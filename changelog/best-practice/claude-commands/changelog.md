@@ -1,18 +1,18 @@
-# Commands Report — Changelog History
+# 命令报告 — 更新日志历史
 
-## Status Legend
+## 状态图例
 
-| Status | Meaning |
+| 状态 | 含义 |
 |--------|---------|
-| ✅ `COMPLETE (reason)` | Action was taken and resolved successfully |
-| ❌ `INVALID (reason)` | Finding was incorrect, not applicable, or intentional |
-| ✋ `ON HOLD (reason)` | Action deferred — waiting on external dependency or user decision |
+| ✅ `COMPLETE (原因)` | 操作已执行并成功解决 |
+| ❌ `INVALID (原因)` | 发现不正确、不适用或有意为之 |
+| ✋ `ON HOLD (原因)` | 操作推迟 — 等待外部依赖或用户决定 |
 
 ---
 
 ## [2026-03-13 04:23 PM PKT] Claude Code v2.1.74
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | HIGH | New Field | Add `name` to frontmatter table — display name for the skill | ❌ INVALID (skill-only field, not applicable to commands frontmatter) |
 | 2 | HIGH | New Field | Add `disable-model-invocation` to frontmatter table — prevents auto-loading | ❌ INVALID (skill-only field, not applicable to commands frontmatter) |
@@ -36,7 +36,7 @@
 
 ## [2026-03-15 12:50 PM PKT] Claude Code v2.1.76
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | HIGH | New Command | Add `/color [color\|default]` to Config tag — set prompt bar color for current session | ✅ COMPLETE (added as #4 in Config tag) |
 | 2 | HIGH | New Command | Add `/effort [low\|medium\|high\|max\|auto]` to Model tag — set model effort level | ✅ COMPLETE (added as #38 in Model tag) |
@@ -48,7 +48,7 @@
 
 ## [2026-03-17 12:45 PM PKT] Claude Code v2.1.77
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | HIGH | New Alias | Add `Alias: /branch` to `/fork` entry (v2.1.77 renamed fork→branch) | ✅ COMPLETE (added "Alias: /branch" to /fork at #59 in Session tag) |
 | 2 | HIGH | New Aliases | Add aliases to 8 commands: `/clear` (+/reset, /new), `/config` (+/settings), `/desktop` (+/app), `/exit` (+/quit), `/rewind` (+/checkpoint), `/resume` (+/continue), `/remote-control` (+/rc), `/mobile` (+/ios, /android) | ✅ COMPLETE (added alias notations to all 8 command descriptions) |
@@ -63,7 +63,7 @@
 
 ## [2026-03-18 11:38 PM PKT] Claude Code v2.1.78
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | HIGH | New Command | Add `/voice` to Config tag — toggle push-to-talk voice dictation | ✅ COMPLETE (added as #15 in Config tag) |
 | 2 | HIGH | Inverted Alias | Swap `/fork` → `/branch` as primary, `/fork` as alias | ✅ COMPLETE (swapped to `/branch` at #56 in Session tag, re-sorted alphabetically) |
@@ -75,7 +75,7 @@
 
 ## [2026-03-19 11:54 AM PKT] Claude Code v2.1.79
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | LOW | Frontmatter Scope | 6 skill-only fields absent from report (intentional scoping) | ❌ INVALID (skill-only fields — same determination as v2.1.74, v2.1.77, and v2.1.78 runs) |
 
@@ -83,7 +83,7 @@
 
 ## [2026-03-20 08:33 AM PKT] Claude Code v2.1.80
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | MED | New Field | Add `effort` to frontmatter table — override model effort level when command is invoked (v2.1.80) | ✅ COMPLETE (added as 5th field, then repositioned to 8th when full field set was added) |
 | 2 | HIGH | QA Correction | Add 6 missing fields (`name`, `disable-model-invocation`, `user-invocable`, `context`, `agent`, `hooks`) — official docs state commands support "the same frontmatter" as skills; previous INVALID determinations (v2.1.74–v2.1.79) were incorrect | ✅ COMPLETE (added all 6 fields, count updated 5 → 11, field order matches official docs) |
@@ -105,7 +105,7 @@ No priority action items — report is fully in sync with official documentation
 
 ## [2026-03-25 08:07 PM PKT] Claude Code v2.1.83
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | HIGH | New Command | Add `/schedule [description]` to Remote tag — Create, update, list, or run Cloud scheduled tasks | ✅ COMPLETE (added as #56 in Remote tag, count updated 63 → 64) |
 
@@ -113,7 +113,7 @@ No priority action items — report is fully in sync with official documentation
 
 ## [2026-03-26 01:01 PM PKT] Claude Code v2.1.84
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | HIGH | New Field | Add `shell` to frontmatter table — shell for `!command` blocks (`bash` or `powershell`) | ✅ COMPLETE (added as 12th field before `hooks`, count updated 11 → 12) |
 | 2 | LOW | Changed Argument | Add `[on\|off]` argument hint to `/fast` command | ✅ COMPLETE (updated `/fast` to `/fast [on\|off]` at #40 in Model tag) |
@@ -122,7 +122,7 @@ No priority action items — report is fully in sync with official documentation
 
 ## [2026-03-27 06:25 PM PKT] Claude Code v2.1.85
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | HIGH | New Field | Add `paths` to frontmatter table — glob patterns that limit when a skill is activated | ✅ COMPLETE (added as 6th field after `user-invocable`, count updated 12 → 13) |
 
@@ -130,7 +130,7 @@ No priority action items — report is fully in sync with official documentation
 
 ## [2026-03-28 06:05 PM PKT] Claude Code v2.1.86
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | MED | Changed Argument | Update `/add-dir` — add `<path>` required argument hint per official docs | ✅ COMPLETE (updated at #44 in Project tag) |
 | 2 | MED | Changed Argument | Update `/branch` — add `[name]` optional argument hint per official docs | ✅ COMPLETE (updated at #57 in Session tag) |
@@ -146,7 +146,7 @@ No priority action items — report is fully in sync with official documentation
 
 ## [2026-03-31 06:55 PM PKT] Claude Code v2.1.88
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | MED | Description Sync | Synced all 43 command descriptions to match official docs — behavioral clarifications (`/vim` toggle, `/sandbox` toggle, `/hooks` view), expanded detail (`/effort` persistence, `/copy` SSH write, `/model` effort arrows), and wording alignment across Auth, Config, Context, Debug, Export, Extensions, Model, Project, Remote, and Session tags | ✅ COMPLETE (all 64 descriptions now match official docs at code.claude.com/docs/en/commands) |
 
@@ -154,7 +154,7 @@ No priority action items — report is fully in sync with official documentation
 
 ## [2026-04-01 12:26 PM PKT] Claude Code v2.1.89
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | LOW | Changed Description | Update `/init` — official docs now use `CLAUDE_CODE_NEW_INIT=1` instead of `=true` | ✅ COMPLETE (updated env var value from `=true` to `=1` to match official docs) |
 
@@ -162,7 +162,7 @@ No priority action items — report is fully in sync with official documentation
 
 ## [2026-04-02 09:14 PM PKT] Claude Code v2.1.90
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | MED | Changed Description | Update `/permissions` — official docs expanded to describe interactive dialog with scope rules, directory management, and auto mode denial review | ✅ COMPLETE (updated description to match official docs) |
 | 2 | MED | New Alias | Add `/bashes` alias to `/tasks` command per official docs | ✅ COMPLETE (added "Alias: /bashes" to /tasks at #27 in Debug tag) |
@@ -171,7 +171,7 @@ No priority action items — report is fully in sync with official documentation
 
 ## [2026-04-03 08:34 PM PKT] Claude Code v2.1.91
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | HIGH | New Command | Add `/powerup` to Config tag — Discover Claude Code features through quick interactive lessons with animated demos | ✅ COMPLETE (added as #26 in Debug tag — resolved in v2.1.92 run) |
 
@@ -179,7 +179,7 @@ No priority action items — report is fully in sync with official documentation
 
 ## [2026-04-04 10:40 PM PKT] Claude Code v2.1.92
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | HIGH | New Command | Add `/powerup` to Debug tag — Discover Claude Code features through quick interactive lessons with animated demos | ✅ COMPLETE (added as #26 in Debug tag, recurring from v2.1.91) |
 | 2 | HIGH | New Command | Add `/setup-bedrock` to Auth tag — Configure Amazon Bedrock authentication, region, and model pins through an interactive wizard | ✅ COMPLETE (added as #3 in Auth tag) |
@@ -198,7 +198,7 @@ No priority action items — report is fully in sync with official documentation
 
 ## [2026-04-09 11:31 PM PKT] Claude Code v2.1.97
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | HIGH | New Command | Add `/autofix-pr [prompt]` to Remote tag — Spawn a web session that watches the current branch's PR and pushes fixes when CI fails or reviewers leave comments | ✅ COMPLETE (added as #51 in Remote tag, count updated 65 → 68) |
 | 2 | HIGH | New Command | Add `/teleport` to Remote tag — Pull a Claude Code on the web session into this terminal. Alias: `/tp` | ✅ COMPLETE (added as #59 in Remote tag) |

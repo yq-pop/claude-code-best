@@ -1,16 +1,16 @@
-# Verification Checklist — Settings Report
+# 验证检查清单 — 设置报告
 
-Rules accumulate over time. Each workflow-changelog run MUST execute ALL rules at the specified depth. When a new type of drift is caught that an existing rule should have caught (but didn't exist or was too shallow), append a new rule here.
+规则随时间累积。每次workflow-changelog运行都必须按指定深度执行所有规则。当捕获到现有规则本应捕获(但不存在或太浅)的新类型偏差时,在此追加新规则。
 
-## Depth Levels
+## 深度级别
 
-| Depth | Meaning | Example |
+| 深度 | 含义 | 示例 |
 |-------|---------|---------|
-| `exists` | Check if a section/table/file exists | "Does the report have a Sandbox Settings table?" |
-| `presence-check` | Check if a specific item is present or absent | "Is the `ConfigChange` event in the Hook Events table?" |
-| `content-match` | Compare actual values word-by-word against source | "Does the `model` setting description match official docs?" |
-| `field-level` | Verify every individual field is accounted for | "Does each settings key from official docs appear in the correct table?" |
-| `cross-file` | Same value must match across multiple files | "Does CLAUDE.md hooks section match the report's hook events?" |
+| `exists` | 检查某个部分/表格/文件是否存在 | "报告中是否有沙盒设置表?" |
+| `presence-check` | 检查特定项目是否存在或缺失 | "`ConfigChange` 事件是否在钩子事件表中?" |
+| `content-match` | 逐字对比实际值与源文件 | "`model` 设置描述是否与官方文档匹配?" |
+| `field-level` | 验证每个独立字段都有记录 | "官方文档中的每个设置键是否都出现在正确的表格中?" |
+| `cross-file` | 相同的值必须在多个文件中匹配 | "CLAUDE.md 钩子部分是否与报告的钩子事件匹配?" |
 
 ---
 
@@ -18,7 +18,7 @@ Rules accumulate over time. Each workflow-changelog run MUST execute ALL rules a
 
 Rules that verify settings key tables against official docs.
 
-| # | Category | Check | Depth | Compare Against | Added | Origin |
+| # | 类别 | 检查 | 深度 | 对比依据 | 添加时间 | 来源 |
 |---|----------|-------|-------|-----------------|-------|--------|
 | 1A | Key Completeness | For each settings key in official docs, verify it appears in the correct section table in the report | field-level | settings documentation page | 2026-03-05 | Initial checklist — ensures no new settings keys are missed |
 | 1B | Key Types | For each key in the tables, verify the Type column matches official docs | content-match | settings documentation page | 2026-03-05 | Initial checklist — type mismatches cause user confusion |
@@ -35,7 +35,7 @@ Rules that verify settings key tables against official docs.
 
 Rules that verify the settings hierarchy table.
 
-| # | Category | Check | Depth | Compare Against | Added | Origin |
+| # | 类别 | 检查 | 深度 | 对比依据 | 添加时间 | 来源 |
 |---|----------|-------|-------|-----------------|-------|--------|
 | 2A | Priority Levels | Verify all priority levels in the hierarchy table match official docs (5-level chain + managed policy) | field-level | settings documentation page | 2026-03-05 | Initial checklist — wrong priority causes override confusion |
 | 2B | File Locations | For each priority level, verify the file location path matches official docs | content-match | settings documentation page | 2026-03-05 | Initial checklist — wrong paths cause settings to be ignored |
@@ -48,7 +48,7 @@ Rules that verify the settings hierarchy table.
 
 Rules that verify permission configuration accuracy.
 
-| # | Category | Check | Depth | Compare Against | Added | Origin |
+| # | 类别 | 检查 | 深度 | 对比依据 | 添加时间 | 来源 |
 |---|----------|-------|-------|-----------------|-------|--------|
 | 3A | Permission Modes | Verify all permission modes in the table match official docs | field-level | settings documentation page | 2026-03-05 | Initial checklist — missing modes limit user options |
 | 3B | Tool Syntax Patterns | Verify all tool permission syntax patterns and examples match official docs | content-match | settings documentation page | 2026-03-05 | Initial checklist — wrong syntax causes permission failures |
@@ -61,7 +61,7 @@ Rules that verify permission configuration accuracy.
 
 Hook analysis is excluded from this workflow. Hooks are maintained in the [claude-code-hooks](https://github.com/shanraisshan/claude-code-hooks) repo. Only verify the redirect link is still valid.
 
-| # | Category | Check | Depth | Compare Against | Added | Origin |
+| # | 类别 | 检查 | 深度 | 对比依据 | 添加时间 | 来源 |
 |---|----------|-------|-------|-----------------|-------|--------|
 | 4A | Hooks Redirect | Verify the hooks section in the report contains a valid redirect link to the claude-code-hooks repo | exists | report file | 2026-03-05 | Hooks externalized to dedicated repo — only check redirect link validity |
 
@@ -71,7 +71,7 @@ Hook analysis is excluded from this workflow. Hooks are maintained in the [claud
 
 Rules that verify environment variable completeness and ownership.
 
-| # | Category | Check | Depth | Compare Against | Added | Origin |
+| # | 类别 | 检查 | 深度 | 对比依据 | 添加时间 | 来源 |
 |---|----------|-------|-------|-----------------|-------|--------|
 | 5A | Env Var Completeness | Verify all `env`-configurable environment variables from official docs appear in the report | field-level | settings documentation page | 2026-03-05 | Initial checklist — missing env vars limit user configuration options |
 | 5B | Ownership Boundary | Verify no env vars from `best-practice/claude-cli-startup-flags.md` are duplicated in the settings report, and vice versa | cross-file | claude-cli-startup-flags.md vs settings report | 2026-03-05 | Initial checklist — env var refactoring split vars across two files, must prevent re-duplication |
@@ -84,7 +84,7 @@ Rules that verify environment variable completeness and ownership.
 
 Rules that verify example accuracy.
 
-| # | Category | Check | Depth | Compare Against | Added | Origin |
+| # | 类别 | 检查 | 深度 | 对比依据 | 添加时间 | 来源 |
 |---|----------|-------|-------|-----------------|-------|--------|
 | 6A | Quick Reference Example | Verify the Quick Reference complete example uses valid current settings with correct syntax and realistic values | content-match | settings documentation page | 2026-03-05 | Initial checklist — example must demonstrate current best practices |
 | 6B | Example URL Validation | Verify any URLs embedded in JSON example blocks (e.g., `$schema`, API endpoints) resolve correctly and use current domains | exists | HTTP response | 2026-03-15 | v2.1.74 caught `$schema` URL using wrong domain (`www.schemastore.org` vs `json.schemastore.org`). URLs inside code blocks were not covered by rule 9B which only checks markdown links |
@@ -95,7 +95,7 @@ Rules that verify example accuracy.
 
 Rules that verify consistency between the report and other repo files.
 
-| # | Category | Check | Depth | Compare Against | Added | Origin |
+| # | 类别 | 检查 | 深度 | 对比依据 | 添加时间 | 来源 |
 |---|----------|-------|-------|-----------------|-------|--------|
 | 7A | CLAUDE.md Sync | Verify CLAUDE.md's Configuration Hierarchy and Hooks System sections are consistent with the report | cross-file | CLAUDE.md vs report | 2026-03-05 | Initial checklist — CLAUDE.md could drift from report |
 
@@ -105,7 +105,7 @@ Rules that verify consistency between the report and other repo files.
 
 Meta-rules about the workflow verification process itself.
 
-| # | Category | Check | Depth | Compare Against | Added | Origin |
+| # | 类别 | 检查 | 深度 | 对比依据 | 添加时间 | 来源 |
 |---|----------|-------|-------|-----------------|-------|--------|
 | 8A | Source Credibility Guard | Only flag items as drift if confirmed by official sources (settings documentation page, CLI reference page, GitHub changelog). Third-party blog sources may be outdated or wrong — use them for leads only, verify against official docs before flagging | content-match | official docs only | 2026-03-05 | Adopted from subagents workflow — prevents false positives from blog sources |
 
@@ -115,7 +115,7 @@ Meta-rules about the workflow verification process itself.
 
 Meta-rules that verify report metadata accuracy and prevent indefinite accumulation of unresolved items.
 
-| # | Category | Check | Depth | Compare Against | Added | Origin |
+| # | 类别 | 检查 | 深度 | 对比依据 | 添加时间 | 来源 |
 |---|----------|-------|-------|-----------------|-------|--------|
 | 10A | Version Metadata | Verify the report's version badge, header settings count, and env var count reflect the actual audited version and current table row counts | content-match | report file internal consistency | 2026-03-15 | v2.1.71 caught version badge mismatch; v2.1.69 caught header counts wrong. No rule existed to verify these meta-fields |
 | 10B | Suspect Key Escalation | After 5 consecutive runs ON HOLD, suspect keys must be resolved: either (a) confirmed via JSON schema and annotated with "in JSON schema, not on official page", or (b) removed from the report. Report the run count for each suspect key | exists | changelog history | 2026-03-15 | Suspect keys (`sandbox.ignoreViolations`, `skipWebFetchPreflight`, etc.) stayed ON HOLD across 6 runs with no resolution mechanism. Indefinite accumulation provides no value |
@@ -127,7 +127,7 @@ Meta-rules that verify report metadata accuracy and prevent indefinite accumulat
 
 Rules that verify all hyperlinks in the report are valid.
 
-| # | Category | Check | Depth | Compare Against | Added | Origin |
+| # | 类别 | 检查 | 深度 | 对比依据 | 添加时间 | 来源 |
 |---|----------|-------|-------|-----------------|-------|--------|
 | 9A | Local File Links | Verify all relative file links resolve to existing files | exists | local filesystem | 2026-03-05 | Initial checklist — file moves can break relative links |
 | 9B | External URL Links | Verify all external URLs return valid pages (not 404 or error) | exists | HTTP response | 2026-03-05 | Initial checklist — external docs pages can be restructured or removed |

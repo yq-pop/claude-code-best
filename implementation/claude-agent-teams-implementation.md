@@ -1,29 +1,29 @@
-# Agent Teams Implementation
+# Agent Teams 实现
 
-![Last Updated](https://img.shields.io/badge/Last_Updated-Mar_12%2C_2026-white?style=flat&labelColor=555)
+![最后更新](https://img.shields.io/badge/Last_Updated-Mar_12%2C_2026-white?style=flat&labelColor=555)
 
 <table width="100%">
 <tr>
-<td><a href="../">← Back to Claude Code Best Practice</a></td>
+<td><a href="../">← 返回 Claude Code Best Practice</a></td>
 <td align="right"><img src="../!/claude-jumping.svg" alt="Claude" width="60" /></td>
 </tr>
 </table>
 
 ---
 
-<a href="#time-orchestration"><img src="../!/tags/implemented-hd.svg" alt="Implemented"></a>
+<a href="#time-orchestration"><img src="../!/tags/implemented-hd.svg" alt="已实现"></a>
 
 <p align="center">
-  <img src="assets/impl-agent-teams.png" alt="Agent Teams in action — split pane mode with tmux" width="100%">
+  <img src="assets/impl-agent-teams.png" alt="Agent Teams 实战 — 使用 tmux 的分屏模式" width="100%">
 </p>
 
-Agent Teams spawn **multiple independent Claude Code sessions** that coordinate via a shared task list. Unlike subagents (isolated context forks within one session), each teammate gets its own full context window with CLAUDE.md, MCP servers, and skills loaded automatically.
+Agent Teams 生成**多个独立的 Claude Code 会话**，通过共享任务列表进行协调。与 subagents（单个会话内的隔离上下文分支）不同，每个团队成员都有自己完整的上下文窗口，自动加载 CLAUDE.md、MCP 服务器和 skills。
 
 ---
 
-## ![How to Use](../!/tags/how-to-use.svg)
+## ![如何使用](../!/tags/how-to-use.svg)
 
-The time orchestration workflow was built entirely by an agent team. To run the finished product:
+时间编排工作流完全由 agent team 构建。要运行最终产品：
 
 ```bash
 cd agent-teams
@@ -31,37 +31,37 @@ claude
 /time-orchestrator
 ```
 
-This invokes the **Command → Agent → Skill** pipeline: the agent fetches Dubai's current time, and the skill renders an SVG time card to `agent-teams/output/dubai-time.svg`.
+这将调用 **Command → Agent → Skill** 管道：agent 获取迪拜的当前时间，skill 将 SVG 时间卡片渲染到 `agent-teams/output/dubai-time.svg`。
 
 ---
 
-## ![How to Implement](../!/tags/how-to-implement.svg)
+## ![如何实现](../!/tags/how-to-implement.svg)
 
-You can create a replica of the weather orchestration workflow using agent teams — in this example, the time orchestration workflow was built entirely by an agent team.
+你可以使用 agent teams 创建天气编排工作流的副本——在这个例子中，时间编排工作流完全由 agent team 构建。
 
-### 1. Install [iTerm2](https://iterm2.com/) and tmux
+### 1. 安装 [iTerm2](https://iterm2.com/) 和 tmux
 
 ```bash
 brew install --cask iterm2
 brew install tmux
 ```
 
-### 2. Start iTerm2 → tmux → Claude
+### 2. 启动 iTerm2 → tmux → Claude
 
 ```bash
 tmux new -s dev
 CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1 claude
 ```
 
-### 3. Prompt with team structure
+### 3. 使用团队结构提示
 
 <a id="time-orchestration"></a>
 
-Paste this prompt into Claude to bootstrap a complete time orchestrator workflow using agent teams:
+将此提示粘贴到 Claude 中，以使用 agent teams 引导完整的时间编排工作流：
 
-Main prompt: **[agent-teams-prompt.md](../agent-teams/agent-teams-prompt.md)**
+主提示：**[agent-teams-prompt.md](../agent-teams/agent-teams-prompt.md)**
 
-### Team Coordination Flow
+### 团队协调流程
 
 ```
 ┌──────────────────────────────────────────────────────────────┐

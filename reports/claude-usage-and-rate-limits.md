@@ -1,6 +1,6 @@
-# Claude Code: Usage, Rate Limits & Extra Usage
+# Claude Code: 使用量、速率限制与额外使用量
 
-Understanding how usage limits work in Claude Code and how to keep working when you hit them.
+了解 Claude Code 中使用限制的工作原理以及达到限制时如何继续工作。
 
 <table width="100%">
 <tr>
@@ -11,96 +11,96 @@ Understanding how usage limits work in Claude Code and how to keep working when 
 
 ---
 
-## Overview
+## 概述
 
-Claude Code on subscription plans (Pro, Max 5x, Max 20x) has usage limits that reset on a rolling window. Three built-in slash commands help you monitor and manage usage:
+订阅计划(Pro、Max 5x、Max 20x)上的 Claude Code 有在滚动窗口上重置的使用限制。三个内置的斜杠命令帮助你监控和管理使用量:
 
-| Command | Description | Available To |
+| 命令 | 描述 | 可用于 |
 |---------|-------------|--------------|
-| `/usage` | Check plan limits and rate limit status | Pro, Max 5x, Max 20x |
-| `/extra-usage` | Configure pay-as-you-go overflow when limits are hit | Pro, Max 5x, Max 20x |
-| `/cost` | Show token usage and spending for the current session | API key users |
+| `/usage` | 检查计划限制和速率限制状态 | Pro、Max 5x、Max 20x |
+| `/extra-usage` | 配置达到限制时的按需付费溢出 | Pro、Max 5x、Max 20x |
+| `/cost` | 显示当前会话的令牌使用和支出 | API密钥用户 |
 
 ---
 
-## `/usage` — Check Your Limits
+## `/usage` — 检查你的限制
 
-Shows your current plan's usage limits and rate limit status. Useful for checking how much capacity you have left before hitting a limit.
+显示当前计划的使用限制和速率限制状态。用于检查在达到限制之前剩余多少容量。
 
 ---
 
-## `/extra-usage` — Keep Working Past Limits
+## `/extra-usage` — 超出限制后继续工作
 
-The `/extra-usage` command configures **pay-as-you-go overflow billing** so Claude Code continues working seamlessly when you hit your plan's rate limits, instead of blocking you.
+`/extra-usage` 命令配置**按需付费溢出计费**,这样当你达到计划的速率限制时,Claude Code 可以无缝继续工作,而不是阻止你。
 
-### How It Works
+### 工作原理
 
-1. You hit your plan's rate limit (limits reset every 5 hours)
-2. If extra usage is enabled with available funds, Claude Code continues without interruption
-3. Overflow tokens are billed at **standard API rates**, separate from your subscription fee
+1. 你达到计划的速率限制(限制每5小时重置一次)
+2. 如果启用了额外使用量且有可用资金,Claude Code 继续工作而不中断
+3. 溢出令牌按**标准 API 费率**计费,与订阅费用分开
 
-### Setting It Up
+### 设置
 
-The `/extra-usage` command in the CLI will guide you through configuration. You can also configure it on the web at **Settings > Usage** on claude.ai:
+CLI 中的 `/extra-usage` 命令将指导你完成配置。你也可以在 claude.ai 的 **Settings > Usage** 上在网页上配置它:
 
-1. Enable extra usage
-2. Add a payment method
-3. Set a **monthly spending cap** (or choose unlimited)
-4. Optionally add **prepaid funds** with auto-reload when balance drops below a threshold
+1. 启用额外使用量
+2. 添加付款方式
+3. 设置**每月支出上限**(或选择无限制)
+4. 可选地添加**预付资金**,当余额低于阈值时自动充值
 
-### Key Details
+### 关键详情
 
-| Detail | Value |
+| 详情 | 值 |
 |--------|-------|
-| Daily redemption limit | $2,000/day |
-| Billing | Separate from subscription, at standard API rates |
-| Limit reset window | Every 5 hours |
+| 每日兑换限制 | $2,000/天 |
+| 计费 | 与订阅分开,按标准 API 费率 |
+| 限制重置窗口 | 每5小时 |
 
-### Known Issue
+### 已知问题
 
-As of February 2026, the `/extra-usage` CLI command is [undocumented](https://github.com/anthropics/claude-code/issues/12396) and may open a sign-in window without clear configuration options. Configuring through the **claude.ai web interface** is the more reliable path for now.
-
----
-
-## `/cost` — Session Spending (API Users)
-
-For users authenticating with an API key (not a subscription plan), `/cost` shows:
-
-- Total cost for the current session
-- API duration and wall time
-- Token usage breakdown
-- Code changes made
-
-This command is not relevant for Pro/Max subscription users.
+截至2026年2月,`/extra-usage` CLI 命令[未记录](https://github.com/anthropics/claude-code/issues/12396),可能会打开登录窗口而没有明确的配置选项。目前通过 **claude.ai 网页界面**配置是更可靠的途径。
 
 ---
 
-## Fast Mode and Extra Usage
+## `/cost` — 会话支出(API用户)
 
-Fast mode (`/fast`) uses Claude Opus 4.6 with faster output. It has a special billing relationship with extra usage:
+对于使用 API 密钥(而非订阅计划)进行身份验证的用户,`/cost` 显示:
 
-- Fast mode usage is **always billed to extra usage** from the first token
-- This applies even if you have remaining usage on your subscription plan
-- Fast mode does not consume your plan's included rate limits
+- 当前会话的总成本
+- API 持续时间和挂钟时间
+- 令牌使用细分
+- 所做的代码更改
 
-This means you need extra usage enabled and funded to use `/fast`.
+此命令与 Pro/Max 订阅用户无关。
 
 ---
 
-## CLI Startup Flags
+## 快速模式和额外使用量
 
-Two startup flags relate to usage budgets (API key users only, print mode):
+快速模式(`/fast`)使用 Claude Opus 4.6 以获得更快的输出。它与额外使用量有特殊的计费关系:
 
-| Flag | Description |
+- 快速模式使用量从第一个令牌开始**总是计入额外使用量**
+- 即使你的订阅计划有剩余使用量,这也适用
+- 快速模式不消耗你计划中包含的速率限制
+
+这意味着你需要启用并资助额外使用量才能使用 `/fast`。
+
+---
+
+## CLI 启动标志
+
+两个启动标志与使用预算相关(仅 API 密钥用户,打印模式):
+
+| 标志 | 描述 |
 |------|-------------|
-| `--max-budget-usd <AMOUNT>` | Maximum dollar amount for API calls before stopping |
-| `--max-turns <NUMBER>` | Limit number of agentic turns |
+| `--max-budget-usd <AMOUNT>` | 停止前 API 调用的最大美元金额 |
+| `--max-turns <NUMBER>` | 限制代理轮次数 |
 
-See [CLI Startup Flags Reference](claude-cli-startup-flags.md) for the full list.
+完整列表见 [CLI Startup Flags Reference](claude-cli-startup-flags.md)。
 
 ---
 
-## Sources
+## 资料来源
 
 - [Extra usage for paid Claude plans — Claude Help Center](https://support.claude.com/en/articles/12429409-extra-usage-for-paid-claude-plans)
 - [Using Claude Code with your Pro or Max plan — Claude Help Center](https://support.claude.com/en/articles/11145838-using-claude-code-with-your-pro-or-max-plan)

@@ -1,141 +1,141 @@
 ---
-description: Track Claude Code settings report changes and find what needs updating
-argument-hint: [number of versions to check, default 10]
+description: 跟踪 Claude Code 设置报告变更并找出需要更新的内容
+argument-hint: [要检查的版本数量，默认 10]
 ---
 
-# Workflow Changelog — Settings Report
+# 工作流变更日志 — 设置报告
 
-You are a coordinator for the claude-code-best-practice project. Your job is to launch two research agents in parallel, wait for their results, merge findings, and present a unified report about drift in the **Settings Reference** report (`best-practice/claude-settings.md`).
+你是 claude-code-best-practice 项目的协调员。你的工作是并行启动两个研究智能体，等待它们的结果，合并发现，并呈现关于**设置参考**报告（`best-practice/claude-settings.md`）漂移情况的统一报告。
 
-**Versions to check:** `$ARGUMENTS` (default: 10 if empty or not a number)
+**要检查的版本数：** `$ARGUMENTS`（默认：如果为空或不是数字则为 10）
 
-This is a **read-then-report** workflow. Launch agents, merge results, and produce a report. Only take action if the user approves.
+这是一个**先读取后报告**的工作流。启动智能体，合并结果，并生成报告。只有在用户批准后才采取行动。
 
 ---
 
-## Phase 0: Launch Both Agents in Parallel
+## 阶段 0：并行启动两个智能体
 
-**Immediately** spawn both agents using the Task tool **in the same message** (parallel launch):
+**立即**使用 Task 工具**在同一消息中**生成两个智能体（并行启动）：
 
-### Agent 1: workflow-claude-settings-agent
+### 智能体 1：workflow-claude-settings-agent
 
-Spawn using `subagent_type: "workflow-claude-settings-agent"`. Give it this prompt:
+使用 `subagent_type: "workflow-claude-settings-agent"` 生成。给它这个提示：
 
-> Research the claude-code-best-practice project for settings report drift. Check the last $ARGUMENTS versions (default: 10).
+> 研究 claude-code-best-practice 项目的设置报告漂移情况。检查最近 $ARGUMENTS 个版本（默认：10）。
 >
-> Fetch these 3 external sources:
+> 获取这 3 个外部来源：
 > 1. Settings Documentation: https://code.claude.com/docs/en/settings
 > 2. CLI Reference: https://code.claude.com/docs/en/cli-reference
 > 3. Changelog: https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md
 >
-> Then read the local report file (`best-practice/claude-settings.md`) and the CLAUDE.md file. Analyze differences between what the official docs say about settings keys, permission syntax, hook events, MCP configuration, sandbox options, plugin settings, model aliases, display settings, and environment variables versus what our report documents. Return a structured findings report covering missing settings, changed types/defaults, new settings additions, deprecated settings, permission syntax changes, hook event changes, MCP setting changes, sandbox setting changes, environment variable completeness, example accuracy, settings hierarchy accuracy, and sources validity.
+> 然后读取本地报告文件（`best-practice/claude-settings.md`）和 CLAUDE.md 文件。分析官方文档中关于设置键、权限语法、钩子事件、MCP 配置、沙盒选项、插件设置、模型别名、显示设置和环境变量的内容与我们报告中记录的内容之间的差异。返回一份结构化的发现报告，涵盖缺失的设置、更改的类型/默认值、新增的设置、已弃用的设置、权限语法更改、钩子事件更改、MCP 设置更改、沙盒设置更改、环境变量完整性、示例准确性、设置层次结构准确性以及来源有效性。
 
-### Agent 2: claude-code-guide
+### 智能体 2：claude-code-guide
 
-Spawn using `subagent_type: "claude-code-guide"`. Give it this prompt:
+使用 `subagent_type: "claude-code-guide"` 生成。给它这个提示：
 
-> Research the latest Claude Code settings system. I need you to find:
-> 1. The complete list of all currently supported settings.json keys with their types, defaults, and descriptions
-> 2. Any new settings keys introduced in recent Claude Code versions
-> 3. Changes to existing settings behavior (e.g. new permission modes, new hook events, new sandbox options)
-> 4. Changes to the settings hierarchy (new priority levels, new file locations)
-> 5. Changes to permission syntax (new tool patterns, new wildcard behavior)
-> 6. New hook events or changes to hook configuration structure
-> 7. Changes to MCP server configuration (new matching fields, new settings)
-> 8. Changes to sandbox settings (new network options, new commands)
-> 9. Changes to plugin configuration (new fields, new marketplace options)
-> 10. Changes to environment variables (new vars, deprecated vars, changed behavior)
-> 11. Changes to model aliases or model configuration
-> 12. Changes to display/UX settings (status line, spinners, progress bars)
-> 13. Any deprecations or removals of settings keys
+> 研究最新的 Claude Code 设置系统。我需要你找到：
+> 1. 当前支持的所有 settings.json 键的完整列表，包括它们的类型、默认值和描述
+> 2. 最近 Claude Code 版本中引入的任何新设置键
+> 3. 现有设置行为的更改（例如新的权限模式、新的钩子事件、新的沙盒选项）
+> 4. 设置层次结构的更改（新的优先级级别、新的文件位置）
+> 5. 权限语法的更改（新的工具模式、新的通配符行为）
+> 6. 新的钩子事件或钩子配置结构的更改
+> 7. MCP 服务器配置的更改（新的匹配字段、新的设置）
+> 8. 沙盒设置的更改（新的网络选项、新的命令）
+> 9. 插件配置的更改（新的字段、新的市场选项）
+> 10. 环境变量的更改（新变量、已弃用的变量、行为更改）
+> 11. 模型别名或模型配置的更改
+> 12. 显示/用户体验设置的更改（状态行、加载动画、进度条）
+> 13. 任何设置键的弃用或移除
 >
-> Be thorough — search the web, fetch docs, and provide concrete version numbers and details for everything you find.
+> 要彻底 — 搜索网络，获取文档，并为你找到的所有内容提供具体的版本号和详细信息。
 
-Both agents run independently and will return their findings.
-
----
-
-## Phase 0.5: Read Verification Checklist
-
-**While agents are running**, read `changelog/best-practice/claude-settings/verification-checklist.md`. This file contains accumulated verification rules — each rule specifies what to check, at what depth, and against which source. Every rule MUST be executed during Phase 2. The checklist is the project's regression test suite for drift detection.
+两个智能体独立运行并将返回它们的发现。
 
 ---
 
-## Phase 1: Read Previous Changelog Entries
+## 阶段 0.5：读取验证清单
 
-**Before merging findings**, read the file `changelog/best-practice/claude-settings/changelog.md` to get the last 25 changelog entries. Each entry is separated by `---`. Parse the priority actions from those previous entries so you can compare them against the current findings. This lets you identify:
-- **Recurring items** — issues that appeared before and are still unresolved
-- **Newly resolved items** — issues from previous runs that are now fixed
-- **New items** — issues that appear for the first time in this run
+**在智能体运行期间**，读取 `changelog/best-practice/claude-settings/verification-checklist.md`。此文件包含累积的验证规则 — 每条规则指定要检查什么、检查深度以及对照哪个来源。每条规则都必须在阶段 2 期间执行。该清单是项目用于漂移检测的回归测试套件。
 
 ---
 
-## Phase 2: Merge Findings & Generate Report
+## 阶段 1：读取之前的变更日志条目
 
-**Wait for both agents to complete.** Once you have:
-- **workflow-claude-settings-agent findings** — detailed report analysis with local file reads, external doc fetches, and drift detection
-- **claude-code-guide findings** — independent research on latest Claude Code settings features and changes
+**在合并发现之前**，读取文件 `changelog/best-practice/claude-settings/changelog.md` 以获取最近 25 个变更日志条目。每个条目由 `---` 分隔。解析这些先前条目中的优先操作，以便你可以将它们与当前发现进行比较。这使你能够识别：
+- **重复出现的项目** — 之前出现过且仍未解决的问题
+- **新解决的项目** — 之前运行中的问题现在已修复
+- **新项目** — 本次运行中首次出现的问题
 
-Cross-reference the two. The dedicated agent provides report-specific drift analysis, while the claude-code-guide agent may surface things it missed (e.g. very recent changes, undocumented features, or context from web searches). Flag any contradictions between the two for the user to resolve.
+---
 
-**Execute the verification checklist:** For every rule in `changelog/best-practice/claude-settings/verification-checklist.md`, perform the check at the specified depth using the agent findings as source data. Include a **Verification Log** section in the report showing each rule's result:
+## 阶段 2：合并发现并生成报告
+
+**等待两个智能体完成。** 一旦你有了：
+- **workflow-claude-settings-agent 发现** — 包含本地文件读取、外部文档获取和漂移检测的详细报告分析
+- **claude-code-guide 发现** — 关于最新 Claude Code 设置功能和更改的独立研究
+
+交叉参考两者。专用智能体提供特定于报告的漂移分析，而 claude-code-guide 智能体可能会发现它遗漏的内容（例如最近的更改、未记录的功能或来自网络搜索的上下文）。标记两者之间的任何矛盾以供用户解决。
+
+**执行验证清单：** 对于 `changelog/best-practice/claude-settings/verification-checklist.md` 中的每条规则，使用智能体发现作为源数据在指定深度执行检查。在报告中包含一个**验证日志**部分，显示每条规则的结果：
 
 ```
-Verification Log:
-Rule # | Category              | Depth         | Result | Notes
-1      | Settings Keys         | field-level   | PASS   | All keys match
-2      | Permission Syntax     | content-match | FAIL   | New tool pattern added
+验证日志：
+规则 # | 类别              | 深度         | 结果 | 注释
+1      | 设置键         | 字段级别   | 通过   | 所有键匹配
+2      | 权限语法     | 内容匹配 | 失败   | 添加了新的工具模式
 ...
 ```
 
-**Update the checklist if needed:** If a finding reveals a new type of drift that no existing checklist rule covers (or covers at insufficient depth), append a new rule to `changelog/best-practice/claude-settings/verification-checklist.md`. The rule must include: category, what to check, depth level, what source to compare against, date added, and the origin (what error prompted this rule). Do NOT add rules for one-off issues that won't recur.
+**如有需要更新清单：** 如果发现揭示了现有清单规则未涵盖（或涵盖深度不足）的新类型漂移，则将新规则附加到 `changelog/best-practice/claude-settings/verification-checklist.md`。该规则必须包括：类别、要检查的内容、深度级别、要对照的来源、添加日期以及来源（是什么错误促使了此规则）。不要为不会重复出现的一次性问题添加规则。
 
-Also compare the current findings against the previous changelog entries (from Phase 1). For each priority action, mark it as:
-- `NEW` — first time this issue appears
-- `RECURRING` — appeared in a previous run and is still unresolved (include which run date it first appeared)
-- `RESOLVED` — appeared in a previous run but is now fixed (include resolution date)
+还要将当前发现与之前的变更日志条目（来自阶段 1）进行比较。对于每个优先操作，将其标记为：
+- `NEW`（新）— 此问题首次出现
+- `RECURRING`（重复）— 在之前的运行中出现过且仍未解决（包括首次出现的运行日期）
+- `RESOLVED`（已解决）— 在之前的运行中出现过但现在已修复（包括解决日期）
 
-Produce a structured report with these sections:
+生成包含以下部分的结构化报告：
 
-1. **New Settings Keys** — Keys in official docs but missing from report, with version introduced
-2. **Changed Setting Behavior** — Settings whose type, default, or description has changed
-3. **Deprecated/Removed Settings** — Settings in report but no longer in official docs
-4. **Permission Syntax Changes** — New tool patterns, wildcard behavior, or permission mode changes
-5. **MCP Setting Changes** — New MCP configuration keys, matching behavior, or server settings
-6. **Sandbox Setting Changes** — New sandbox options, network settings, or command exclusions
-7. **Plugin Setting Changes** — New plugin configuration keys or marketplace options
-8. **Model Configuration Changes** — New model aliases, effort levels, or model environment variables
-9. **Display & UX Changes** — New status line fields, spinner options, or display settings
-10. **Environment Variable Completeness** — Vars in official docs but missing from report, or vars in report no longer documented
-11. **Settings Hierarchy Accuracy** — Verify priority levels, file locations, and override behavior
-12. **Example Accuracy** — Whether the Quick Reference complete example reflects current settings
-13. **Sources Accuracy** — Verify all source links are valid and point to correct documentation
-14. **claude-code-guide Agent Findings** — Unique insights from the agent that weren't captured by the dedicated agent. Only include findings that add new information. If there are contradictions between the two agents, flag them for the user to resolve. Do NOT list "confirmed agreements".
+1. **新设置键** — 官方文档中存在但报告中缺失的键，包括引入的版本
+2. **设置行为更改** — 类型、默认值或描述已更改的设置
+3. **已弃用/已移除的设置** — 报告中存在但官方文档中不再存在的设置
+4. **权限语法更改** — 新的工具模式、通配符行为或权限模式更改
+5. **MCP 设置更改** — 新的 MCP 配置键、匹配行为或服务器设置
+6. **沙盒设置更改** — 新的沙盒选项、网络设置或命令排除
+7. **插件设置更改** — 新的插件配置键或市场选项
+8. **模型配置更改** — 新的模型别名、努力级别或模型环境变量
+9. **显示和用户体验更改** — 新的状态行字段、加载动画选项或显示设置
+10. **环境变量完整性** — 官方文档中存在但报告中缺失的变量，或报告中存在但不再记录的变量
+11. **设置层次结构准确性** — 验证优先级级别、文件位置和覆盖行为
+12. **示例准确性** — 快速参考完整示例是否反映当前设置
+13. **来源准确性** — 验证所有来源链接有效并指向正确的文档
+14. **claude-code-guide 智能体发现** — 智能体发现的独特见解，这些见解未被专用智能体捕获。仅包括添加新信息的发现。如果两个智能体之间存在矛盾，请标记它们以供用户解决。不要列出"已确认的一致意见"。
 
-> **Note:** Hook-related analysis (events, properties, matchers, exit codes, HTTP hooks, hook env vars) is **excluded** from this workflow. Hooks are maintained in the [claude-code-hooks](https://github.com/shanraisshan/claude-code-hooks) repo.
+> **注意：** 与钩子相关的分析（事件、属性、匹配器、退出代码、HTTP 钩子、钩子环境变量）**不包括**在此工作流中。钩子在 [claude-code-hooks](https://github.com/shanraisshan/claude-code-hooks) 仓库中维护。
 
-End with a prioritized **Action Items** summary table. Each item must include a `Status` column showing `NEW`, `RECURRING (first seen: <date>)`, or `RESOLVED`:
+最后以优先级**操作项目**摘要表结束。每个项目必须包含一个 `Status`（状态）列，显示 `NEW`（新）、`RECURRING (first seen: <date>)`（重复（首次出现：<日期>））或 `RESOLVED`（已解决）：
 
 ```
-Priority Actions:
-#  | Type                  | Action                                    | Status
-1  | New Setting           | Add <key> to <section> table               | NEW
-2  | Changed Behavior      | Update <key> description                   | NEW
-3  | Deprecated Setting    | Remove <key> from table                    | RECURRING (first seen: 2026-03-05)
-4  | Permission Syntax     | Add new tool pattern syntax                | NEW
-5  | Env Variable          | Add <var> to environment variables table   | NEW
-7  | Example Update        | Update Quick Reference example             | NEW
+优先操作：
+#  | 类型                  | 操作                                    | 状态
+1  | 新设置           | 将 <键> 添加到 <部分> 表               | NEW
+2  | 行为更改      | 更新 <键> 描述                   | NEW
+3  | 已弃用的设置    | 从表中删除 <键>                    | RECURRING (first seen: 2026-03-05)
+4  | 权限语法     | 添加新的工具模式语法                | NEW
+5  | 环境变量          | 将 <变量> 添加到环境变量表   | NEW
+7  | 示例更新        | 更新快速参考示例             | NEW
 ```
 
-Also include a **Resolved Since Last Run** section listing any items from the previous run that are no longer issues.
+还要包含一个**自上次运行以来已解决**的部分，列出之前运行中不再是问题的任何项目。
 
 ---
 
-## Phase 2.5: Append Summary to Changelog
+## 阶段 2.5：将摘要附加到变更日志
 
-**This phase is MANDATORY — always execute it before presenting the report to the user.**
+**此阶段是强制性的 — 在向用户呈现报告之前始终执行它。**
 
-Read the existing `changelog/best-practice/claude-settings/changelog.md` file, then **append** (do NOT overwrite) a new entry at the end. The entry format must be exactly:
+读取现有的 `changelog/best-practice/claude-settings/changelog.md` 文件，然后在末尾**附加**（不要覆盖）新条目。条目格式必须完全如下：
 
 ```markdown
 ---
@@ -148,96 +148,96 @@ Read the existing `changelog/best-practice/claude-settings/changelog.md` file, t
 | ... | ... | ... | ... | ... |
 ```
 
-**Status format — MUST use one of these three formats:**
-- `COMPLETE (reason)` — action was taken and resolved successfully
-- `INVALID (reason)` — finding was incorrect, not applicable, or intentional
-- `ON HOLD (reason)` — action deferred, waiting on external dependency or user decision
+**状态格式 — 必须使用以下三种格式之一：**
+- `COMPLETE (reason)` — 已采取行动并成功解决
+- `INVALID (reason)` — 发现不正确、不适用或是有意为之
+- `ON HOLD (reason)` — 操作推迟，等待外部依赖或用户决定
 
-The `(reason)` is mandatory and must briefly explain what was done or why.
+`(reason)`（原因）是强制性的，必须简要说明已完成的工作或原因。
 
-**Rules for appending:**
-- Always append — never overwrite or replace previous entries
-- The date and time is when the command is executed in Pakistan Standard Time (PKT, UTC+5); get it by running `TZ=Asia/Karachi date "+%Y-%m-%d %I:%M %p PKT"`. The version comes from agent findings
-- If `changelog/best-practice/claude-settings/changelog.md` doesn't exist or is empty, create it with the Status Legend table (see top of file) then the first entry
-- Each entry is separated by `---`
-- **Only include items with HIGH, MEDIUM, or LOW priority** — omit NONE priority items (things that need no action)
-
----
-
-## Phase 2.6: Update Last Updated Badge
-
-**This phase is MANDATORY — always execute it immediately after Phase 2.5, before presenting the report.**
-
-Update the "Last Updated" badge at the top of `best-practice/claude-settings.md`. Run `TZ=Asia/Karachi date "+%b %d, %Y %-I:%M %p PKT"` to get the time, URL-encode it (spaces to `%20`, commas to `%2C`), and replace the date portion in the badge. Also update the Claude Code version in the badge if it has changed.
-
-**Do NOT log badge updates as action items in the changelog or report.** Badge syncing is a routine part of every run, not a finding.
+**附加规则：**
+- 始终附加 — 永远不要覆盖或替换先前的条目
+- 日期和时间是命令在巴基斯坦标准时间（PKT，UTC+5）执行的时间；通过运行 `TZ=Asia/Karachi date "+%Y-%m-%d %I:%M %p PKT"` 获取。版本来自智能体发现
+- 如果 `changelog/best-practice/claude-settings/changelog.md` 不存在或为空，则使用状态图例表（参见文件顶部）创建它，然后创建第一个条目
+- 每个条目由 `---` 分隔
+- **仅包含具有 HIGH、MEDIUM 或 LOW 优先级的项目** — 省略 NONE 优先级项目（不需要操作的事项）
 
 ---
 
-## Phase 2.7: Validate All Hyperlinks
+## 阶段 2.6：更新最后更新徽章
 
-**This phase is MANDATORY — always execute it after Phase 2.6, before presenting the report.**
+**此阶段是强制性的 — 在阶段 2.5 之后、呈现报告之前立即执行它。**
 
-Scan `best-practice/claude-settings.md` for every hyperlink (both markdown `[text](url)` and inline URLs). For each link:
+更新 `best-practice/claude-settings.md` 顶部的"最后更新"徽章。运行 `TZ=Asia/Karachi date "+%b %d, %Y %-I:%M %p PKT"` 获取时间，将其进行 URL 编码（空格转为 `%20`，逗号转为 `%2C`），并替换徽章中的日期部分。如果 Claude Code 版本已更改，也要更新徽章中的版本。
 
-1. **Local file links** (relative paths): Verify the file exists at the resolved path using the Read tool. Flag any broken links.
-2. **External URLs** (e.g., `https://code.claude.com/docs/en/settings`): Fetch each URL using WebFetch and verify it returns a valid page (not a 404 or redirect to an error page). Flag any dead or moved links.
-3. **Anchor links** (e.g., `#section-name`): Verify the target heading exists within the same file.
+**不要将徽章更新记录为变更日志或报告中的操作项目。** 徽章同步是每次运行的常规部分，而不是发现。
 
-Include a **Hyperlink Validation Log** in the report:
+---
+
+## 阶段 2.7：验证所有超链接
+
+**此阶段是强制性的 — 在阶段 2.6 之后、呈现报告之前执行它。**
+
+扫描 `best-practice/claude-settings.md` 中的每个超链接（包括 markdown `[text](url)` 和内联 URL）。对于每个链接：
+
+1. **本地文件链接**（相对路径）：使用 Read 工具验证文件是否存在于解析的路径。标记任何损坏的链接。
+2. **外部 URL**（例如，`https://code.claude.com/docs/en/settings`）：使用 WebFetch 获取每个 URL 并验证它返回有效页面（不是 404 或重定向到错误页面）。标记任何失效或移动的链接。
+3. **锚点链接**（例如，`#section-name`）：验证目标标题是否存在于同一文件中。
+
+在报告中包含一个**超链接验证日志**：
 
 ```
-Hyperlink Validation Log:
-#  | Type     | Link                                          | Status | Notes
-1  | Local    | ../                                            | OK     |
-2  | External | https://code.claude.com/docs/en/settings       | OK     |
-3  | External | https://www.schemastore.org/claude-code-settings.json | BROKEN | 404
+超链接验证日志：
+#  | 类型     | 链接                                          | 状态 | 注释
+1  | 本地    | ../                                            | OK     |
+2  | 外部 | https://code.claude.com/docs/en/settings       | OK     |
+3  | 外部 | https://www.schemastore.org/claude-code-settings.json | BROKEN | 404
 ...
 ```
 
-**If any links are broken**, add them as HIGH priority action items in the report. Broken links degrade the report's usefulness and must be fixed before any other changes.
+**如果有任何链接损坏**，将它们作为 HIGH 优先级操作项目添加到报告中。损坏的链接会降低报告的实用性，必须在任何其他更改之前修复。
 
 ---
 
-## Phase 3: Offer to Take Action
+## 阶段 3：提供采取行动的选项
 
-After presenting the report (and confirming both changelog and badge were updated), ask the user:
+在呈现报告后（并确认变更日志和徽章已更新），询问用户：
 
-1. **Execute all actions** — Handle everything (add missing settings, update descriptions, fix examples)
-2. **Execute specific actions** — User picks which numbers to execute
-3. **Just save the report** — No changes
+1. **执行所有操作** — 处理所有事项（添加缺失的设置、更新描述、修复示例）
+2. **执行特定操作** — 用户选择要执行的编号
+3. **仅保存报告** — 不做任何更改
 
-When executing:
-- **New settings**: Add to the appropriate section table with correct type, default, and description
-- **Changed behavior**: Update the setting description or default in the table
-- **Deprecated settings**: Confirm with user before removing
-- **Permission syntax changes**: Update the Permission Syntax table with new patterns
-- **MCP setting changes**: Update the MCP Settings section
-- **Sandbox setting changes**: Update the Sandbox Settings section
-- **Plugin setting changes**: Update the Plugin Settings section
-- **Model changes**: Update the Model Configuration section
-- **Display changes**: Update the Display & UX section
-- **Environment variable changes**: Add/update/remove vars in the Environment Variables section
-- **Settings hierarchy changes**: Update the Settings Hierarchy table
-- **Example updates**: Update the Quick Reference complete example to reflect current settings
-- **Broken links**: Fix or replace broken URLs
-- After all actions, re-run verification to confirm consistency
+执行时：
+- **新设置**：使用正确的类型、默认值和描述添加到相应的部分表中
+- **行为更改**：更新表中的设置描述或默认值
+- **已弃用的设置**：在删除前与用户确认
+- **权限语法更改**：使用新模式更新权限语法表
+- **MCP 设置更改**：更新 MCP 设置部分
+- **沙盒设置更改**：更新沙盒设置部分
+- **插件设置更改**：更新插件设置部分
+- **模型更改**：更新模型配置部分
+- **显示更改**：更新显示和用户体验部分
+- **环境变量更改**：在环境变量部分添加/更新/删除变量
+- **设置层次结构更改**：更新设置层次结构表
+- **示例更新**：更新快速参考完整示例以反映当前设置
+- **损坏的链接**：修复或替换损坏的 URL
+- 所有操作后，重新运行验证以确认一致性
 
 ---
 
-## Critical Rules
+## 关键规则
 
-1. **Launch BOTH agents in parallel** in a single message — never sequentially
-2. **Wait for both agents** before generating the report
-3. **Never guess** versions or dates — use data from the agents
-4. **New settings keys are HIGH PRIORITY** — they require table and example updates
-5. **Cross-reference setting counts** — the number of settings in each table must match official docs
-6. **Don't auto-execute** — always present the report first
-7. **ALWAYS append to changelog** — Phase 2.5 is mandatory. Never skip it. Never overwrite previous entries.
-8. **Compare with previous runs** — read the last 25 entries from the changelog and mark each action item as NEW, RECURRING, or RESOLVED.
-9. **ALWAYS execute the verification checklist** — read the verification-checklist.md and execute every rule. Include a Verification Log in the report. Append new rules when a new type of drift is discovered.
-10. **Checklist rules are append-only** — never remove or weaken existing rules. Only add new rules or upgrade depth levels.
-11. **ALWAYS update the Last Updated badge** — Phase 2.6 is mandatory. Never skip it.
-12. **ALWAYS validate all hyperlinks** — Phase 2.7 is mandatory. Never skip it. Broken links are HIGH priority.
-13. **Environment variables are split across two files** — `claude-settings.md` owns `env`-configurable vars; `claude-cli-startup-flags.md` owns startup-only vars. Do NOT flag env vars as missing if they belong in the CLI file. Cross-reference `best-practice/claude-cli-startup-flags.md` to verify ownership boundaries.
-14. **Verify the settings hierarchy** — the 5-level override chain plus managed policy layer must match official docs exactly.
+1. **在单个消息中并行启动两个智能体** — 永远不要顺序启动
+2. **在生成报告之前等待两个智能体完成**
+3. **永远不要猜测**版本或日期 — 使用智能体提供的数据
+4. **新设置键是 HIGH 优先级** — 它们需要更新表和示例
+5. **交叉参考设置计数** — 每个表中的设置数量必须与官方文档匹配
+6. **不要自动执行** — 始终先呈现报告
+7. **始终附加到变更日志** — 阶段 2.5 是强制性的。永远不要跳过它。永远不要覆盖先前的条目。
+8. **与之前的运行进行比较** — 从变更日志中读取最近 25 个条目，并将每个操作项目标记为 NEW、RECURRING 或 RESOLVED。
+9. **始终执行验证清单** — 读取 verification-checklist.md 并执行每条规则。在报告中包含验证日志。当发现新类型的漂移时附加新规则。
+10. **清单规则仅追加** — 永远不要删除或削弱现有规则。只添加新规则或升级深度级别。
+11. **始终更新最后更新徽章** — 阶段 2.6 是强制性的。永远不要跳过它。
+12. **始终验证所有超链接** — 阶段 2.7 是强制性的。永远不要跳过它。损坏的链接是 HIGH 优先级。
+13. **环境变量分布在两个文件中** — `claude-settings.md` 拥有 `env` 可配置的变量；`claude-cli-startup-flags.md` 拥有仅启动时的变量。如果环境变量属于 CLI 文件，不要将其标记为缺失。交叉参考 `best-practice/claude-cli-startup-flags.md` 以验证所有权边界。
+14. **验证设置层次结构** — 5 级覆盖链加上托管策略层必须与官方文档完全匹配。

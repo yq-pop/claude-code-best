@@ -1,34 +1,34 @@
-# Development Workflows Changelog
+# 开发工作流更新日志
 
-**Status Legend:**
+**状态图例：**
 
-| Status | Meaning |
+| 状态 | 含义 |
 |--------|---------|
-| `COMPLETE (reason)` | Action was taken and resolved successfully |
-| `INVALID (reason)` | Finding was incorrect, not applicable, or intentional |
-| `ON HOLD (reason)` | Action deferred, waiting on external dependency or user decision |
+| `COMPLETE (原因)` | 操作已执行并成功解决 |
+| `INVALID (原因)` | 发现不正确、不适用或有意为之 |
+| `ON HOLD (原因)` | 操作推迟,等待外部依赖或用户决定 |
 
 ---
 
-## [2026-03-19 05:25 PM PKT] Development Workflows Update
+## [2026-03-19 05:25 PM PKT] 开发工作流更新
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
-| 1 | HIGH | Repo Change | Changed humanlayer from article-only repo to humanlayer/humanlayer (★ 10k, 6 agents, 27 commands) | COMPLETE (user requested, repo has actual implementation) |
-| 2 | HIGH | Count Update | Added counts for context-hub: 0 agents · 7 skills · 7 commands | COMPLETE (was showing —) |
-| 3 | HIGH | Count Update | Added counts for agent-os: 0 agents · 0 skills · 5 commands | COMPLETE (was showing —) |
-| 4 | MED | Count Update | Updated spec-kit commands from 14 to 9+ (9 core, extensions are community-contributed) | COMPLETE (agents confirmed 9 core command templates) |
-| 5 | MED | Count Update | Updated OpenSpec commands from 10+ to 11 (confirmed exact count) | COMPLETE (agents confirmed 11 commands) |
-| 6 | MED | Count Update | Updated gstack from "21 skills · 21 commands" to "21 skills/commands" (skills serve as command surface) | COMPLETE (no separate commands/ directory, skills ARE commands) |
-| 7 | MED | Description | Added uniqueness descriptions for context-hub, agent-os, humanlayer | COMPLETE (was showing generic descriptions) |
-| 8 | LOW | Sort Order | Moved humanlayer up from ★ 1.6k to ★ 10k position (after context-hub) | COMPLETE (repo change resulted in higher star count) |
-| 9 | LOW | Report Update | Updated cross-workflow analysis report "Workflows at a Glance" table with all 9 workflows | COMPLETE (was only 6, now includes all 9 sorted by stars) |
+| 1 | HIGH | 仓库变更 | 将 humanlayer 从仅文章仓库改为 humanlayer/humanlayer (★ 10k, 6 agents, 27 commands) | COMPLETE (用户请求,仓库有实际实现) |
+| 2 | HIGH | 计数更新 | 添加 context-hub 计数: 0 agents · 7 skills · 7 commands | COMPLETE (之前显示 —) |
+| 3 | HIGH | 计数更新 | 添加 agent-os 计数: 0 agents · 0 skills · 5 commands | COMPLETE (之前显示 —) |
+| 4 | MED | 计数更新 | 更新 spec-kit commands 从 14 到 9+ (9 个核心,扩展由社区贡献) | COMPLETE (agents 确认 9 个核心命令模板) |
+| 5 | MED | 计数更新 | 更新 OpenSpec commands 从 10+ 到 11 (确认准确数量) | COMPLETE (agents 确认 11 个命令) |
+| 6 | MED | 计数更新 | 更新 gstack 从 "21 skills · 21 commands" 到 "21 skills/commands" (skills 作为命令界面) | COMPLETE (没有单独的 commands/ 目录, skills 就是 commands) |
+| 7 | MED | 描述 | 为 context-hub, agent-os, humanlayer 添加独特性描述 | COMPLETE (之前显示通用描述) |
+| 8 | LOW | 排序 | 将 humanlayer 从 ★ 1.6k 位置移动到 ★ 10k 位置 (context-hub 之后) | COMPLETE (仓库变更导致星标数增加) |
+| 9 | LOW | 报告更新 | 更新跨工作流分析报告 "Workflows at a Glance" 表格,包含所有 9 个工作流 | COMPLETE (之前只有 6 个,现在包含按星标排序的全部 9 个) |
 
 ---
 
-## [2026-03-19 05:29 PM PKT] Development Workflows Update
+## [2026-03-19 05:29 PM PKT] 开发工作流更新
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | HIGH | Count Update | Update obra/superpowers agents from 7 to 5 (v5.0.4 consolidated review loop to whole-plan evaluation, removed 2 implicit agents) | COMPLETE (updated README table and report) |
 | 2 | HIGH | Count Update | Update obra/superpowers skills from 44+ to 14 core (community repo obra/superpowers-skills archived Oct 2025) | COMPLETE (updated README table and report) |
@@ -43,9 +43,9 @@
 
 ---
 
-## [2026-03-20 08:37 AM PKT] Development Workflows Update
+## [2026-03-20 08:37 AM PKT] 开发工作流更新
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | HIGH | Star Update | Update Superpowers ★ from 98k to 100k (99,603 actual — approaching 100k milestone) | COMPLETE (updated README table) |
 | 2 | HIGH | Star Update | Update Everything Claude Code ★ from 87k to 89k (88,580 actual) | COMPLETE (updated README table) |
@@ -57,9 +57,9 @@
 
 ---
 
-## [2026-03-21 09:20 PM PKT] Development Workflows Update
+## [2026-03-21 09:20 PM PKT] 开发工作流更新
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | HIGH | Star Update | Update Superpowers ★ from 100k to 103k (102,767 actual) | COMPLETE (updated README table) |
 | 2 | HIGH | Star Update | Update Everything Claude Code ★ from 89k to 93k (93,145 actual) | COMPLETE (updated README table) |
@@ -74,9 +74,9 @@
 
 ---
 
-## [2026-03-23 09:53 PM PKT] Development Workflows Update
+## [2026-03-23 09:53 PM PKT] 开发工作流更新
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | HIGH | Star Update | Update Superpowers ★ from 103k to 107k (107,308 actual) | COMPLETE (updated README table) |
 | 2 | HIGH | Star Update | Update ECC ★ from 93k to 101k (101,098 actual — crossed 100k milestone!) | COMPLETE (updated README table) |
@@ -93,9 +93,9 @@
 
 ---
 
-## [2026-03-24 08:12 PM PKT] Development Workflows Update
+## [2026-03-24 08:12 PM PKT] 开发工作流更新
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | HIGH | Star Update | Update Superpowers ★ from 107k to 110k (109,846 actual) | COMPLETE (updated README table) |
 | 2 | HIGH | Star Update | Update ECC ★ from 101k to 104k (103,960 actual) | COMPLETE (updated README table) |
@@ -109,9 +109,9 @@
 
 ---
 
-## [2026-03-25 08:12 PM PKT] Development Workflows Update
+## [2026-03-25 08:12 PM PKT] 开发工作流更新
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | HIGH | Star Update | Update Superpowers ★ from 110k to 112k (112,163 actual) | COMPLETE (updated README table) |
 | 2 | HIGH | Star Update | Update ECC ★ from 104k to 107k (106,913 actual) | COMPLETE (updated README table) |
@@ -122,9 +122,9 @@
 
 ---
 
-## [2026-03-26 01:05 PM PKT] Development Workflows Update
+## [2026-03-26 01:05 PM PKT] 开发工作流更新
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | HIGH | Star Update | Update Superpowers ★ from 112k to 114k (114,107 actual) | COMPLETE (updated README table) |
 | 2 | HIGH | Star Update | Update ECC ★ from 107k to 109k (108,839 actual) | COMPLETE (updated README table) |
@@ -134,9 +134,9 @@
 
 ---
 
-## [2026-03-27 06:32 PM PKT] Development Workflows Update
+## [2026-03-27 06:32 PM PKT] 开发工作流更新
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | HIGH | Star Update | Update Superpowers ★ from 114k to 118k (117,568 actual) | COMPLETE (updated README table) |
 | 2 | HIGH | Star Update | Update ECC ★ from 109k to 111k (111,487 actual) | COMPLETE (updated README table) |
@@ -152,9 +152,9 @@
 
 ---
 
-## [2026-03-28 09:29 PM PKT] Development Workflows Update
+## [2026-03-28 09:29 PM PKT] 开发工作流更新
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | HIGH | Star Update | Update Superpowers ★ from 118k to 120k (120,147 actual) | COMPLETE (updated README table) |
 | 2 | HIGH | Star Update | Update ECC ★ from 111k to 114k (114,134 actual) | COMPLETE (updated README table) |
@@ -166,9 +166,9 @@
 
 ---
 
-## [2026-03-29 08:00 PM PKT] Development Workflows Update
+## [2026-03-29 08:00 PM PKT] 开发工作流更新
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | HIGH | Star Update | Update Superpowers ★ from 120k to 122k (122,129 actual) | COMPLETE (updated README table) |
 | 2 | HIGH | Star Update | Update ECC ★ from 114k to 116k (115,898 actual) | COMPLETE (updated README table) |
@@ -181,9 +181,9 @@
 
 ---
 
-## [2026-03-31 07:43 PM PKT] Development Workflows Update
+## [2026-03-31 07:43 PM PKT] 开发工作流更新
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | HIGH | Star Update | Update Superpowers ★ from 122k to 127k (127,473 actual) | COMPLETE (updated README table) |
 | 2 | HIGH | Star Update | Update ECC ★ from 116k to 124k (124,279 actual) | COMPLETE (updated README table) |
@@ -198,9 +198,9 @@
 
 ---
 
-## [2026-04-01 12:35 PM PKT] Development Workflows Update
+## [2026-04-01 12:35 PM PKT] 开发工作流更新
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | HIGH | Star Update | Update Superpowers ★ from 127k to 129k (128,925 actual) | COMPLETE (updated README table) |
 | 2 | HIGH | Star Update | Update ECC ★ from 124k to 129k (128,606 actual — neck-and-neck with Superpowers) | COMPLETE (updated README table) |
@@ -212,9 +212,9 @@
 
 ---
 
-## [2026-04-02 09:22 PM PKT] Development Workflows Update
+## [2026-04-02 09:22 PM PKT] 开发工作流更新
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | HIGH | Sort Order | Move ECC (133k) above Superpowers (132k) — ECC now has more stars | COMPLETE (updated README table) |
 | 2 | HIGH | Star Update | Update ECC ★ from 129k to 133k (133,114 actual — overtook Superpowers) | COMPLETE (updated README table) |
@@ -231,9 +231,9 @@
 
 ---
 
-## [2026-04-03 10:56 PM PKT] Development Workflows Update
+## [2026-04-03 10:56 PM PKT] 开发工作流更新
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | HIGH | Star Update | Update ECC ★ from 133k to 136k (135,765 actual — widening lead over Superpowers) | COMPLETE (updated README table) |
 | 2 | HIGH | Count Update | Update ECC agents 36→38, commands 68→75, skills 152→156 (NestJS patterns, Jira integration, C#/Dart support, web frontend rules) | COMPLETE (updated README table) |
@@ -245,9 +245,9 @@
 
 ---
 
-## [2026-04-04 10:45 PM PKT] Development Workflows Update
+## [2026-04-04 10:45 PM PKT] 开发工作流更新
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | MED | Star Update | Update ECC ★ from 136k to 137k (137,404 actual) | COMPLETE (updated README table) |
 | 2 | MED | Star Update | Update Superpowers ★ from 134k to 135k (134,933 actual) | COMPLETE (updated README table) |
@@ -258,9 +258,9 @@
 
 ---
 
-## [2026-04-06 09:49 PM PKT] Development Workflows Update
+## [2026-04-06 09:49 PM PKT] 开发工作流更新
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | HIGH | Star Update | Update ECC ★ from 137k to 142k (142,218 actual — v1.10.0 Surface Refresh, 10 commits on Apr 6 alone) | COMPLETE (updated README table) |
 | 2 | HIGH | Count Update | Update ECC agents 38→47, commands 75→82, skills 156→182 (agent-introspection-debugging, hookify bundle restored, 26 new skills) | COMPLETE (updated README table) |
@@ -275,9 +275,9 @@
 
 ---
 
-## [2026-04-08 09:38 PM PKT] Development Workflows Update
+## [2026-04-08 09:38 PM PKT] 开发工作流更新
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | HIGH | Star Update | Update ECC ★ from 142k to 146k (146,462 actual — v1.10.0 Surface Refresh momentum, ecc2 alpha development) | COMPLETE (updated README table) |
 | 2 | HIGH | Star Update | Update Superpowers ★ from 137k to 141k (141,071 actual) | COMPLETE (updated README table) |
@@ -292,9 +292,9 @@
 
 ---
 
-## [2026-04-10 12:23 AM PKT] Development Workflows Update
+## [2026-04-10 12:23 AM PKT] 开发工作流更新
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | HIGH | Star Update | Update ECC ★ from 146k to 148k (148,000 actual — v1.10.0 momentum, ecc2 alpha) | COMPLETE (updated README table) |
 | 2 | HIGH | Star Update | Update Superpowers ★ from 141k to 143k (143,000 actual — v5.0.7 Copilot CLI) | COMPLETE (updated README table) |

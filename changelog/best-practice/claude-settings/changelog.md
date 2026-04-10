@@ -1,18 +1,18 @@
-# Settings Report — Changelog History
+# 设置报告 — 更新日志历史
 
-## Status Legend
+## 状态图例
 
-| Status | Meaning |
+| 状态 | 含义 |
 |--------|---------|
-| ✅ `COMPLETE (reason)` | Action was taken and resolved successfully |
-| ❌ `INVALID (reason)` | Finding was incorrect, not applicable, or intentional |
-| ✋ `ON HOLD (reason)` | Action deferred — waiting on external dependency or user decision |
+| ✅ `COMPLETE (原因)` | 操作已执行并成功解决 |
+| ❌ `INVALID (原因)` | 发现不正确、不适用或有意为之 |
+| ✋ `ON HOLD (原因)` | 操作推迟 — 等待外部依赖或用户决定 |
 
 ---
 
 ## [2026-03-05 06:18 AM PKT] Claude Code v2.1.69
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | HIGH | Missing Settings | Add 13 non-hook missing settings keys (`$schema`, `availableModels`, `fastModePerSessionOptIn`, `teammateMode`, `prefersReducedMotion`, `sandbox.filesystem.*`, `sandbox.network.allowManagedDomainsOnly`, `sandbox.enableWeakerNetworkIsolation`, `allowManagedMcpServersOnly`, `blockedMarketplaces`, `includeGitInstructions`, `pluginTrustMessage`, `fileSuggestion` table entry) | ✅ COMPLETE (added to report) |
 | 2 | HIGH | Missing Env Vars | Add missing environment variables including `CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING`, `CLAUDE_CODE_DISABLE_1M_CONTEXT`, `CLAUDE_CODE_ACCOUNT_UUID`, `CLAUDE_CODE_DISABLE_GIT_INSTRUCTIONS`, `ENABLE_CLAUDEAI_MCP_SERVERS`, and more | ✅ COMPLETE (added 13 missing env vars to report) |
@@ -32,7 +32,7 @@
 
 ## [2026-03-07 02:17 PM PKT] Claude Code v2.1.71
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | HIGH | Changed Behavior | Fix `teammateMode`: type `boolean` → `string`, default `false` → `"auto"`, description → "Agent team display: auto, in-process, tmux" | ✅ COMPLETE (type, default, and description updated) |
 | 2 | HIGH | New Setting | Add `allowManagedPermissionRulesOnly` to Permissions table (boolean, managed only) | ✅ COMPLETE (added to Permission Keys table) |
@@ -49,7 +49,7 @@
 
 ## [2026-03-12 12:23 PM PKT] Claude Code v2.1.74
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | HIGH | Changed Behavior | Fix `dontAsk` permission mode description: "Auto-accept all tools" → "Auto-denies tools unless pre-approved via `/permissions` or `permissions.allow` rules" | ✅ COMPLETE (description corrected per official permissions docs) |
 | 2 | HIGH | New Setting | Add `modelOverrides` to Model Configuration section (object, maps Anthropic model IDs to provider-specific IDs like Bedrock ARNs) | ✅ COMPLETE (added with example and description) |
@@ -67,7 +67,7 @@
 
 ## [2026-03-14 01:35 AM PKT] Claude Code v2.1.75
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | HIGH | Settings Hierarchy | Restructure to match official 5-level hierarchy: Managed (#1) > CLI args > Local > Project > User. Remove `~/.claude/settings.local.json` row. Add managed-tier internal precedence (server-managed > MDM > file > HKCU). Note Managed "cannot be overridden by any other level, including CLI args" | ✅ COMPLETE (restructured table to 5 levels with Managed as #1, added delivery methods, internal precedence, and file paths) |
 | 2 | HIGH | Changed Behavior | Fix `availableModels` description: change from complex object array (`title`/`modelId`/`effortOptions`) to simple string array `["sonnet", "haiku"]` per official docs | ✅ COMPLETE (updated description to match official docs format) |
@@ -86,7 +86,7 @@
 
 ## [2026-03-15 12:52 PM PKT] Claude Code v2.1.76
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | HIGH | New Setting | Add `effortLevel` to General Settings or Model Configuration — persists effort level across sessions (`"low"`, `"medium"`, `"high"`). Confirmed on official settings page | ✋ ON HOLD (awaiting user approval) |
 | 2 | HIGH | New Settings | Add Worktree Settings section with `worktree.sparsePaths` (array, sparse-checkout cone mode) and `worktree.symlinkDirectories` (array, symlink dirs to avoid duplication). Confirmed on official settings page | ✋ ON HOLD (awaiting user approval) |
@@ -105,7 +105,7 @@
 
 ## [2026-03-15 01:10 PM PKT] Claude Code v2.1.76
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | HIGH | New Setting | Add `effortLevel` to Model Configuration — persists effort level across sessions (`"low"`, `"medium"`, `"high"`). Also added `/effort` command to Useful Commands and updated Effort Level how-to section | ✅ COMPLETE (added to Model Overrides table, updated how-to, added /effort command) |
 | 2 | HIGH | New Settings | Add Worktree Settings section with `worktree.sparsePaths` (array, sparse-checkout cone mode) and `worktree.symlinkDirectories` (array, symlink dirs to avoid duplication) | ✅ COMPLETE (new Worktree Settings subsection in Core Configuration with table and example) |
@@ -124,7 +124,7 @@
 
 ## [2026-03-17 12:54 PM PKT] Claude Code v2.1.77
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | HIGH | New Setting | Add `sandbox.filesystem.allowRead` to Sandbox Settings table — re-allows read access within `denyRead` regions (array, default `[]`). Confirmed in v2.1.77 changelog | ✅ COMPLETE (added to Sandbox Settings table after denyRead row) |
 | 2 | HIGH | Changed Description | Update `CLAUDE_CODE_MAX_OUTPUT_TOKENS` description: default for Opus 4.6 increased to 64k, upper bound for Opus 4.6 and Sonnet 4.6 increased to 128k (v2.1.77 changelog) | ✅ COMPLETE (description updated with model-specific defaults and bounds) |
@@ -141,7 +141,7 @@
 
 ## [2026-03-18 11:53 PM PKT] Claude Code v2.1.78
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | HIGH | Missing Setting | Add `voiceEnabled` to General Settings table — enable push-to-talk voice dictation (boolean, written by `/voice`, requires Claude.ai account). Confirmed on official settings page | ✅ COMPLETE (added to General Settings table before feedbackSurveyRate) |
 | 2 | HIGH | Missing Setting | Add `filesystem.allowManagedReadPathsOnly` to Sandbox Settings table — managed-only, only managed `allowRead` paths are respected (boolean, default false). Confirmed on official settings page | ✅ COMPLETE (added to Sandbox Settings table before enableWeakerNetworkIsolation) |
@@ -160,7 +160,7 @@
 
 ## [2026-03-19 12:38 PM PKT] Claude Code v2.1.79
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | HIGH | Missing Env Vars | Add `ANTHROPIC_CUSTOM_MODEL_OPTION`, `ANTHROPIC_CUSTOM_MODEL_OPTION_NAME`, `ANTHROPIC_CUSTOM_MODEL_OPTION_DESCRIPTION` to Common Environment Variables table — model-config vars for adding custom entries to `/model` picker. Confirmed on official /en/env-vars page | ✅ COMPLETE (added 3 env vars after ANTHROPIC_BASE_URL in table) |
 | 2 | HIGH | Changed Description | Update `CLAUDE_CODE_PLUGIN_SEED_DIR` from singular to plural: "Path to one or more read-only plugin seed directories, separated by `:` on Unix or `;` on Windows". Changed in v2.1.79 changelog. Confirmed on official /en/env-vars page | ✅ COMPLETE (description updated to multi-directory support) |
@@ -171,7 +171,7 @@
 
 ## [2026-03-20 08:41 AM PKT] Claude Code v2.1.80
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | HIGH | New Setting | Add `channelsEnabled` to MCP Settings table — managed-only boolean, controls channel message delivery for Team and Enterprise users. Confirmed on official settings page | ✅ COMPLETE (added to MCP Settings table after allowManagedMcpServersOnly) |
 | 2 | MED | Version Badge | Update report version from v2.1.79 to v2.1.80 | ✅ COMPLETE (badge and header updated) |
@@ -180,7 +180,7 @@
 
 ## [2026-03-21 09:17 PM PKT] Claude Code v2.1.81
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | HIGH | Missing Settings (~/.claude.json) | Add `autoConnectIde` (boolean, default `false`) and `autoInstallIdeExtension` (boolean, default `true`) to Global Config Settings table. Confirmed on official settings page under "Global config settings" | ✅ COMPLETE (added both keys to ~/.claude.json table before showTurnDuration) |
 | 2 | HIGH | Incorrect Setting | `allow_remote_sessions` listed in Permission Keys table as managed-only boolean, but official permissions page states: "Access to Remote Control and web sessions is not controlled by a managed settings key." Mark as unverified or remove | ✅ COMPLETE (re-added unverified annotation with official docs quote and admin UI link) |
@@ -193,7 +193,7 @@
 
 ## [2026-03-23 10:02 PM PKT] Claude Code v2.1.81
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | HIGH | Missing Setting (~/.claude.json) | Add `editorMode` (string, default `"normal"`, values: `"normal"` or `"vim"`) to Global Config Settings table. Written automatically when running `/vim`. Confirmed on official settings page | ✅ COMPLETE (added to Global Config Settings table after autoInstallIdeExtension) |
 | 2 | HIGH | File Scope Fix | Move `showClearContextOnPlanAccept` from Global Config Settings (~/.claude.json) to General Settings (settings.json). Official docs now list it in the main Available settings table, not the Global config table. Remove stale annotation "not yet on official settings page" | ✅ COMPLETE (moved to General Settings table before feedbackSurveyRate, removed stale annotation) |
@@ -204,7 +204,7 @@
 
 ## [2026-03-25 08:16 PM PKT] Claude Code v2.1.83
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | HIGH | New Setting | Add `autoMode` to Permissions section — object with `environment`, `allow`, `soft_deny` arrays for configuring auto mode classifier. Not read from shared project settings (`.claude/settings.json`). Available in user, local, and managed settings. Confirmed on official settings + permissions pages | ✅ COMPLETE (added to Permission Keys table with full description, scope restrictions, and `claude auto-mode defaults` note) |
 | 2 | HIGH | New Setting | Add `disableAutoMode` to Permissions section — string, set to `"disable"` to prevent auto mode activation. Removes `auto` from Shift+Tab cycle. Can be set at any settings level, most useful in managed settings. Confirmed on official settings + permissions pages | ✅ COMPLETE (added to Permission Keys table after `autoMode`) |
@@ -223,7 +223,7 @@
 
 ## [2026-03-26 01:04 PM PKT] Claude Code v2.1.84
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | HIGH | New Setting | Add `defaultShell` to General Settings — string, default `"bash"`, accepts `"bash"` or `"powershell"`. Routes interactive `!` commands through PowerShell on Windows. Requires `CLAUDE_CODE_USE_POWERSHELL_TOOL=1`. Confirmed on official settings page | ✅ COMPLETE (added to General Settings table after teammateMode) |
 | 2 | HIGH | New Setting | Add `allowedChannelPlugins` to MCP Settings — array, managed-only. Allowlist of channel plugins that may push messages. Replaces default Anthropic allowlist when set. Requires `channelsEnabled: true`. Confirmed on official settings page | ✅ COMPLETE (added to MCP Settings table after channelsEnabled) |
@@ -241,7 +241,7 @@
 
 ## [2026-03-27 06:32 PM PKT] Claude Code v2.1.85
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | HIGH | Missing Env Var | Add `CLAUDE_STREAM_IDLE_TIMEOUT_MS` to Common Environment Variables table — timeout in ms before streaming idle watchdog closes stalled connection (default: 90000). Confirmed on official /en/env-vars page. Added in v2.1.84 but missed in previous run | ✅ COMPLETE (added to env vars table after CLAUDE_CODE_OTEL_HEADERS_HELPER_DEBOUNCE_MS) |
 | 2 | HIGH | Version Bump | Update report version badge from v2.1.84 to v2.1.85 | ✅ COMPLETE (badge, header version, and header text updated in Phase 2.6) |
@@ -252,7 +252,7 @@
 
 ## [2026-03-28 06:10 PM PKT] Claude Code v2.1.86
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | HIGH | File Scope | Move `teammateMode` from General Settings (settings.json) to Global Config Settings (~/.claude.json). Official settings page lists it under "Global config settings" — adding to settings.json triggers schema validation error (Rule 1H). Same pattern as v2.1.78 `showTurnDuration` fix | ✅ COMPLETE (removed from General Settings table, added to Global Config Settings table after terminalProgressBarEnabled with agent-teams docs link) |
 | 2 | HIGH | Type + Annotation | Fix `disableDeepLinkRegistration`: change type from `boolean` to `string` (value: `"disable"`), update description to match official docs, remove stale "(in changelog, not on official settings page)" annotation. Now confirmed on official settings page (line 169) | ✅ COMPLETE (type changed to string, description updated to match official docs, changelog annotation removed) |
@@ -262,7 +262,7 @@
 
 ## [2026-03-31 07:02 PM PKT] Claude Code v2.1.88
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | HIGH | Missing Env Var | Add `CLAUDE_CODE_NO_FLICKER` to Common Environment Variables table — enable flicker-free alt-screen rendering (v2.1.88). Confirmed on official /en/env-vars page | ✅ COMPLETE (added after CLAUDE_CODE_DISABLE_TERMINAL_TITLE) |
 | 2 | HIGH | Missing Env Vars | Add `CLAUDE_CODE_SCROLL_SPEED` and `CLAUDE_CODE_DISABLE_MOUSE` to Common Environment Variables table — fullscreen UI controls. Confirmed on official /en/env-vars page | ✅ COMPLETE (added after CLAUDE_CODE_NO_FLICKER) |
@@ -276,7 +276,7 @@
 
 ## [2026-04-01 12:32 PM PKT] Claude Code v2.1.89
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | HIGH | Missing Setting | Add `skipDangerousModePermissionPrompt` to Permission Keys table — boolean, skip bypass-mode confirmation prompt. Ignored in project settings. Confirmed on official settings page | ✅ COMPLETE (added after disableBypassPermissionsMode in Permission Keys table) |
 | 2 | HIGH | New Setting | Add `showThinkingSummaries` to General Settings — boolean, default `false`. Thinking summaries no longer generated by default; set `true` to restore. v2.1.89 changelog — not yet on official settings page | ✅ COMPLETE (added before feedbackSurveyRate with changelog annotation) |
@@ -291,7 +291,7 @@
 
 ## [2026-04-02 09:24 PM PKT] Claude Code v2.1.90
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | HIGH | Changed Type + Description | Fix `forceLoginOrgUUID`: type from `string` to `string \| string[]`. Expand description to include array behavior (any listed org accepted without pre-selection), managed settings enforcement (login fails if account not in listed org), and empty array fail-closed behavior | ✅ COMPLETE (type updated to string \| array, description expanded with array behavior, managed enforcement, fail-closed semantics, example updated) |
 | 2 | HIGH | Missing Env Vars | Add `CLAUDE_CODE_OAUTH_TOKEN`, `CLAUDE_CODE_OAUTH_REFRESH_TOKEN`, `CLAUDE_CODE_OAUTH_SCOPES` to Common Environment Variables table. All confirmed on official /en/env-vars page | ✅ COMPLETE (added 3 OAuth env vars after ANTHROPIC_AUTH_TOKEN) |
@@ -307,7 +307,7 @@
 
 ## [2026-04-03 08:44 PM PKT] Claude Code v2.1.91
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | HIGH | New Setting | Add `disableSkillShellExecution` to General Settings table — boolean, disable inline shell execution in skills, custom slash commands, and plugin commands. Confirmed in v2.1.91 changelog. Not yet on official settings page or in JSON schema | ✅ COMPLETE (added after showThinkingSummaries with changelog annotation) |
 | 2 | HIGH | Version Bump | Update report version badge from v2.1.90 to v2.1.91 | ✅ COMPLETE (badge and header updated in Phase 2.6) |
@@ -316,7 +316,7 @@
 
 ## [2026-04-04 10:48 PM PKT] Claude Code v2.1.92
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | HIGH | New Setting | Add `forceRemoteSettingsRefresh` to General Settings — boolean, managed-only, blocks CLI startup until remote managed settings are freshly fetched (fail-closed). Confirmed on official settings page | ✅ COMPLETE (added before feedbackSurveyRate in General Settings table) |
 | 2 | HIGH | Missing Env Var | Add `CLAUDE_REMOTE_CONTROL_SESSION_NAME_PREFIX` to Common Environment Variables table — prefix for auto-generated Remote Control session names, defaults to machine hostname. Confirmed on official /en/env-vars page | ✅ COMPLETE (added before CLAUDE_CODE_ENABLE_TELEMETRY) |
@@ -332,7 +332,7 @@
 
 ## [2026-04-08 09:51 PM PKT] Claude Code v2.1.96
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | HIGH | Missing Env Vars | Add `CLAUDE_CODE_USE_MANTLE`, `ANTHROPIC_BEDROCK_MANTLE_BASE_URL`, `CLAUDE_CODE_SKIP_MANTLE_AUTH` to Common Environment Variables table — Bedrock Mantle endpoint support (v2.1.94). All confirmed on official /en/env-vars page | ✅ COMPLETE (added near related cloud provider vars) |
 | 2 | HIGH | Changed Default | Update Effort Level section — default changed from Medium to High for API-key, Bedrock/Vertex/Foundry, Team, and Enterprise users (v2.1.94). Update table default marker and historical note | ✅ COMPLETE (table updated High as default, historical note expanded with v2.1.94 change) |
@@ -344,7 +344,7 @@
 
 ## [2026-04-09 11:39 PM PKT] Claude Code v2.1.97
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | HIGH | New Setting | Add `sandbox.network.allowMachLookup` to Sandbox Settings table — array, macOS only, XPC/Mach service names with trailing `*` wildcard support. Confirmed on official settings page | ✅ COMPLETE (added after allowManagedDomainsOnly in sandbox network sub-keys) |
 | 2 | HIGH | Display & UX | Add `refreshInterval` field to Status Line Configuration section — optional, re-runs command every N seconds, minimum 1 (v2.1.97). Confirmed on official status line docs | ✅ COMPLETE (added to config table with `padding` field, updated JSON example) |

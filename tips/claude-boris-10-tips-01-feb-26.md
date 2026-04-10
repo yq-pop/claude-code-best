@@ -1,6 +1,6 @@
-# 10 Tips for Using Claude Code — From the Claude Code Team
+# 使用 Claude Code 的 10 个技巧 — 来自 Claude Code 团队
 
-A summary of team tips shared by Boris Cherny ([@bcherny](https://x.com/bcherny)), creator of Claude Code, on February 1, 2026.
+Boris Cherny ([@bcherny](https://x.com/bcherny))，Claude Code 的创建者，于 2026 年 2 月 1 日分享的团队技巧总结。
 
 <table width="100%">
 <tr>
@@ -11,60 +11,60 @@ A summary of team tips shared by Boris Cherny ([@bcherny](https://x.com/bcherny)
 
 ---
 
-## Context
+## 背景
 
-Boris shared tips for using Claude Code sourced directly from the Claude Code team. The way the team uses Claude is different than how Boris uses it personally. Remember: there is no one right way to use Claude Code — everyone's setup is different. You should experiment to see what works for you!
+Boris 分享了直接来自 Claude Code 团队的使用技巧。团队使用 Claude 的方式与 Boris 个人使用方式不同。请记住：使用 Claude Code 没有唯一正确的方式 — 每个人的设置都不同。你应该进行实验，看看什么适合你！
 
 <a href="https://x.com/bcherny/status/2017742741636321619"><img src="assets/boris-1-feb-26/0.png" alt="Boris Cherny intro tweet" width="50%" /></a>
 
 ---
 
-## 1/ Do More in Parallel
+## 1/ 并行处理更多任务
 
-Spin up 3–5 git worktrees at once, each running its own Claude session in parallel. It's the single biggest productivity unlock, and the top tip from the team. Personally, Boris uses multiple git checkouts, but most of the Claude Code team prefers worktrees — it's the reason `@amorisscode` built native support for them into the Claude Desktop app!
+同时启动 3-5 个 git worktrees，每个都运行自己的 Claude 会话。这是最大的生产力提升，也是团队的首要技巧。Boris 个人使用多个 git checkouts，但 Claude Code 团队大多数人更喜欢 worktrees — 这就是 `@amorisscode` 在 Claude Desktop 应用中为它们构建原生支持的原因！
 
-Some people also name their worktrees and set up shell aliases (`2a`, `2b`, `2c`) so they can hop between them in one keystroke. Others have a dedicated "analysis" worktree that's only for reading logs and running BigQuery.
+有些人还会为他们的 worktrees 命名并设置 shell 别名（`2a`、`2b`、`2c`），这样他们可以通过一次按键在它们之间切换。其他人有一个专门的"分析" worktree，仅用于读取日志和运行 BigQuery。
 
-See: [Worktrees Docs](https://code.claude.com/docs/en/common...)
+参见：[Worktrees 文档](https://code.claude.com/docs/en/common...)
 
 <a href="https://x.com/bcherny/status/2017742743125299476"><img src="assets/boris-1-feb-26/1.png" alt="Do more in parallel" width="50%" /></a>
 
 ---
 
-## 2/ Start Every Complex Task in Plan Mode
+## 2/ 在计划模式下开始每个复杂任务
 
-Pour your energy into the plan so Claude can 1-shot the implementation.
+将你的精力投入到计划中，这样 Claude 就可以一次完成实现。
 
-One person has one Claude write the plan, then they spin up a second Claude to review it as a staff engineer.
+有人让一个 Claude 编写计划，然后启动第二个 Claude 作为高级工程师来审查它。
 
-Another says the moment something goes sideways, they switch back to plan mode and re-plan. Don't keep pushing. They also explicitly tell Claude to enter plan mode for verification steps, not just for the build.
+另一个人说，一旦出现问题，他们就会切换回计划模式并重新规划。不要继续推进。他们还明确告诉 Claude 进入计划模式进行验证步骤，而不仅仅是构建。
 
 <a href="https://x.com/bcherny/status/2017742745365057733"><img src="assets/boris-1-feb-26/2.png" alt="Start every complex task in plan mode" width="50%" /></a>
 
 ---
 
-## 3/ Invest in Your CLAUDE.md
+## 3/ 投资你的 CLAUDE.md
 
-After every correction, end with: "Update your CLAUDE.md so you don't make that mistake again." Claude is eerily good at writing rules for itself.
+每次纠正后，以此结束："更新你的 CLAUDE.md，这样你就不会再犯同样的错误。" Claude 在为自己编写规则方面出奇地擅长。
 
-Ruthlessly edit your `CLAUDE.md` over time. Keep iterating until Claude's mistake rate measurably drops.
+随着时间的推移，无情地编辑你的 `CLAUDE.md`。持续迭代，直到 Claude 的错误率明显下降。
 
-One engineer tells Claude to maintain a notes directory for every task/project, updated after every PR. They then point `CLAUDE.md` at it.
+一位工程师告诉 Claude 为每个任务/项目维护一个笔记目录，在每个 PR 后更新。然后他们将 `CLAUDE.md` 指向它。
 
 <a href="https://x.com/bcherny/status/2017742747067945390"><img src="assets/boris-1-feb-26/3.png" alt="Invest in your CLAUDE.md" width="50%" /></a>
 
 ---
 
-## 4/ Create Your Own Skills and Commit Them to Git
+## 4/ 创建你自己的技能并提交到 Git
 
-Reuse across every project. Tips from the team:
+在每个项目中重复使用。来自团队的技巧：
 
-- If you do something more than once a day, turn it into a skill or command
-- Build a `/techdebt` slash command and run it at the end of every session to find and kill duplicated code
-- Set up a slash command that syncs 7 days of Slack, GDrive, Asana, and GitHub into one context dump
-- Build analytics-engineer-style agents that write dbt models, review code, and test changes in dev
+- 如果你每天做某事超过一次，就把它变成一个技能或命令
+- 构建一个 `/techdebt` 斜杠命令，在每个会话结束时运行它以查找和删除重复代码
+- 设置一个斜杠命令，将 7 天的 Slack、GDrive、Asana 和 GitHub 同步到一个上下文转储中
+- 构建分析工程师风格的代理，编写 dbt 模型、审查代码并在开发中测试更改
 
-See: [Extend Claude with Skills — Claude Code Docs](https://code.claude.com/docs/en/skills)
+参见：[使用技能扩展 Claude — Claude Code 文档](https://code.claude.com/docs/en/skills)
 
 <a href="https://x.com/bcherny/status/2017742748984742078"><img src="assets/boris-1-feb-26/4.png" alt="Create your own skills" width="50%" /></a>
 

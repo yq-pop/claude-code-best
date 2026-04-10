@@ -1,13 +1,13 @@
 # Glob: presentation/**
 
-## Delegation Rule
+## 委派规则
 
-Any request to update, modify, or fix the presentation (`presentation/index.html`) MUST be handled by the `presentation-curator` agent. Always delegate presentation work to this agent via the Task tool — never edit the presentation directly.
+任何更新、修改或修复演示文稿（`presentation/index.html`）的请求都必须由 `presentation-curator` 智能体处理。始终通过 Task 工具将演示文稿工作委派给此智能体 — 永远不要直接编辑演示文稿。
 
 ```
 Task(subagent_type="presentation-curator", description="...", prompt="...")
 ```
 
-## Why
+## 原因
 
-The presentation-curator agent has three preloaded skills that keep it in sync with the presentation's structure, styling, and conceptual framework. It also self-evolves after every execution, updating its own skills to prevent knowledge drift. Bypassing the agent risks breaking slide numbering, level transitions, or style consistency.
+presentation-curator 智能体拥有三个预加载的技能，使其与演示文稿的结构、样式和概念框架保持同步。它还会在每次执行后自我演化，更新自己的技能以防止知识漂移。绕过该智能体可能会破坏幻灯片编号、级别转换或样式一致性。

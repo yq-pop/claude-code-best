@@ -1,18 +1,18 @@
-# Subagents Report — Changelog History
+# 子代理报告 — 更新日志历史
 
-## Status Legend
+## 状态图例
 
-| Status | Meaning |
+| 状态 | 含义 |
 |--------|---------|
-| ✅ `COMPLETE (reason)` | Action was taken and resolved successfully |
-| ❌ `INVALID (reason)` | Finding was incorrect, not applicable, or intentional |
-| ✋ `ON HOLD (reason)` | Action deferred — waiting on external dependency or user decision |
+| ✅ `COMPLETE (原因)` | 操作已执行并成功解决 |
+| ❌ `INVALID (原因)` | 发现不正确、不适用或有意为之 |
+| ✋ `ON HOLD (原因)` | 操作推迟 — 等待外部依赖或用户决定 |
 
 ---
 
 ## [2026-02-28 03:22 PM PKT] Claude Code v2.1.63
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | HIGH | Agents Table | Add `workflow-changelog-claude-agents-frontmatter-agent` to Agents in This Repository table | ✅ COMPLETE (added with model: opus, inherits all tools, no skills/memory) |
 | 2 | HIGH | Agents Table | Fix presentation-curator skills column — add `presentation/` prefix to skill names | ✅ COMPLETE (updated to presentation/vibe-to-agentic-framework etc.) |
@@ -23,7 +23,7 @@
 
 ## [2026-03-07 08:35 AM PKT] Claude Code v2.1.71
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | HIGH | Broken Link | Fix agent memory link to `reports/claude-agent-memory.md` | ✅ COMPLETE |
 | 2 | HIGH | Changed Behavior | Update `tools` field description: `Task(agent_type)` → `Agent(agent_type)` (v2.1.63 rename) | ✅ COMPLETE |
@@ -79,7 +79,7 @@ No drift detected — report is fully in sync with official docs. All 13 frontma
 
 ## [2026-03-20 08:35 AM PKT] Claude Code v2.1.80
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | HIGH | New Field | Add `effort` field to Frontmatter Fields table (string, optional — effort level override: `low`, `medium`, `high`, `max`) | ✅ COMPLETE (added between `background` and `isolation`, count updated 14→15) |
 
@@ -107,7 +107,7 @@ No drift detected — report is fully in sync with official docs. All 15 frontma
 
 ## [2026-03-26 01:01 PM PKT] Claude Code v2.1.84
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | HIGH | New Field | Add `initialPrompt` to Frontmatter Fields table (string, optional — auto-submitted as first user turn when agent runs as main session agent via `--agent` or `agent` setting) | ✅ COMPLETE (added between `isolation` and `color`, count updated 15→16) |
 
@@ -133,7 +133,7 @@ No drift detected — report is fully in sync with official docs. All 16 frontma
 
 ## [2026-04-02 09:11 PM PKT] Claude Code v2.1.90
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | HIGH | Removed Agent | Remove `Bash` from Official Claude Agents table — official docs list 5 built-in agents, `Bash` is not among them | ✅ COMPLETE (removed Bash row, renumbered 6→5 agents) |
 | 2 | LOW | Field Docs | Update `color` field description — remove "absent from official frontmatter table" note; `color` now appears in official supported frontmatter fields table | ✅ COMPLETE (removed unofficial note from color field description) |
@@ -142,7 +142,7 @@ No drift detected — report is fully in sync with official docs. All 16 frontma
 
 ## [2026-04-03 08:30 PM PKT] Claude Code v2.1.91
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | LOW | Field Docs | Update `permissionMode` field description — add `auto` as a valid value (official docs now list: `default`, `acceptEdits`, `auto`, `dontAsk`, `bypassPermissions`, `plan`) | ✅ COMPLETE (added `auto` between `acceptEdits` and `dontAsk` in permissionMode description) |
 
@@ -156,7 +156,7 @@ No drift detected — report is fully in sync with official docs. All 16 frontma
 
 ## [2026-04-08 09:34 PM PKT] Claude Code v2.1.96
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | LOW | Field Docs | Update `model` field description — add full model ID support (e.g., `claude-opus-4-6`) alongside aliases | ✅ COMPLETE (updated description to match official docs wording) |
 | 2 | LOW | Field Docs | Update `effort` field description — add `max (Opus 4.6 only)` qualifier | ✅ COMPLETE (added Opus 4.6 only note to max option) |

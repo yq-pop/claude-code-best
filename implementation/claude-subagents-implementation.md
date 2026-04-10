@@ -1,25 +1,25 @@
-# Sub-agents Implementation
+# Sub-agents 实现
 
-![Last Updated](https://img.shields.io/badge/Last_Updated-Mar_02%2C_2026_07%3A59_PM_PKT-white?style=flat&labelColor=555)
+![最后更新](https://img.shields.io/badge/Last_Updated-Mar_02%2C_2026_07%3A59_PM_PKT-white?style=flat&labelColor=555)
 
 <table width="100%">
 <tr>
-<td><a href="../">← Back to Claude Code Best Practice</a></td>
+<td><a href="../">← 返回 Claude Code Best Practice</a></td>
 <td align="right"><img src="../!/claude-jumping.svg" alt="Claude" width="60" /></td>
 </tr>
 </table>
 
 ---
 
-<a href="#weather-agent"><img src="../!/tags/implemented-hd.svg" alt="Implemented"></a>
+<a href="#weather-agent"><img src="../!/tags/implemented-hd.svg" alt="已实现"></a>
 
-The weather agent is implemented in this repo as an example of the **Command → Agent → Skill** architecture pattern, demonstrating two distinct skill patterns.
+weather agent 在本仓库中作为 **Command → Agent → Skill** 架构模式的示例实现，展示了两种不同的 skill 模式。
 
 ---
 
 ## Weather Agent
 
-**File**: [`.claude/agents/weather-agent.md`](../.claude/agents/weather-agent.md)
+**文件**: [`.claude/agents/weather-agent.md`](../.claude/agents/weather-agent.md)
 
 ```yaml
 ---
@@ -56,11 +56,11 @@ skill:
 ...
 ```
 
-The agent has one preloaded skill (`weather-fetcher`) that provides instructions for fetching from Open-Meteo. It returns the temperature value and unit to the calling command.
+该 agent 有一个预加载的 skill（`weather-fetcher`），提供从 Open-Meteo 获取数据的指令。它将温度值和单位返回给调用的命令。
 
 ---
 
-## ![How to Use](../!/tags/how-to-use.svg)
+## ![如何使用](../!/tags/how-to-use.svg)
 
 ```bash
 $ claude
@@ -69,28 +69,28 @@ $ claude
 
 ---
 
-## ![How to Implement](../!/tags/how-to-implement.svg)
+## ![如何实现](../!/tags/how-to-implement.svg)
 
-You can create an agent using the `/agents` command, 
+你可以使用 `/agents` 命令创建一个 agent，
 ```bash
 $ claude
 > /agents
 ```
 
-or ask Claude to create one for you — it will generate the markdown file with YAML frontmatter and body in `.claude/agents/<name>.md`
+或者让 Claude 为你创建一个——它会在 `.claude/agents/<name>.md` 中生成带有 YAML frontmatter 和正文的 markdown 文件
 
 ---
 
-<a href="https://github.com/shanraisshan/claude-code-best-practice#orchestration-workflow"><img src="../!/tags/orchestration-workflow-hd.svg" alt="Orchestration Workflow"></a>
+<a href="https://github.com/shanraisshan/claude-code-best-practice#orchestration-workflow"><img src="../!/tags/orchestration-workflow-hd.svg" alt="编排工作流"></a>
 
-The weather agent is the **Agent** in the Command → Agent → Skill orchestration pattern. It receives the workflow from the `/weather-orchestrator` command and fetches temperature using its preloaded skill (`weather-fetcher`). The command then invokes the standalone `weather-svg-creator` skill to create the visual output.
+weather agent 是 Command → Agent → Skill 编排模式中的 **Agent**。它从 `/weather-orchestrator` 命令接收工作流，并使用其预加载的 skill（`weather-fetcher`）获取温度。然后命令调用独立的 `weather-svg-creator` skill 来创建可视化输出。
 
 <p align="center">
-  <img src="../orchestration-workflow/orchestration-workflow.svg" alt="Command Skill Agent Architecture Flow" width="100%">
+  <img src="../orchestration-workflow/orchestration-workflow.svg" alt="Command Skill Agent 架构流程" width="100%">
 </p>
 
-| Component | Role | This Repo |
+| 组件 | 角色 | 本仓库 |
 |-----------|------|-----------|
-| **Command** | Entry point, user interaction | [`/weather-orchestrator`](../.claude/commands/weather-orchestrator.md) |
-| **Agent** | Fetches data with preloaded skill (agent skill) | [`weather-agent`](../.claude/agents/weather-agent.md) with [`weather-fetcher`](../.claude/skills/weather-fetcher/SKILL.md) |
-| **Skill** | Creates output independently (skill) | [`weather-svg-creator`](../.claude/skills/weather-svg-creator/SKILL.md) |
+| **Command** | 入口点，用户交互 | [`/weather-orchestrator`](../.claude/commands/weather-orchestrator.md) |
+| **Agent** | 使用预加载的 skill 获取数据（agent skill） | [`weather-agent`](../.claude/agents/weather-agent.md) 带 [`weather-fetcher`](../.claude/skills/weather-fetcher/SKILL.md) |
+| **Skill** | 独立创建输出（skill） | [`weather-svg-creator`](../.claude/skills/weather-svg-creator/SKILL.md) |

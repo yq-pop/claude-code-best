@@ -1,18 +1,18 @@
-# macOS Setup
+# macOS 安装
 
-[Back to Day 0](README.md)
+[返回 Day 0](README.md)
 
 ---
 
-**Terminal**
-- Open Terminal (press `Cmd + Space`, type "Terminal", hit Enter)
+**终端**
+- 打开终端 (按 `Cmd + Space`,输入 "Terminal",按 Enter)
 
 **Homebrew**
-- Check if Homebrew is already installed:
+- 检查是否已安装 Homebrew:
   ```bash
   brew --version
   ```
-- If you get "command not found", install Homebrew first:
+- 如果显示 "command not found",请先安装 Homebrew:
   ```bash
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   ```
@@ -22,11 +22,11 @@
   brew install --cask claude-code
   ```
 
-**Verify**
+**验证**
 - ```bash
   claude --version
   ```
 
 ---
 
-Now head back to [README.md](README.md) for authentication setup.
+现在返回 [README.md](README.md) 进行身份验证设置。

@@ -1,6 +1,6 @@
-# Claude Code: Agent Memory Frontmatter
+# Claude Code: 代理内存前置信息
 
-Persistent memory for subagents — enabling agents to learn, remember, and build knowledge across sessions.
+子代理的持久内存 — 使代理能够跨会话学习、记忆和构建知识。
 
 <table width="100%">
 <tr>
@@ -11,9 +11,9 @@ Persistent memory for subagents — enabling agents to learn, remember, and buil
 
 ---
 
-## Overview
+## 概述
 
-Introduced in **Claude Code v2.1.33** (February 2026), the `memory` frontmatter field gives each subagent its own persistent markdown-based knowledge store. Before this, every agent invocation started from scratch.
+在 **Claude Code v2.1.33**(2026年2月)中引入,`memory` 前置信息字段为每个子代理提供了自己的持久化基于 markdown 的知识存储。在此之前,每次代理调用都从头开始。
 
 ```yaml
 ---
@@ -30,24 +30,24 @@ patterns, conventions, and recurring issues you discover.
 
 ---
 
-## Memory Scopes
+## 内存作用域
 
-| Scope | Storage Location | Version Controlled | Shared | Best For |
+| 作用域 | 存储位置 | 版本控制 | 共享 | 最适合 |
 |-------|-----------------|-------------------|--------|----------|
-| `user` | `~/.claude/agent-memory/<agent-name>/` | No | No | Cross-project knowledge (recommended default) |
-| `project` | `.claude/agent-memory/<agent-name>/` | Yes | Yes | Project-specific knowledge the team should share |
-| `local` | `.claude/agent-memory-local/<agent-name>/` | No (git-ignored) | No | Project-specific knowledge that's personal |
+| `user` | `~/.claude/agent-memory/<agent-name>/` | 否 | 否 | 跨项目知识(推荐默认) |
+| `project` | `.claude/agent-memory/<agent-name>/` | 是 | 是 | 团队应共享的项目特定知识 |
+| `local` | `.claude/agent-memory-local/<agent-name>/` | 否(git忽略) | 否 | 个人的项目特定知识 |
 
-These scopes mirror the settings hierarchy (`~/.claude/settings.json` → `.claude/settings.json` → `.claude/settings.local.json`).
+这些作用域反映了设置层次结构(`~/.claude/settings.json` → `.claude/settings.json` → `.claude/settings.local.json`)。
 
 ---
 
-## How It Works
+## 工作原理
 
-1. **On startup**: First 200 lines of `MEMORY.md` are injected into the agent's system prompt
-2. **Tool access**: `Read`, `Write`, `Edit` are auto-enabled so the agent can manage its memory
-3. **During execution**: The agent reads/writes to its memory directory freely
-4. **Curation**: If `MEMORY.md` exceeds 200 lines, the agent moves details into topic-specific files
+1. **启动时**: `MEMORY.md` 的前200行被注入到代理的系统提示中
+2. **工具访问**: `Read`, `Write`, `Edit` 自动启用,以便代理可以管理其内存
+3. **执行期间**: 代理可以自由地读写其内存目录
+4. **策展**: 如果 `MEMORY.md` 超过200行,代理会将详细信息移至特定主题文件
 
 ```
 ~/.claude/agent-memory/code-reviewer/     # user scope example
@@ -58,25 +58,25 @@ These scopes mirror the settings hierarchy (`~/.claude/settings.json` → `.clau
 
 ---
 
-## Agent Memory vs Other Memory Systems
+## 代理内存 vs 其他内存系统
 
-| System | Who Writes | Who Reads | Scope |
+| 系统 | 谁写入 | 谁读取 | 作用域 |
 |--------|-----------|-----------|-------|
-| **CLAUDE.md** | You (manually) | Main Claude + all agents | Project |
-| **Auto-memory** | Main Claude (auto) | Main Claude only | Per-project per-user |
-| **`/memory` command** | You (via editor) | Main Claude only | Per-project per-user |
-| **Agent memory** | The agent itself | That specific agent only | Configurable (user/project/local) |
+| **CLAUDE.md** | 你(手动) | 主 Claude + 所有代理 | 项目 |
+| **自动内存** | 主 Claude(自动) | 仅主 Claude | 每个项目每个用户 |
+| **`/memory` 命令** | 你(通过编辑器) | 仅主 Claude | 每个项目每个用户 |
+| **代理内存** | 代理本身 | 仅该特定代理 | 可配置(用户/项目/本地) |
 
-These systems are **complementary** — an agent reads both CLAUDE.md (project context) and its own memory (agent-specific knowledge).
+这些系统是**互补的** — 代理会读取 CLAUDE.md(项目上下文)和自己的内存(代理特定知识)。
 
 ---
 
-## Practical Example
+## 实际示例
 
 ```yaml
 ---
 name: api-developer
-description: Implement API endpoints following team conventions
+description: 遵循团队约定实现API端点
 tools: Read, Write, Edit, Bash
 model: sonnet
 memory: project
@@ -85,23 +85,23 @@ skills:
   - error-handling-patterns
 ---
 
-Implement API endpoints. Follow the conventions from your preloaded skills.
-As you work, save architectural decisions and patterns to your memory.
+实现API端点。遵循你预加载的技能中的约定。
+在工作时,将架构决策和模式保存到你的内存中。
 ```
 
-This combines **skills** (static knowledge at startup) with **memory** (dynamic knowledge built over time).
+这结合了**技能**(启动时的静态知识)和**内存**(随时间构建的动态知识)。
 
 ---
 
-## Tips
+## 提示
 
-- **Prompt memory usage** — Include explicit instructions: `"Before starting, review your memory. After completing, update your memory with what you learned."`
-- **Request memory checks** when invoking agents: `"Review this PR, and check your memory for patterns you've seen before."`
-- **Choose the right scope** — `user` for cross-project, `project` for team-shared, `local` for personal
+- **提示内存使用** — 包含明确的指令:`"在开始之前,查看你的内存。完成后,用你学到的内容更新你的内存。"`
+- **调用代理时请求内存检查**: `"审查此PR,并检查你的内存以查找之前看到的模式。"`
+- **选择正确的作用域** — `user` 用于跨项目,`project` 用于团队共享,`local` 用于个人
 
 ---
 
-## Sources
+## 资料来源
 
 - [Create custom subagents — Claude Code Docs](https://code.claude.com/docs/en/sub-agents)
 - [Manage Claude's memory — Claude Code Docs](https://code.claude.com/docs/en/memory)

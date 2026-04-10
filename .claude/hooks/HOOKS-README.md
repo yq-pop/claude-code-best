@@ -1,76 +1,76 @@
 # HOOKS-README
-contains all the details, scripts, and instructions for the hooks
+包含钩子的所有详细信息、脚本和指令
 
-## Hook Events Overview - [Official 27 Hooks](https://code.claude.com/docs/en/hooks)
-Claude Code provides several hook events that run at different points in the workflow:
+## 钩子事件概览 - [官方 27 个钩子](https://code.claude.com/docs/en/hooks)
+Claude Code 提供了几个在工作流不同点运行的钩子事件：
 
-| # | Hook | Description | Options |
+| # | Hook | 描述 | 选项 |
 |:-:|------|-------------|---------|
-| 1 | `PreToolUse` | Runs before tool calls (can block them) | `async`, `timeout: 5000`, `tool_use_id` |
-| 2 | `PermissionRequest` | Runs when Claude Code requests permission from the user | `async`, `timeout: 5000`, `permission_suggestions` |
-| 3 | `PostToolUse` | Runs after tool calls complete successfully | `async`, `timeout: 5000`, `tool_response`, `tool_use_id` |
-| 4 | `PostToolUseFailure` | Runs after tool calls fail | `async`, `timeout: 5000`, `error`, `is_interrupt`, `tool_use_id` |
-| 5 | `UserPromptSubmit` | Runs when the user submits a prompt, before Claude processes it | `async`, `timeout: 5000`, `prompt` |
-| 6 | `Notification` | Runs when Claude Code sends notifications | `async`, `timeout: 5000`, `notification_type`, `message`, `title` |
-| 7 | `Stop` | Runs when Claude Code finishes responding | `async`, `timeout: 5000`, `last_assistant_message`, `stop_hook_active` |
-| 8 | `SubagentStart` | Runs when subagent tasks start | `async`, `timeout: 5000`, `agent_id`, `agent_type` |
-| 9 | `SubagentStop` | Runs when subagent tasks complete | `async`, `timeout: 5000`, `agent_id`, `agent_type`, `last_assistant_message`, `agent_transcript_path`, `stop_hook_active` |
-| 10 | `PreCompact` | Runs before Claude Code is about to run a compact operation | `async`, `timeout: 5000`, `once`, `compact_trigger` |
-| 11 | `PostCompact` | Runs after Claude Code completes a compact operation | `async`, `timeout: 5000`, `compact_trigger` |
-| 12 | `SessionStart` | Runs when Claude Code starts a new session or resumes an existing session | `async`, `timeout: 5000`, `once`, `agent_type`, `model`, `source` |
-| 13 | `SessionEnd` | Runs when Claude Code session ends | `async`, `timeout: 5000`, `once`, `reason` |
-| 14 | `Setup` | Runs when Claude Code runs the /setup command for project initialization | `async`, `timeout: 30000` |
-| 15 | `TeammateIdle` | Runs when a teammate agent becomes idle (experimental agent teams) | `async`, `timeout: 5000`, `teammate_name`, `team_name` |
-| 16 | `TaskCreated` | Runs when a task is being created via the TaskCreate tool (experimental agent teams) | `async`, `timeout: 5000`, `task_id`, `task_subject`, `task_description`, `teammate_name`, `team_name` |
-| 17 | `TaskCompleted` | Runs when a background task completes (experimental agent teams) | `async`, `timeout: 5000`, `task_id`, `task_subject`, `task_description`, `teammate_name`, `team_name` |
-| 18 | `ConfigChange` | Runs when a configuration file changes during a session | `async`, `timeout: 5000`, `file_path`, `source` |
-| 19 | `WorktreeCreate` | Runs when agent worktree isolation creates worktrees for custom VCS setup | `async`, `timeout: 5000`, `worktree_path`, `worktree_name`, `base_branch` |
-| 20 | `WorktreeRemove` | Runs when agent worktree isolation removes worktrees for custom VCS teardown | `async`, `timeout: 5000`, `worktree_path`, `worktree_name` |
-| 21 | `InstructionsLoaded` | Runs when CLAUDE.md or `.claude/rules/*.md` files are loaded into context | `async`, `timeout: 5000`, `file_path`, `memory_type`, `load_reason`, `globs`, `trigger_file_path`, `parent_file_path` |
-| 22 | `Elicitation` | Runs when an MCP server requests user input during a tool call | `async`, `timeout: 5000`, `mcp_server_name`, `tool_name`, `form_fields` |
-| 23 | `ElicitationResult` | Runs after a user responds to an MCP elicitation, before the response is sent back to the server | `async`, `timeout: 5000`, `mcp_server_name`, `tool_name`, `user_response`, `form_fields` |
-| 24 | `StopFailure` | Runs when the turn ends due to an API error (rate limit, auth failure, etc.) | `async`, `timeout: 5000`, `error`, `error_details`, `last_assistant_message` |
-| 25 | `CwdChanged` | Runs when the working directory changes during a session (reactive env management, e.g. direnv) | `async`, `timeout: 5000`, `old_cwd`, `new_cwd` |
-| 26 | `FileChanged` | Runs when watched files change during a session (reactive env management, e.g. direnv). **Requires `matcher` with pipe-separated basenames** (e.g. `.envrc\|.env`) to specify which files to watch | `async`, `timeout: 5000`, `file_path`, `change_type` |
-| 27 | `PermissionDenied` | Runs after auto mode classifier denies a tool call. Return `{retry: true}` to tell the model it can retry | `async`, `timeout: 5000`, `tool_name`, `tool_input`, `tool_use_id`, `reason` |
+| 1 | `PreToolUse` | 在工具调用之前运行（可以阻止它们） | `async`, `timeout: 5000`, `tool_use_id` |
+| 2 | `PermissionRequest` | 当 Claude Code 向用户请求权限时运行 | `async`, `timeout: 5000`, `permission_suggestions` |
+| 3 | `PostToolUse` | 在工具调用成功完成后运行 | `async`, `timeout: 5000`, `tool_response`, `tool_use_id` |
+| 4 | `PostToolUseFailure` | 在工具调用失败后运行 | `async`, `timeout: 5000`, `error`, `is_interrupt`, `tool_use_id` |
+| 5 | `UserPromptSubmit` | 在用户提交提示时运行，在 Claude 处理之前 | `async`, `timeout: 5000`, `prompt` |
+| 6 | `Notification` | 当 Claude Code 发送通知时运行 | `async`, `timeout: 5000`, `notification_type`, `message`, `title` |
+| 7 | `Stop` | 当 Claude Code 完成响应时运行 | `async`, `timeout: 5000`, `last_assistant_message`, `stop_hook_active` |
+| 8 | `SubagentStart` | 当子智能体任务开始时运行 | `async`, `timeout: 5000`, `agent_id`, `agent_type` |
+| 9 | `SubagentStop` | 当子智能体任务完成时运行 | `async`, `timeout: 5000`, `agent_id`, `agent_type`, `last_assistant_message`, `agent_transcript_path`, `stop_hook_active` |
+| 10 | `PreCompact` | 在 Claude Code 即将运行压缩操作之前运行 | `async`, `timeout: 5000`, `once`, `compact_trigger` |
+| 11 | `PostCompact` | 在 Claude Code 完成压缩操作后运行 | `async`, `timeout: 5000`, `compact_trigger` |
+| 12 | `SessionStart` | 当 Claude Code 启动新会话或恢复现有会话时运行 | `async`, `timeout: 5000`, `once`, `agent_type`, `model`, `source` |
+| 13 | `SessionEnd` | 当 Claude Code 会话结束时运行 | `async`, `timeout: 5000`, `once`, `reason` |
+| 14 | `Setup` | 当 Claude Code 运行 /setup 命令进行项目初始化时运行 | `async`, `timeout: 30000` |
+| 15 | `TeammateIdle` | 当团队成员智能体变为空闲时运行（实验性智能体团队） | `async`, `timeout: 5000`, `teammate_name`, `team_name` |
+| 16 | `TaskCreated` | 通过 TaskCreate 工具创建任务时运行（实验性智能体团队） | `async`, `timeout: 5000`, `task_id`, `task_subject`, `task_description`, `teammate_name`, `team_name` |
+| 17 | `TaskCompleted` | 当后台任务完成时运行（实验性智能体团队） | `async`, `timeout: 5000`, `task_id`, `task_subject`, `task_description`, `teammate_name`, `team_name` |
+| 18 | `ConfigChange` | 当配置文件在会话期间更改时运行 | `async`, `timeout: 5000`, `file_path`, `source` |
+| 19 | `WorktreeCreate` | 当智能体工作树隔离为自定义 VCS 设置创建工作树时运行 | `async`, `timeout: 5000`, `worktree_path`, `worktree_name`, `base_branch` |
+| 20 | `WorktreeRemove` | 当智能体工作树隔离为自定义 VCS 拆除移除工作树时运行 | `async`, `timeout: 5000`, `worktree_path`, `worktree_name` |
+| 21 | `InstructionsLoaded` | 当 CLAUDE.md 或 `.claude/rules/*.md` 文件加载到上下文时运行 | `async`, `timeout: 5000`, `file_path`, `memory_type`, `load_reason`, `globs`, `trigger_file_path`, `parent_file_path` |
+| 22 | `Elicitation` | 当 MCP 服务器在工具调用期间请求用户输入时运行 | `async`, `timeout: 5000`, `mcp_server_name`, `tool_name`, `form_fields` |
+| 23 | `ElicitationResult` | 在用户响应 MCP 引导后、响应发送回服务器之前运行 | `async`, `timeout: 5000`, `mcp_server_name`, `tool_name`, `user_response`, `form_fields` |
+| 24 | `StopFailure` | 当由于 API 错误（速率限制、身份验证失败等）而结束回合时运行 | `async`, `timeout: 5000`, `error`, `error_details`, `last_assistant_message` |
+| 25 | `CwdChanged` | 当工作目录在会话期间更改时运行（响应式环境管理，例如 direnv） | `async`, `timeout: 5000`, `old_cwd`, `new_cwd` |
+| 26 | `FileChanged` | 当监视的文件在会话期间更改时运行（响应式环境管理，例如 direnv）。**需要使用管道分隔的基名的 `matcher`**（例如 `.envrc\|.env`）来指定要监视的文件 | `async`, `timeout: 5000`, `file_path`, `change_type` |
+| 27 | `PermissionDenied` | 在自动模式分类器拒绝工具调用后运行。返回 `{retry: true}` 告诉模型它可以重试 | `async`, `timeout: 5000`, `tool_name`, `tool_input`, `tool_use_id`, `reason` |
 
-> **Note:** Hooks 15-17 (`TeammateIdle`, `TaskCreated`, and `TaskCompleted`) require the experimental agent teams feature. Set `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1` when launching Claude Code to enable them.
+> **注意：** 钩子 15-17（`TeammateIdle`、`TaskCreated` 和 `TaskCompleted`）需要实验性智能体团队功能。启动 Claude Code 时设置 `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1` 以启用它们。
 
-### Not in Official Docs
+### 未在官方文档中
 
-The following items exist in the [Claude Code Changelog](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md) but are **not listed** in the [Official Hooks Reference](https://code.claude.com/docs/en/hooks):
+以下项目存在于 [Claude Code 更新日志](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md) 中，但**未列在** [官方钩子参考](https://code.claude.com/docs/en/hooks) 中：
 
-| Item | Added In | Changelog Reference | Notes |
+| 项目 | 添加于 | 更新日志参考 | 注释 |
 |------|----------|-------------------|-------|
-| `Setup` hook | [v2.1.10](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md#2110) | "Added new Setup hook event that can be triggered via `--init`, `--init-only`, or `--maintenance` CLI flags for repository setup and maintenance operations" | Not listed in official hooks reference page (26 hooks listed, Setup excluded) |
-| Agent frontmatter hooks | [v2.1.0](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md#210) | "Added hooks support to agent frontmatter, allowing agents to define PreToolUse, PostToolUse, and Stop hooks scoped to the agent's lifecycle" | Changelog only mentions 3 hooks, but testing confirms **6 hooks** actually fire in agent sessions: PreToolUse, PostToolUse, PermissionRequest, PostToolUseFailure, Stop, SubagentStop. Not all 27 hooks are supported. |
+| `Setup` 钩子 | [v2.1.10](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md#2110) | "添加了新的 Setup 钩子事件，可以通过 `--init`、`--init-only` 或 `--maintenance` CLI 标志触发，用于仓库设置和维护操作" | 未列在官方钩子参考页面（列出了 26 个钩子，排除了 Setup） |
+| 智能体前置元数据钩子 | [v2.1.0](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md#210) | "为智能体前置元数据添加了钩子支持，允许智能体定义范围限定在智能体生命周期的 PreToolUse、PostToolUse 和 Stop 钩子" | 更新日志仅提到 3 个钩子，但测试确认智能体会话中实际触发 **6 个钩子**：PreToolUse、PostToolUse、PermissionRequest、PostToolUseFailure、Stop、SubagentStop。并非所有 27 个钩子都受支持。 |
 
-## Prerequisites
+## 先决条件
 
-Before using hooks, ensure you have **Python 3** installed on your system.
+在使用钩子之前，确保您的系统上安装了 **Python 3**。
 
-### Required Software
+### 所需软件
 
-#### All Platforms (Windows, macOS, Linux)
-- **Python 3**: Required for running the hook scripts
-- Verify installation: `python3 --version`
+#### 所有平台（Windows、macOS、Linux）
+- **Python 3**：运行钩子脚本所需
+- 验证安装：`python3 --version`
 
-**Installation Instructions:**
-- **Windows**: Download from [python.org](https://www.python.org/downloads/) or install via `winget install Python.Python.3`
-- **macOS**: Install via `brew install python3` (requires [Homebrew](https://brew.sh/))
-- **Linux**: Install via `sudo apt install python3` (Ubuntu/Debian) or `sudo yum install python3` (RHEL/CentOS)
+**安装说明：**
+- **Windows**：从 [python.org](https://www.python.org/downloads/) 下载或通过 `winget install Python.Python.3` 安装
+- **macOS**：通过 `brew install python3` 安装（需要 [Homebrew](https://brew.sh/)）
+- **Linux**：通过 `sudo apt install python3`（Ubuntu/Debian）或 `sudo yum install python3`（RHEL/CentOS）安装
 
-### Audio Players (Optional - Automatically Detected)
+### 音频播放器（可选 - 自动检测）
 
-The hook scripts automatically detect and use the appropriate audio player for your platform:
+钩子脚本自动检测并使用适合您平台的音频播放器：
 
-- **macOS**: Uses `afplay` (built-in, no installation needed)
-- **Linux**: Uses `paplay` from `pulseaudio-utils` - install via `sudo apt install pulseaudio-utils`
-- **Windows**: Uses built-in `winsound` module (included with Python)
+- **macOS**：使用 `afplay`（内置，无需安装）
+- **Linux**：使用 `pulseaudio-utils` 中的 `paplay` - 通过 `sudo apt install pulseaudio-utils` 安装
+- **Windows**：使用内置的 `winsound` 模块（包含在 Python 中）
 
-### How Hooks Are Executed
+### 钩子的执行方式
 
-The hooks are configured in `.claude/settings.json` to run directly with Python 3:
+钩子在 `.claude/settings.json` 中配置为直接使用 Python 3 运行：
 
 ```json
 {
@@ -79,39 +79,39 @@ The hooks are configured in `.claude/settings.json` to run directly with Python 
 }
 ```
 
-## Configuring Hooks (Enable/Disable)
+## 配置钩子（启用/禁用）
 
-Hooks can be easily enabled or disabled at both the global and individual levels.
+钩子可以在全局和个别级别轻松启用或禁用。
 
-### Disable All Hooks at Once
+### 一次性禁用所有钩子
 
-Edit `.claude/settings.local.json` and set:
+编辑 `.claude/settings.local.json` 并设置：
 ```json
 {
   "disableAllHooks": true
 }
 ```
 
-**Note:** The `.claude/settings.local.json` file is git-ignored, so each user can configure their own hook preferences without affecting the team's shared settings in `.claude/settings.json`.
+**注意：** `.claude/settings.local.json` 文件被 git 忽略，因此每个用户可以配置自己的钩子偏好，而不影响团队在 `.claude/settings.json` 中的共享设置。
 
-> **Managed Settings:** If an administrator has configured hooks through managed policy settings, `disableAllHooks` set in user, project, or local settings cannot disable those managed hooks (fixed in v2.1.49).
+> **托管设置：** 如果管理员通过托管策略设置配置了钩子，在用户、项目或本地设置中设置的 `disableAllHooks` 无法禁用这些托管钩子（在 v2.1.49 中修复）。
 
-### Disable Individual Hooks
+### 禁用单个钩子
 
-For granular control, you can disable specific hooks by editing the hooks configuration files.
+为了精细控制，您可以通过编辑钩子配置文件来禁用特定钩子。
 
-#### Configuration Files
+#### 配置文件
 
-There are two configuration files for managing individual hooks:
+有两个用于管理单个钩子的配置文件：
 
-1. **`.claude/hooks/config/hooks-config.json`** - The shared/default configuration that is committed to git
-2. **`.claude/hooks/config/hooks-config.local.json`** - Your personal overrides (git-ignored)
+1. **`.claude/hooks/config/hooks-config.json`** - 提交到 git 的共享/默认配置
+2. **`.claude/hooks/config/hooks-config.local.json`** - 您的个人覆盖（git 忽略）
 
-The local config file (`.local.json`) takes precedence over the shared config, allowing each developer to customize their hook behavior without affecting the team.
+本地配置文件（`.local.json`）优先于共享配置，允许每个开发人员自定义其钩子行为而不影响团队。
 
-#### Shared Configuration
+#### 共享配置
 
-Edit `.claude/hooks/config/hooks-config.json` for team-wide defaults:
+编辑 `.claude/hooks/config/hooks-config.json` 以设置团队范围的默认值：
 
 ```json
 {
@@ -145,12 +145,12 @@ Edit `.claude/hooks/config/hooks-config.json` for team-wide defaults:
 }
 ```
 
-**Configuration Options:**
-- `disableLogging`: Set to `true` to disable logging hook events to `.claude/hooks/logs/hooks-log.jsonl` (useful to prevent log file growth)
+**配置选项：**
+- `disableLogging`：设置为 `true` 以禁用将钩子事件记录到 `.claude/hooks/logs/hooks-log.jsonl`（用于防止日志文件增长）
 
-#### Local Configuration (Personal Overrides)
+#### 本地配置（个人覆盖）
 
-Create or edit `.claude/hooks/config/hooks-config.local.json` for personal preferences:
+创建或编辑 `.claude/hooks/config/hooks-config.local.json` 以设置个人偏好：
 
 ```json
 {
@@ -160,35 +160,35 @@ Create or edit `.claude/hooks/config/hooks-config.local.json` for personal prefe
 }
 ```
 
-In this example, logging is disabled, and the PostToolUse and SessionStart hooks are overridden locally. All other hooks will use the shared configuration values.
+在此示例中，禁用了日志记录，并在本地覆盖了 PostToolUse 和 SessionStart 钩子。所有其他钩子将使用共享配置值。
 
-**Note:** Individual hook toggles are checked by the hook script (`.claude/hooks/scripts/hooks.py`). Local settings override shared settings, and if a hook is disabled, the script exits silently without playing any sounds or executing hook logic.
+**注意：** 单个钩子切换由钩子脚本（`.claude/hooks/scripts/hooks.py`）检查。本地设置覆盖共享设置，如果钩子被禁用，脚本将静默退出，不播放任何声音或执行钩子逻辑。
 
-### Text to Speech (TTS)
-website used to generate sounds: https://elevenlabs.io/
-voice used: Samara X
+### 文本转语音（TTS）
+用于生成声音的网站：https://elevenlabs.io/
+使用的语音：Samara X
 
-## Agent Frontmatter Hooks
+## 智能体前置元数据钩子
 
-Claude Code 2.1.0 introduced support for agent-specific hooks defined in agent frontmatter files. These hooks only run within the agent's lifecycle and support a subset of hook events.
+Claude Code 2.1.0 引入了对智能体前置元数据文件中定义的智能体特定钩子的支持。这些钩子仅在智能体的生命周期内运行，并支持钩子事件的子集。
 
-### Supported Agent Hooks
+### 支持的智能体钩子
 
-Agent frontmatter hooks support **6 hooks** (not all 27). The changelog originally mentioned only 3, but testing confirms 6 hooks actually fire in agent sessions:
-- `PreToolUse`: Runs before the agent uses a tool
-- `PostToolUse`: Runs after the agent completes a tool use
-- `PermissionRequest`: Runs when a tool requires user permission
-- `PostToolUseFailure`: Runs after a tool call fails
-- `Stop`: Runs when the agent finishes
-- `SubagentStop`: Runs when a subagent completes
+智能体前置元数据钩子支持 **6 个钩子**（不是全部 27 个）。更新日志最初仅提到 3 个，但测试确认智能体会话中实际触发 6 个钩子：
+- `PreToolUse`：在智能体使用工具之前运行
+- `PostToolUse`：在智能体完成工具使用后运行
+- `PermissionRequest`：当工具需要用户权限时运行
+- `PostToolUseFailure`：在工具调用失败后运行
+- `Stop`：当智能体完成时运行
+- `SubagentStop`：当子智能体完成时运行
 
-> **Note:** The [v2.1.0 changelog](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md#210) only mentions 3 hooks: *"Added hooks support to agent frontmatter, allowing agents to define PreToolUse, PostToolUse, and Stop hooks scoped to the agent's lifecycle"*. However, testing with the `claude-code-hook-agent` confirms that 6 hooks actually fire in agent sessions. The remaining 21 hooks (e.g., Notification, SessionStart, SessionEnd, etc.) do not fire in agent contexts.
+> **注意：** [v2.1.0 更新日志](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md#210) 仅提到 3 个钩子：*"为智能体前置元数据添加了钩子支持，允许智能体定义范围限定在智能体生命周期的 PreToolUse、PostToolUse 和 Stop 钩子"*。然而，使用 `claude-code-hook-agent` 的测试确认智能体会话中实际触发 6 个钩子。其余 21 个钩子（例如，Notification、SessionStart、SessionEnd 等）不在智能体上下文中触发。
 >
-> **Update (Feb 2026):** The [official hooks reference](https://code.claude.com/docs/en/hooks) now states *"All hook events are supported"* for skill/agent frontmatter hooks. This may mean support has expanded beyond the 6 hooks originally tested. Re-testing recommended to verify if additional hooks now fire in agent sessions.
+> **更新（2026 年 2 月）：** [官方钩子参考](https://code.claude.com/docs/en/hooks) 现在声明技能/智能体前置元数据钩子*"支持所有钩子事件"*。这可能意味着支持已扩展到最初测试的 6 个钩子之外。建议重新测试以验证智能体会话中现在是否触发其他钩子。
 
-### Agent Sound Folders
+### 智能体声音文件夹
 
-Agent-specific sounds are stored in separate folders:
+智能体特定的声音存储在单独的文件夹中：
 - `.claude/hooks/sounds/agent_pretooluse/`
 - `.claude/hooks/sounds/agent_posttooluse/`
 - `.claude/hooks/sounds/agent_permissionrequest/`
@@ -196,9 +196,9 @@ Agent-specific sounds are stored in separate folders:
 - `.claude/hooks/sounds/agent_stop/`
 - `.claude/hooks/sounds/agent_subagentstop/`
 
-### Creating an Agent with Hooks
+### 创建带钩子的智能体
 
-1. Create an agent definition file in `.claude/agents/`:
+1. 在 `.claude/agents/` 中创建智能体定义文件：
 
 ```markdown
 ---
@@ -246,7 +246,7 @@ hooks:
 Your agent instructions here...
 ```
 
-2. Add sound files to the agent sound folders:
+2. 将声音文件添加到智能体声音文件夹：
    - `agent_pretooluse/agent_pretooluse.wav`
    - `agent_posttooluse/agent_posttooluse.wav`
    - `agent_permissionrequest/agent_permissionrequest.wav`
@@ -254,13 +254,13 @@ Your agent instructions here...
    - `agent_stop/agent_stop.wav`
    - `agent_subagentstop/agent_subagentstop.wav`
 
-### Example: Weather Fetcher Agent
+### 示例：天气获取器智能体
 
-See `.claude/agents/claude-code-hook-agent.md` for a complete example of an agent with hooks configured.
+请参阅 `.claude/agents/claude-code-hook-agent.md` 以获取配置了钩子的智能体的完整示例。
 
-### Hook Option: `once: true`
+### 钩子选项：`once: true`
 
-The `once: true` option ensures a hook only runs once per session:
+`once: true` 选项确保钩子每个会话仅运行一次：
 
 ```json
 {
@@ -271,13 +271,13 @@ The `once: true` option ensures a hook only runs once per session:
 }
 ```
 
-This is useful for hooks like `SessionStart`, `SessionEnd`, and `PreCompact` that should only trigger once.
+这对于像 `SessionStart`、`SessionEnd` 和 `PreCompact` 这样应该只触发一次的钩子很有用。
 
-> **Note:** The `once` option is for **skills only, not agents**. It works in settings-based hooks and skill frontmatter, but is not supported in agent frontmatter hooks.
+> **注意：** `once` 选项**仅适用于技能，不适用于智能体**。它在基于设置的钩子和技能前置元数据中有效，但在智能体前置元数据钩子中不受支持。
 
-### Hook Option: `async: true`
+### 钩子选项：`async: true`
 
-Hooks can run in the background without blocking Claude Code's execution by adding `"async": true`:
+钩子可以通过添加 `"async": true` 在后台运行而不阻塞 Claude Code 的执行：
 
 ```json
 {
@@ -288,16 +288,16 @@ Hooks can run in the background without blocking Claude Code's execution by addi
 }
 ```
 
-**When to use async hooks:**
-- Logging and analytics
-- Notifications and sound effects
-- Any side-effect that shouldn't slow down Claude Code
+**何时使用异步钩子：**
+- 日志记录和分析
+- 通知和声音效果
+- 任何不应减慢 Claude Code 速度的副作用
 
-This project uses `async: true` for all hooks since sound notifications are side-effects that don't need to block execution. The `timeout` specifies how long the async hook can run before being terminated.
+此项目对所有钩子使用 `async: true`，因为声音通知是不需要阻塞执行的副作用。`timeout` 指定异步钩子在终止之前可以运行多长时间。
 
-### Hook Option: `asyncRewake` (since v2.1.72, undocumented)
+### 钩子选项：`asyncRewake`（自 v2.1.72 起，未记录）
 
-The `asyncRewake` option combines async execution with the ability to wake the model on failure:
+`asyncRewake` 选项将异步执行与在失败时唤醒模型的能力结合起来：
 
 ```json
 {
@@ -307,11 +307,11 @@ The `asyncRewake` option combines async execution with the ability to wake the m
 }
 ```
 
-When `asyncRewake` is `true`, the hook runs in the background (implies `async`) but if it exits with code 2 (blocking error), it wakes the model to handle the error. This is useful for hooks that are normally non-blocking but need to surface critical failures. Discovered in the settings schema `propertyNames` — not yet in official documentation.
+当 `asyncRewake` 为 `true` 时，钩子在后台运行（隐含 `async`），但如果它以代码 2（阻塞错误）退出，它会唤醒模型来处理错误。这对于通常不阻塞但需要显示关键故障的钩子很有用。在设置架构 `propertyNames` 中发现 — 尚未在官方文档中。
 
-### Hook Option: `statusMessage`
+### 钩子选项：`statusMessage`
 
-The `statusMessage` field sets a custom spinner message displayed to the user while the hook is running:
+`statusMessage` 字段设置在钩子运行时向用户显示的自定义进度消息：
 
 ```json
 {
@@ -323,11 +323,11 @@ The `statusMessage` field sets a custom spinner message displayed to the user wh
 }
 ```
 
-This project sets `statusMessage` to the hook event name on all hooks, so the spinner briefly shows which hook is firing (e.g., "PreToolUse", "SessionStart", "Stop"). This is most visible for synchronous hooks; for async hooks the message flashes briefly before the hook runs in the background.
+此项目在所有钩子上将 `statusMessage` 设置为钩子事件名称，因此进度指示器会短暂显示哪个钩子正在触发（例如，"PreToolUse"、"SessionStart"、"Stop"）。这对于同步钩子最明显；对于异步钩子，消息会在钩子在后台运行之前短暂闪现。
 
-### Hook Option: `if` (since v2.1.85)
+### 钩子选项：`if`（自 v2.1.85 起）
 
-The `if` field adds conditional execution to hooks using permission rule syntax. When set, the hook process is only spawned if the condition matches — reducing unnecessary process spawning:
+`if` 字段使用权限规则语法为钩子添加条件执行。设置后，仅当条件匹配时才生成钩子进程 — 减少不必要的进程生成：
 
 ```json
 {
@@ -344,20 +344,20 @@ The `if` field adds conditional execution to hooks using permission rule syntax.
 }
 ```
 
-**Key details:**
-- Uses permission rule syntax: `Bash(git *)`, `Edit(*.ts)`, `mcp__.*`
-- Only applies to tool event hooks: `PreToolUse`, `PostToolUse`, `PostToolUseFailure`, `PermissionRequest`
-- Set at the handler level (per-handler granularity), not the matcher level
-- Without `if`, the hook process spawns on every matcher match — with `if`, it only spawns when the condition also matches
-- This project does not use `if` since all hooks fire for sound playback regardless of tool arguments
+**关键详情：**
+- 使用权限规则语法：`Bash(git *)`、`Edit(*.ts)`、`mcp__.*`
+- 仅适用于工具事件钩子：`PreToolUse`、`PostToolUse`、`PostToolUseFailure`、`PermissionRequest`
+- 在处理器级别设置（每个处理器的粒度），而不是在匹配器级别
+- 没有 `if`，钩子进程在每次匹配器匹配时生成 — 有 `if`，它仅在条件也匹配时生成
+- 此项目不使用 `if`，因为所有钩子都会触发声音播放，无论工具参数如何
 
-## Hook Types
+## 钩子类型
 
-Claude Code supports four hook handler types. This project uses `command` hooks for all sound playback.
+Claude Code 支持四种钩子处理器类型。此项目对所有声音播放使用 `command` 钩子。
 
-### `type: "command"` (used by this project)
+### `type: "command"`（此项目使用）
 
-Runs a shell command. Receives JSON input via stdin, communicates results through exit codes and stdout.
+运行 shell 命令。通过 stdin 接收 JSON 输入，通过退出代码和 stdout 传达结果。
 
 ```json
 {
@@ -370,7 +370,7 @@ Runs a shell command. Receives JSON input via stdin, communicates results throug
 
 ### `type: "prompt"`
 
-Sends a prompt to a Claude model for single-turn evaluation. The model returns a yes/no decision as JSON (`{"ok": true/false, "reason": "..."}`). Useful for decisions that require judgment rather than deterministic rules.
+向 Claude 模型发送提示以进行单轮评估。模型以 JSON（`{"ok": true/false, "reason": "..."}`）返回是/否决定。对于需要判断而不是确定性规则的决策很有用。
 
 ```json
 {
@@ -380,11 +380,11 @@ Sends a prompt to a Claude model for single-turn evaluation. The model returns a
 }
 ```
 
-**Supported events:** PreToolUse, PostToolUse, PostToolUseFailure, PermissionRequest, UserPromptSubmit, Stop, SubagentStop, TaskCreated, TaskCompleted. **Command-only events (not supported for prompt/agent types):** ConfigChange, CwdChanged, Elicitation, ElicitationResult, FileChanged, InstructionsLoaded, Notification, PermissionDenied, PostCompact, PreCompact, SessionEnd, SessionStart, Setup, StopFailure, SubagentStart, TeammateIdle, WorktreeCreate, WorktreeRemove.
+**支持的事件：** PreToolUse、PostToolUse、PostToolUseFailure、PermissionRequest、UserPromptSubmit、Stop、SubagentStop、TaskCreated、TaskCompleted。**仅命令事件（prompt/agent 类型不支持）：** ConfigChange、CwdChanged、Elicitation、ElicitationResult、FileChanged、InstructionsLoaded、Notification、PermissionDenied、PostCompact、PreCompact、SessionEnd、SessionStart、Setup、StopFailure、SubagentStart、TeammateIdle、WorktreeCreate、WorktreeRemove。
 
 ### `type: "agent"`
 
-Spawns a subagent with multi-turn tool access (Read, Grep, Glob) to verify conditions before returning a decision. Same response format as prompt hooks. Useful when verification requires inspecting actual files or test output.
+生成具有多轮工具访问权限（Read、Grep、Glob）的子智能体，在返回决定之前验证条件。与提示钩子相同的响应格式。当验证需要检查实际文件或测试输出时很有用。
 
 ```json
 {
@@ -394,9 +394,9 @@ Spawns a subagent with multi-turn tool access (Read, Grep, Glob) to verify condi
 }
 ```
 
-### `type: "http"` (since v2.1.63)
+### `type: "http"`（自 v2.1.63 起）
 
-POSTs JSON to a URL and receives a JSON response, instead of running a shell command. Useful for integrating with external services or webhooks. HTTP hooks are routed through the sandbox network proxy when sandboxing is enabled.
+将 JSON POST 到 URL 并接收 JSON 响应，而不是运行 shell 命令。对于与外部服务或 webhook 集成很有用。启用沙箱时，HTTP 钩子通过沙箱网络代理路由。
 
 ```json
 {
@@ -410,49 +410,49 @@ POSTs JSON to a URL and receives a JSON response, instead of running a shell com
 }
 ```
 
-**Not supported for:** ConfigChange, CwdChanged, Elicitation, ElicitationResult, FileChanged, InstructionsLoaded, Notification, PermissionDenied, PostCompact, PreCompact, SessionEnd, SessionStart, Setup, StopFailure, SubagentStart, TeammateIdle, WorktreeCreate, WorktreeRemove (command-only events). Headers support environment variable interpolation with `$VAR_NAME`, but only for variables explicitly listed in `allowedEnvVars`.
+**不支持：** ConfigChange、CwdChanged、Elicitation、ElicitationResult、FileChanged、InstructionsLoaded、Notification、PermissionDenied、PostCompact、PreCompact、SessionEnd、SessionStart、Setup、StopFailure、SubagentStart、TeammateIdle、WorktreeCreate、WorktreeRemove（仅命令事件）。标头支持使用 `$VAR_NAME` 进行环境变量插值，但仅适用于 `allowedEnvVars` 中明确列出的变量。
 
-## Environment Variables
+## 环境变量
 
-Claude Code provides these environment variables to hook scripts:
+Claude Code 为钩子脚本提供这些环境变量：
 
-| Variable | Availability | Description |
+| 变量 | 可用性 | 描述 |
 |----------|-------------|-------------|
-| `$CLAUDE_PROJECT_DIR` | All hooks | Project root directory. Wrap in quotes for paths with spaces |
-| `$CLAUDE_ENV_FILE` | SessionStart, CwdChanged, FileChanged | File path for persisting environment variables for subsequent Bash commands. Use append (`>>`) to preserve variables from other hooks |
-| `${CLAUDE_PLUGIN_ROOT}` | Plugin hooks | Plugin's root directory, for scripts bundled with a plugin |
-| `$CLAUDE_CODE_REMOTE` | All hooks | Set to `"true"` in remote web environments, not set in local CLI |
-| `${CLAUDE_SKILL_DIR}` | Skill hooks | Skill's own directory, for scripts bundled with a skill (since v2.1.69) |
-| `${CLAUDE_PLUGIN_DATA}` | Plugin hooks | Plugin's persistent data directory that survives plugin updates (since v2.1.78) |
-| `CLAUDE_CODE_SESSIONEND_HOOKS_TIMEOUT_MS` | SessionEnd hooks | Override SessionEnd hook timeout in milliseconds. Prior to v2.1.74, SessionEnd hooks were killed after 1.5s regardless of configured `timeout`. Now respects the hook's `timeout` value, or this env var if set (since v2.1.74) |
-| `session_id` (via stdin JSON) | All hooks | Current session ID, received as part of the JSON input on stdin (not an environment variable) |
+| `$CLAUDE_PROJECT_DIR` | 所有钩子 | 项目根目录。对于带空格的路径用引号括起来 |
+| `$CLAUDE_ENV_FILE` | SessionStart、CwdChanged、FileChanged | 用于为后续 Bash 命令持久化环境变量的文件路径。使用追加（`>>`）以保留其他钩子的变量 |
+| `${CLAUDE_PLUGIN_ROOT}` | 插件钩子 | 插件的根目录，用于与插件捆绑的脚本 |
+| `$CLAUDE_CODE_REMOTE` | 所有钩子 | 在远程 Web 环境中设置为 `"true"`，在本地 CLI 中未设置 |
+| `${CLAUDE_SKILL_DIR}` | 技能钩子 | 技能自己的目录，用于与技能捆绑的脚本（自 v2.1.69 起） |
+| `${CLAUDE_PLUGIN_DATA}` | 插件钩子 | 插件的持久数据目录，在插件更新后仍然存在（自 v2.1.78 起） |
+| `CLAUDE_CODE_SESSIONEND_HOOKS_TIMEOUT_MS` | SessionEnd 钩子 | 以毫秒为单位覆盖 SessionEnd 钩子超时。在 v2.1.74 之前，SessionEnd 钩子在 1.5 秒后被终止，无论配置的 `timeout` 如何。现在遵守钩子的 `timeout` 值，或者如果设置了此环境变量（自 v2.1.74 起） |
+| `session_id`（通过 stdin JSON） | 所有钩子 | 当前会话 ID，作为 stdin 上 JSON 输入的一部分接收（不是环境变量） |
 
-### Common Input Fields (stdin JSON)
+### 常见输入字段（stdin JSON）
 
-Every hook receives a JSON object on stdin containing these common fields, in addition to any hook-specific fields listed in the Options column above:
+每个钩子在 stdin 上接收一个包含这些常见字段的 JSON 对象，以及上面选项列中列出的任何钩子特定字段：
 
-| Field | Type | Description |
+| 字段 | 类型 | 描述 |
 |-------|------|-------------|
-| `hook_event_name` | string | Name of the hook event that fired (e.g., `"PreToolUse"`, `"Stop"`) |
-| `session_id` | string | Current session identifier |
-| `transcript_path` | string | Path to the conversation transcript JSON file |
-| `cwd` | string | Current working directory |
-| `permission_mode` | string | Current permission mode: `default`, `plan`, `acceptEdits`, `dontAsk`, or `bypassPermissions` |
-| `agent_id` | string | Unique subagent identifier. Present when the hook fires inside a subagent context (since v2.1.69) |
-| `agent_type` | string | Agent type name (e.g. `Bash`, `Explore`, `Plan`, or custom). Present when using `--agent <name>` flag or inside a subagent (since v2.1.69) |
+| `hook_event_name` | string | 触发的钩子事件的名称（例如，`"PreToolUse"`、`"Stop"`） |
+| `session_id` | string | 当前会话标识符 |
+| `transcript_path` | string | 对话记录 JSON 文件的路径 |
+| `cwd` | string | 当前工作目录 |
+| `permission_mode` | string | 当前权限模式：`default`、`plan`、`acceptEdits`、`dontAsk` 或 `bypassPermissions` |
+| `agent_id` | string | 唯一的子智能体标识符。当钩子在子智能体上下文内触发时存在（自 v2.1.69 起） |
+| `agent_type` | string | 智能体类型名称（例如 `Bash`、`Explore`、`Plan` 或自定义）。在使用 `--agent <name>` 标志或在子智能体内部时存在（自 v2.1.69 起） |
 
-> **Note:** Hook-specific fields (e.g., `tool_name` for PreToolUse, `last_assistant_message` for Stop) are listed in the Options column of the [Hook Events Overview](#hook-events-overview---official-27-hooks) table above.
+> **注意：** 钩子特定字段（例如，PreToolUse 的 `tool_name`、Stop 的 `last_assistant_message`）在上面的[钩子事件概览](#钩子事件概览---官方-27-个钩子)表的选项列中列出。
 
-## Hooks Management Commands
+## 钩子管理命令
 
-Claude Code provides built-in commands for managing hooks:
+Claude Code 提供了用于管理钩子的内置命令：
 
-- **`/hooks`** — Interactive hook management UI. View, add, and delete hooks without editing JSON files. Hooks are labeled by source: `[User]`, `[Project]`, `[Local]`, `[Plugin]`. You can also toggle `disableAllHooks` from this menu.
-- **`claude hooks reload`** — Reload hooks configuration without restarting the session. Useful after editing settings files (since v2.0.47).
+- **`/hooks`** — 交互式钩子管理 UI。查看、添加和删除钩子，无需编辑 JSON 文件。钩子按来源标记：`[User]`、`[Project]`、`[Local]`、`[Plugin]`。您还可以从此菜单切换 `disableAllHooks`。
+- **`claude hooks reload`** — 重新加载钩子配置而不重新启动会话。在编辑设置文件后很有用（自 v2.0.47 起）。
 
-## MCP Tool Matchers
+## MCP 工具匹配器
 
-For `PreToolUse`, `PostToolUse`, and `PermissionRequest` hooks, you can match MCP (Model Context Protocol) tools using the pattern `mcp__<server>__<tool>`:
+对于 `PreToolUse`、`PostToolUse` 和 `PermissionRequest` 钩子，您可以使用模式 `mcp__<server>__<tool>` 匹配 MCP（模型上下文协议）工具：
 
 ```json
 {
@@ -465,15 +465,15 @@ For `PreToolUse`, `PostToolUse`, and `PermissionRequest` hooks, you can match MC
 }
 ```
 
-Full regex is supported: `mcp__memory__.*` (all tools from memory server), `mcp__.*__write.*` (any write tool from any server).
+支持完整的正则表达式：`mcp__memory__.*`（来自 memory 服务器的所有工具）、`mcp__.*__write.*`（来自任何服务器的任何写入工具）。
 
-### Per-Hook Matcher Reference
+### 每个钩子的匹配器参考
 
-Matchers filter which events trigger a hook. Not all hooks support matchers — hooks without matcher support always fire.
+匹配器过滤哪些事件触发钩子。并非所有钩子都支持匹配器 — 不支持匹配器的钩子始终触发。
 
-| Hook | Matcher Field | Possible Values | Example |
+| 钩子 | 匹配器字段 | 可能的值 | 示例 |
 |------|--------------|-----------------|---------|
-| `PreToolUse` | `tool_name` | Any tool name: `Bash`, `Read`, `Edit`, `Write`, `Glob`, `Grep`, `Agent`, `WebFetch`, `WebSearch`, `AskUserQuestion`, `ExitPlanMode`, `mcp__*` | `"matcher": "Bash"` |
+| `PreToolUse` | `tool_name` | 任何工具名称：`Bash`、`Read`、`Edit`、`Write`、`Glob`、`Grep`、`Agent`、`WebFetch`、`WebSearch`、`AskUserQuestion`、`ExitPlanMode`、`mcp__*` | `"matcher": "Bash"` |
 | `PermissionRequest` | `tool_name` | Same as PreToolUse | `"matcher": "mcp__memory__.*"` |
 | `PostToolUse` | `tool_name` | Same as PreToolUse | `"matcher": "Write"` |
 | `PostToolUseFailure` | `tool_name` | Same as PreToolUse | `"matcher": "Bash"` |

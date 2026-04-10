@@ -1,6 +1,6 @@
-# The Secrets of Claude Code From the Engineers Who Built It — Every
+# 构建 Claude Code 的工程师揭秘 — Every
 
-Transcript of the interview with Cat & Boris (Claude Code engineers) on the Every podcast, published October 29, 2025.
+Cat & Boris（Claude Code 工程师）在 Every 播客上的采访转录，发布于 2025年10月29日。
 
 <table width="100%">
 <tr>
@@ -11,16 +11,16 @@ Transcript of the interview with Cat & Boris (Claude Code engineers) on the Ever
 
 ---
 
-## Video Details
+## 视频详情
 
-- **Guest:** Cat & Boris (Claude Code Engineers, Anthropic)
-- **Host:** Every
-- **Published:** October 29, 2025
-- **YouTube:** [Watch on YouTube](https://youtu.be/IDSAMqip6ms)
+- **嘉宾：** Cat & Boris（Claude Code 工程师，Anthropic）
+- **主持人：** Every
+- **发布日期：** 2025年10月29日
+- **YouTube：** [在 YouTube 观看](https://youtu.be/IDSAMqip6ms)
 
 ---
 
-## Transcript
+## 转录内容
 
 [`0:02`](https://youtu.be/IDSAMqip6ms?t=2) What made it work really well is that quad code has access to everything that an engineer does at the terminal. Everything you can do, quad code can do. There's nothing in between.
 

@@ -1,6 +1,6 @@
-# Claude Code: Global vs Project-Level Features
+# Claude Code: 全局 vs 项目级功能
 
-A comprehensive comparison of which Claude Code features are global-only (`~/.claude/`) versus which have both global and project-level (`.claude/`) equivalents.
+全面比较哪些 Claude Code 功能仅为全局(`~/.claude/`),哪些同时具有全局和项目级(`.claude/`)等效功能。
 
 <table width="100%">
 <tr>
@@ -9,77 +9,77 @@ A comprehensive comparison of which Claude Code features are global-only (`~/.cl
 </tr>
 </table>
 
-## Table of Contents
+## 目录
 
-1. [Overview](#overview)
-2. [Global-Only Features](#global-only-features)
-3. [Dual-Scope Features](#dual-scope-features)
-4. [Settings Precedence](#settings-precedence)
-5. [Directory Structure Comparison](#directory-structure-comparison)
-6. [Tasks System](#tasks-system)
-7. [Agent Teams](#agent-teams)
-8. [Design Principles](#design-principles)
-9. [Sources](#sources)
-
----
-
-## Overview
-
-Claude Code uses a **scope hierarchy** where some features exist at both the global (`~/.claude/`) and project (`.claude/`) levels, while others are exclusively global. The design principle: things that are *personal state* or *cross-project coordination* live globally; things that are *team-shareable project config* can live at the project level.
-
-- `~/.claude/` is your **user-level home** (global, all projects)
-- `.claude/` inside a repo is your **project-level home** (scoped to that project)
+1. [概述](#overview)
+2. [仅全局功能](#global-only-features)
+3. [双重作用域功能](#dual-scope-features)
+4. [设置优先级](#settings-precedence)
+5. [目录结构比较](#directory-structure-comparison)
+6. [任务系统](#tasks-system)
+7. [代理团队](#agent-teams)
+8. [设计原则](#design-principles)
+9. [资料来源](#sources)
 
 ---
 
-## Global-Only Features
+## 概述
 
-These live **only** under `~/.claude/` and cannot be scoped to a project:
+Claude Code 使用**作用域层次结构**,其中一些功能同时存在于全局(`~/.claude/`)和项目(`.claude/`)级别,而其他功能则专属于全局。设计原则:*个人状态*或*跨项目协调*的内容全局存在;*团队可共享的项目配置*可以存在于项目级别。
 
-| Feature | Location | Purpose |
+- `~/.claude/` 是你的**用户级主目录**(全局,所有项目)
+- 仓库内的 `.claude/` 是你的**项目级主目录**(限定于该项目)
+
+---
+
+## 仅全局功能
+
+这些功能**仅**存在于 `~/.claude/` 下,不能限定于项目:
+
+| 功能 | 位置 | 目的 |
 |---------|----------|---------|
-| **Tasks** | `~/.claude/tasks/` | Persistent task lists across sessions and agents |
-| **Agent Teams** | `~/.claude/teams/` | Multi-agent coordination configs (experimental, Feb 2026) |
-| **Auto Memory** | `~/.claude/projects/<hash>/memory/` | Claude's self-written learnings per project (personal, never shared) |
-| **Credentials & OAuth** | System keychain + `~/.claude.json` | API keys, OAuth tokens (never in project files) |
-| **Keybindings** | `~/.claude/keybindings.json` | Custom keyboard shortcuts |
-| **MCP User Servers** | `~/.claude.json` (`mcpServers` key) | Personal MCP servers across all projects |
-| **Preferences/Cache** | `~/.claude.json` | Theme, model, output style, session state |
+| **任务** | `~/.claude/tasks/` | 跨会话和代理的持久任务列表 |
+| **代理团队** | `~/.claude/teams/` | 多代理协调配置(实验性,2026年2月) |
+| **自动内存** | `~/.claude/projects/<hash>/memory/` | Claude 为每个项目自我编写的学习内容(个人,从不共享) |
+| **凭据与 OAuth** | 系统密钥链 + `~/.claude.json` | API密钥、OAuth令牌(从不在项目文件中) |
+| **键绑定** | `~/.claude/keybindings.json` | 自定义键盘快捷键 |
+| **MCP 用户服务器** | `~/.claude.json`(`mcpServers` 键) | 所有项目的个人 MCP 服务器 |
+| **首选项/缓存** | `~/.claude.json` | 主题、模型、输出风格、会话状态 |
 
 ---
 
-## Dual-Scope Features
+## 双重作用域功能
 
-These exist at both levels, with **project-level taking precedence** over global:
+这些功能存在于两个级别,**项目级优先于**全局:
 
-| Feature | Global (`~/.claude/`) | Project (`.claude/`) | Precedence |
+| 功能 | 全局(`~/.claude/`) | 项目(`.claude/`) | 优先级 |
 |---------|----------------------|---------------------|------------|
-| **CLAUDE.md** | `~/.claude/CLAUDE.md` | `./CLAUDE.md` or `.claude/CLAUDE.md` | Project overrides global |
-| **Settings** | `~/.claude/settings.json` | `.claude/settings.json` + `.claude/settings.local.json` | Project > Global |
-| **Rules** | `~/.claude/rules/*.md` | `.claude/rules/*.md` | Project overrides |
-| **Agents/Subagents** | `~/.claude/agents/*.md` | `.claude/agents/*.md` | Project overrides |
-| **Commands** | `~/.claude/commands/*.md` | `.claude/commands/*.md` | Both available |
-| **Skills** | `~/.claude/skills/` | `.claude/skills/` | Both available |
-| **Hooks** | `~/.claude/hooks/` | `.claude/hooks/` | Both execute |
-| **MCP Servers** | `~/.claude.json` (user scope) | `.mcp.json` (project scope) | Three scopes: local > project > user |
+| **CLAUDE.md** | `~/.claude/CLAUDE.md` | `./CLAUDE.md` 或 `.claude/CLAUDE.md` | 项目覆盖全局 |
+| **设置** | `~/.claude/settings.json` | `.claude/settings.json` + `.claude/settings.local.json` | 项目 > 全局 |
+| **规则** | `~/.claude/rules/*.md` | `.claude/rules/*.md` | 项目覆盖 |
+| **代理/子代理** | `~/.claude/agents/*.md` | `.claude/agents/*.md` | 项目覆盖 |
+| **命令** | `~/.claude/commands/*.md` | `.claude/commands/*.md` | 两者都可用 |
+| **技能** | `~/.claude/skills/` | `.claude/skills/` | 两者都可用 |
+| **钩子** | `~/.claude/hooks/` | `.claude/hooks/` | 两者都执行 |
+| **MCP 服务器** | `~/.claude.json`(用户作用域) | `.mcp.json`(项目作用域) | 三个作用域:本地 > 项目 > 用户 |
 
 ---
 
-## Settings Precedence
+## 设置优先级
 
-User-writable settings apply in this override order (highest to lowest):
+用户可写设置按此覆盖顺序应用(从高到低):
 
-| Priority | Location | Scope | Version Control | Purpose |
+| 优先级 | 位置 | 作用域 | 版本控制 | 目的 |
 |----------|----------|-------|-----------------|---------|
-| 1 | Command line flags | Session | N/A | Single-session overrides |
-| 2 | `.claude/settings.local.json` | Project | No (git-ignored) | Personal project-specific |
-| 3 | `.claude/settings.json` | Project | Yes (committed) | Team-shared settings |
-| 4 | `~/.claude/settings.local.json` | User | N/A | Personal global overrides |
-| 5 | `~/.claude/settings.json` | User | N/A | Global personal settings |
+| 1 | 命令行标志 | 会话 | 不适用 | 单会话覆盖 |
+| 2 | `.claude/settings.local.json` | 项目 | 否(git忽略) | 个人项目特定 |
+| 3 | `.claude/settings.json` | 项目 | 是(已提交) | 团队共享设置 |
+| 4 | `~/.claude/settings.local.json` | 用户 | 不适用 | 个人全局覆盖 |
+| 5 | `~/.claude/settings.json` | 用户 | 不适用 | 全局个人设置 |
 
-Policy layer: `managed-settings.json` is organization-enforced and cannot be overridden by local files.
+策略层:`managed-settings.json` 是组织强制的,无法被本地文件覆盖。
 
-**Important**: `deny` rules have the highest safety precedence and cannot be overridden by lower-priority allow/ask rules.
+**重要**: `deny` 规则具有最高的安全优先级,无法被较低优先级的允许/询问规则覆盖。
 
 ---
 
@@ -235,7 +235,7 @@ Auto-memory (`~/.claude/projects/<hash>/memory/`) is a notable hybrid: it's *abo
 
 ---
 
-## Sources
+## 资料来源
 
 - [Claude Code Settings Documentation](https://code.claude.com/docs/en/settings)
 - [Orchestrate Teams of Claude Code Sessions](https://code.claude.com/docs/en/agent-teams)

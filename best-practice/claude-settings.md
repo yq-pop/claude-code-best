@@ -1,89 +1,89 @@
-# Settings Best Practice
+# 设置最佳实践
 
 ![Last Updated](https://img.shields.io/badge/Last_Updated-Apr%2009%2C%202026%2011%3A39%20PM%20PKT-white?style=flat&labelColor=555) ![Version](https://img.shields.io/badge/Claude_Code-v2.1.97-blue?style=flat&labelColor=555)<br>
 [![Implemented](https://img.shields.io/badge/Implemented-2ea44f?style=flat)](../.claude/settings.json)
 
-A comprehensive guide to all available configuration options in Claude Code's `settings.json` files. As of v2.1.97, Claude Code exposes **60+ settings** and **170+ environment variables** (use the `"env"` field in `settings.json` to avoid wrapper scripts).
+Claude Code `settings.json` 文件中所有可用配置选项的综合指南。截至 v2.1.97,Claude Code 暴露了 **60+ 设置**和 **170+ 环境变量**(使用 `settings.json` 中的 `"env"` 字段以避免包装脚本)。
 
 <table width="100%">
 <tr>
-<td><a href="../">← Back to Claude Code Best Practice</a></td>
+<td><a href="../">← 返回 Claude Code 最佳实践</a></td>
 <td align="right"><img src="../!/claude-jumping.svg" alt="Claude" width="60" /></td>
 </tr>
 </table>
 
-## Table of Contents
+## 目录
 
-1. [Settings Hierarchy](#settings-hierarchy)
-2. [Core Configuration](#core-configuration)
-3. [Permissions](#permissions)
-4. [Hooks](#hooks)
-5. [MCP Servers](#mcp-servers)
-6. [Sandbox](#sandbox)
-7. [Plugins](#plugins)
-8. [Model Configuration](#model-configuration)
-9. [Display & UX](#display--ux)
-10. [AWS & Cloud Credentials](#aws--cloud-credentials)
-11. [Environment Variables](#environment-variables-via-env)
-12. [Useful Commands](#useful-commands)
+1. [设置层次结构](#settings-hierarchy)
+2. [核心配置](#core-configuration)
+3. [权限](#permissions)
+4. [钩子](#hooks)
+5. [MCP 服务器](#mcp-servers)
+6. [沙盒](#sandbox)
+7. [插件](#plugins)
+8. [模型配置](#model-configuration)
+9. [显示与用户体验](#display--ux)
+10. [AWS 与云凭据](#aws--cloud-credentials)
+11. [环境变量](#environment-variables-via-env)
+12. [有用的命令](#useful-commands)
 
 ---
 
 ## Settings Hierarchy
 
-Settings apply in order of precedence (highest to lowest):
+设置按优先级顺序应用(从高到低):
 
-| Priority | Location | Scope | Shared? | Purpose |
+| 优先级 | 位置 | 作用域 | 共享? | 目的 |
 |----------|----------|-------|---------|---------|
-| 1 | Managed settings | Organization | Yes (deployed by IT) | Security policies that cannot be overridden |
-| 2 | Command line arguments | Session | N/A | Temporary single-session overrides |
-| 3 | `.claude/settings.local.json` | Project | No (git-ignored) | Personal project-specific |
-| 4 | `.claude/settings.json` | Project | Yes (committed) | Team-shared settings |
-| 5 | `~/.claude/settings.json` | User | N/A | Global personal defaults |
+| 1 | 托管设置 | 组织 | 是(由 IT 部署) | 无法覆盖的安全策略 |
+| 2 | 命令行参数 | 会话 | 不适用 | 临时单会话覆盖 |
+| 3 | `.claude/settings.local.json` | 项目 | 否(git 忽略) | 个人项目特定 |
+| 4 | `.claude/settings.json` | 项目 | 是(已提交) | 团队共享设置 |
+| 5 | `~/.claude/settings.json` | 用户 | 不适用 | 全局个人默认值 |
 
-**Managed settings** are organization-enforced and cannot be overridden by any other level, including command line arguments. Delivery methods:
-- **Server-managed** settings (remote delivery)
-- **MDM profiles** — macOS plist at `com.anthropic.claudecode`
-- **Registry policies** — Windows `HKLM\SOFTWARE\Policies\ClaudeCode` (admin) and `HKCU\SOFTWARE\Policies\ClaudeCode` (user-level, lowest policy priority)
-- **File** — `managed-settings.json` and `managed-mcp.json` (macOS: `/Library/Application Support/ClaudeCode/`, Linux/WSL: `/etc/claude-code/`, Windows: `C:\Program Files\ClaudeCode\`)
-- **Drop-in directory** — `managed-settings.d/` alongside `managed-settings.json` for independent policy fragments (v2.1.83). Following the systemd convention, `managed-settings.json` is merged first as the base, then all `*.json` files in the drop-in directory are sorted alphabetically and merged on top. Later files override earlier ones for scalar values; arrays are concatenated and de-duplicated; objects are deep-merged. Hidden files starting with `.` are ignored. Use numeric prefixes to control merge order (e.g., `10-telemetry.json`, `20-security.json`)
+**托管设置**由组织强制执行,无法被任何其他级别覆盖,包括命令行参数。交付方法:
+- **服务器托管**设置(远程交付)
+- **MDM 配置文件** — macOS plist 位于 `com.anthropic.claudecode`
+- **注册表策略** — Windows `HKLM\SOFTWARE\Policies\ClaudeCode`(管理员)和 `HKCU\SOFTWARE\Policies\ClaudeCode`(用户级别,最低策略优先级)
+- **文件** — `managed-settings.json` 和 `managed-mcp.json`(macOS:`/Library/Application Support/ClaudeCode/`,Linux/WSL:`/etc/claude-code/`,Windows:`C:\Program Files\ClaudeCode\`)
+- **插入目录** — `managed-settings.d/` 与 `managed-settings.json` 并列,用于独立策略片段(v2.1.83)。遵循 systemd 约定,首先合并 `managed-settings.json` 作为基础,然后按字母顺序排序插入目录中的所有 `*.json` 文件并合并到顶部。后面的文件覆盖前面的标量值;数组被连接和去重;对象被深度合并。以 `.` 开头的隐藏文件被忽略。使用数字前缀控制合并顺序(例如 `10-telemetry.json`、`20-security.json`)
 
-Within the managed tier, precedence is: server-managed > MDM/OS-level policies > file-based (`managed-settings.d/*.json` + `managed-settings.json`) > HKCU registry (Windows only). Only one managed source is used; sources do not merge across tiers. Within the file-based tier, drop-in files and the base file are merged together.
+在托管层级内,优先级为:服务器托管 > MDM/OS 级别策略 > 基于文件(`managed-settings.d/*.json` + `managed-settings.json`) > HKCU 注册表(仅 Windows)。仅使用一个托管源;源不跨层级合并。在基于文件的层级内,插入文件和基础文件合并在一起。
 
-> **Note:** As of v2.1.75, the deprecated Windows fallback path `C:\ProgramData\ClaudeCode\managed-settings.json` has been removed. Use `C:\Program Files\ClaudeCode\managed-settings.json` instead.
+> **注意:**自 v2.1.75 起,已弃用的 Windows 回退路径 `C:\ProgramData\ClaudeCode\managed-settings.json` 已被删除。请改用 `C:\Program Files\ClaudeCode\managed-settings.json`。
 
-**Important**:
-- `deny` rules have highest safety precedence and cannot be overridden by lower-priority allow/ask rules.
-- Managed settings may lock or override local behavior even if local files specify different values.
-- Array settings (e.g., `permissions.allow`) are **concatenated and deduplicated** across scopes — entries from all levels are combined, not replaced.
+**重要提示**:
+- `deny` 规则具有最高安全优先级,无法被较低优先级的 allow/ask 规则覆盖。
+- 即使本地文件指定不同的值,托管设置也可能锁定或覆盖本地行为。
+- 数组设置(例如 `permissions.allow`)在作用域之间**连接和去重** — 来自所有级别的条目被组合,而不是替换。
 
 ---
 
 ## Core Configuration
 
-### General Settings
+### 通用设置
 
-| Key | Type | Default | Description |
+| 键 | 类型 | 默认值 | 描述 |
 |-----|------|---------|-------------|
-| `$schema` | string | - | JSON Schema URL for IDE validation and autocompletion (e.g., `"https://json.schemastore.org/claude-code-settings.json"`) |
-| `model` | string | `"default"` | Override default model. Accepts aliases (`sonnet`, `opus`, `haiku`) or full model IDs |
-| `agent` | string | - | Set the default agent for the main conversation. Value is the agent name from `.claude/agents/`. Also available via `--agent` CLI flag |
-| `language` | string | `"english"` | Claude's preferred response language. Also sets the voice dictation language |
-| `cleanupPeriodDays` | number | `30` | Sessions inactive for longer than this period are deleted at startup (minimum 1). Also controls the age cutoff for automatic removal of orphaned subagent worktrees at startup. Setting to `0` is rejected with a validation error. To disable transcript writes in non-interactive mode (`-p`), use `--no-session-persistence` or `persistSession: false` SDK option |
-| `autoUpdatesChannel` | string | `"latest"` | Release channel: `"stable"` or `"latest"` |
-| `alwaysThinkingEnabled` | boolean | `false` | Enable extended thinking by default for all sessions |
-| `skipWebFetchPreflight` | boolean | `false` | Skip WebFetch blocklist check before fetching URLs *(in JSON schema, not on official settings page)* |
-| `availableModels` | array | - | Restrict which models users can select via `/model`, `--model`, Config tool, or `ANTHROPIC_MODEL`. Does not affect the Default option. Example: `["sonnet", "haiku"]` |
-| `fastModePerSessionOptIn` | boolean | `false` | Require users to opt in to fast mode each session |
-| `defaultShell` | string | `"bash"` | Default shell for input-box `!` commands. Accepts `"bash"` (default) or `"powershell"`. Setting `"powershell"` routes interactive `!` commands through PowerShell on Windows. Requires `CLAUDE_CODE_USE_POWERSHELL_TOOL=1` (v2.1.84) |
-| `includeGitInstructions` | boolean | `true` | Include built-in commit and PR workflow instructions and the git status snapshot in Claude's system prompt. The `CLAUDE_CODE_DISABLE_GIT_INSTRUCTIONS` environment variable takes precedence over this setting when set |
-| `voiceEnabled` | boolean | - | Enable push-to-talk voice dictation. Written automatically when you run `/voice`. Requires a Claude.ai account |
-| `showClearContextOnPlanAccept` | boolean | `false` | Show the "clear context" option on the plan accept screen. Set to `true` to restore the option (hidden by default since v2.1.81) |
-| `disableDeepLinkRegistration` | string | - | Set to `"disable"` to prevent Claude Code from registering the `claude-cli://` protocol handler with the operating system on startup. Deep links let external tools open a Claude Code session with a pre-filled prompt via `claude-cli://open?q=...`. The `q` parameter supports multi-line prompts using URL-encoded newlines (`%0A`). Useful in environments where protocol handler registration is restricted or managed separately |
-| `showThinkingSummaries` | boolean | `false` | Show extended thinking summaries in interactive sessions. When unset or `false` (default in interactive mode), thinking blocks are redacted by the API and shown as a collapsed stub. Redaction only changes what you see, not what the model generates — to reduce thinking spend, lower the budget or disable thinking instead. Non-interactive mode (`-p`) and SDK callers always receive summaries regardless of this setting |
-| `disableSkillShellExecution` | boolean | `false` | Disable inline shell execution for `` !`...` `` blocks in skills and custom commands. Commands are replaced with `[shell command execution disabled by policy]`. Bundled and managed skills are not affected (v2.1.91) |
-| `forceRemoteSettingsRefresh` | boolean | `false` | **(Managed only)** Block CLI startup until remote managed settings are freshly fetched. If the fetch fails, the CLI exits (fail-closed). Use in enterprise environments where policy enforcement must be up-to-date before any session begins (v2.1.92) |
-| `feedbackSurveyRate` | number | - | Probability (0–1) that the session quality survey appears when eligible. Enterprise admins can control how often the survey is shown. Example: `0.05` = 5% of eligible sessions |
+| `$schema` | string | - | 用于 IDE 验证和自动完成的 JSON Schema URL(例如 `"https://json.schemastore.org/claude-code-settings.json"`) |
+| `model` | string | `"default"` | 覆盖默认模型。接受别名(`sonnet`、`opus`、`haiku`)或完整模型 ID |
+| `agent` | string | - | 为主对话设置默认代理。值是来自 `.claude/agents/` 的代理名称。也可通过 `--agent` CLI 标志使用 |
+| `language` | string | `"english"` | Claude 的首选响应语言。也设置语音听写语言 |
+| `cleanupPeriodDays` | number | `30` | 在启动时删除不活跃超过此期间的会话(最小值 1)。还控制启动时自动删除孤立子代理工作树的年龄截止点。设置为 `0` 会被验证错误拒绝。要在非交互模式(`-p`)中禁用转录本写入,请使用 `--no-session-persistence` 或 `persistSession: false` SDK 选项 |
+| `autoUpdatesChannel` | string | `"latest"` | 发布频道:`"stable"` 或 `"latest"` |
+| `alwaysThinkingEnabled` | boolean | `false` | 默认为所有会话启用扩展思考 |
+| `skipWebFetchPreflight` | boolean | `false` | 在获取 URL 之前跳过 WebFetch 阻止列表检查 *(在 JSON schema 中,不在官方设置页面上)* |
+| `availableModels` | array | - | 限制用户可以通过 `/model`、`--model`、Config 工具或 `ANTHROPIC_MODEL` 选择的模型。不影响默认选项。示例:`["sonnet", "haiku"]` |
+| `fastModePerSessionOptIn` | boolean | `false` | 要求用户每个会话选择加入快速模式 |
+| `defaultShell` | string | `"bash"` | 输入框 `!` 命令的默认 shell。接受 `"bash"`(默认)或 `"powershell"`。设置 `"powershell"` 会在 Windows 上通过 PowerShell 路由交互式 `!` 命令。需要 `CLAUDE_CODE_USE_POWERSHELL_TOOL=1`(v2.1.84) |
+| `includeGitInstructions` | boolean | `true` | 在 Claude 的系统提示词中包含内置的提交和 PR 工作流程指令以及 git 状态快照。设置时,`CLAUDE_CODE_DISABLE_GIT_INSTRUCTIONS` 环境变量优先于此设置 |
+| `voiceEnabled` | boolean | - | 启用按住说话的语音听写。运行 `/voice` 时自动写入。需要 Claude.ai 账户 |
+| `showClearContextOnPlanAccept` | boolean | `false` | 在计划接受屏幕上显示"清除上下文"选项。设置为 `true` 以恢复该选项(自 v2.1.81 起默认隐藏) |
+| `disableDeepLinkRegistration` | string | - | 设置为 `"disable"` 以防止 Claude Code 在启动时向操作系统注册 `claude-cli://` 协议处理程序。深层链接让外部工具通过 `claude-cli://open?q=...` 打开带有预填充提示的 Claude Code 会话。`q` 参数支持使用 URL 编码的换行符(`%0A`)的多行提示。在协议处理程序注册受限或单独管理的环境中很有用 |
+| `showThinkingSummaries` | boolean | `false` | 在交互式会话中显示扩展思考摘要。未设置或 `false`(交互模式下的默认值)时,思考块被 API 编辑并显示为折叠的存根。编辑仅改变您看到的内容,而不是模型生成的内容 — 要减少思考支出,请降低预算或禁用思考。非交互模式(`-p`)和 SDK 调用者始终接收摘要,无论此设置如何 |
+| `disableSkillShellExecution` | boolean | `false` | 禁用技能和自定义命令中 `` !`...` `` 块的内联 shell 执行。命令被替换为 `[shell command execution disabled by policy]`。捆绑和托管的技能不受影响(v2.1.91) |
+| `forceRemoteSettingsRefresh` | boolean | `false` | **(仅托管)** 阻止 CLI 启动,直到刚刚获取远程托管设置。如果获取失败,CLI 退出(失败关闭)。在企业环境中使用,其中策略执行必须在任何会话开始之前是最新的(v2.1.92) |
+| `feedbackSurveyRate` | number | - | 符合条件时会话质量调查出现的概率(0–1)。企业管理员可以控制调查显示的频率。示例:`0.05` = 5% 的符合条件的会话 |
 
 **Example:**
 ```json

@@ -1,6 +1,6 @@
-# Weather SVG Creator — Reference
+# 天气 SVG 创建器 — 参考
 
-## SVG Template
+## SVG 模板
 
 ```svg
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 160" width="300" height="160">
@@ -11,52 +11,52 @@
 </svg>
 ```
 
-### Placeholders
+### 占位符
 
-| Placeholder | Replace with | Example |
+| 占位符 | 替换为 | 示例 |
 |-------------|-------------|---------|
-| `[Celsius/Fahrenheit]` | Full unit name from input | `Celsius` |
-| `[value]` | Numeric temperature from input | `26.2` |
-| `[C/F]` | Unit abbreviation | `C` or `F` |
+| `[Celsius/Fahrenheit]` | 输入的完整单位名称 | `Celsius` |
+| `[value]` | 输入的数值温度 | `26.2` |
+| `[C/F]` | 单位缩写 | `C` 或 `F` |
 
-### Design Specs
+### 设计规范
 
-| Property | Value |
+| 属性 | 值 |
 |----------|-------|
-| Dimensions | 300 x 160 px |
-| Corner radius | 12 px |
-| Background | `#1a1a2e` (dark navy) |
-| Unit label | `#8892b0` (muted blue), 14px |
-| Temperature | `#ccd6f6` (light blue), 42px bold |
-| Location | `#64ffda` (teal accent), 16px |
-| Font | `system-ui` |
-| All text | Centered (`text-anchor="middle"` at x=150) |
+| 尺寸 | 300 x 160 px |
+| 圆角半径 | 12 px |
+| 背景 | `#1a1a2e`（深海军蓝） |
+| 单位标签 | `#8892b0`（柔和蓝色），14px |
+| 温度 | `#ccd6f6`（浅蓝色），42px 粗体 |
+| 位置 | `#64ffda`（青色强调），16px |
+| 字体 | `system-ui` |
+| 所有文本 | 居中（在 x=150 处 `text-anchor="middle"`） |
 
 ---
 
-## Output Markdown Template
+## 输出 Markdown 模板
 
 ```markdown
-# Weather Result
+# 天气结果
 
-## Temperature
+## 温度
 [value]°[C/F]
 
-## Location
-Dubai, UAE
+## 位置
+迪拜，阿联酋
 
-## Unit
+## 单位
 [Celsius/Fahrenheit]
 
-## SVG Card
-![Weather Card](weather.svg)
+## SVG 卡片
+![天气卡片](weather.svg)
 ```
 
 ---
 
-## Output Paths
+## 输出路径
 
-| File | Path |
+| 文件 | 路径 |
 |------|------|
-| SVG card | `orchestration-workflow/weather.svg` |
-| Markdown summary | `orchestration-workflow/output.md` |
+| SVG 卡片 | `orchestration-workflow/weather.svg` |
+| Markdown 摘要 | `orchestration-workflow/output.md` |

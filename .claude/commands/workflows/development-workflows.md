@@ -1,14 +1,14 @@
 ---
-description: Update the DEVELOPMENT WORKFLOWS table by researching all 10 workflow repos in parallel
+description: 通过并行研究所有 10 个工作流仓库来更新 DEVELOPMENT WORKFLOWS 表
 ---
 
-# Workflow — Development Workflows
+# 工作流 — 开发工作流
 
-Update the DEVELOPMENT WORKFLOWS table in `README.md` by researching 10 repos in parallel. Launch agents, merge results, present changes, update table if approved.
+通过并行研究 10 个仓库来更新 `README.md` 中的 DEVELOPMENT WORKFLOWS 表。启动代理、合并结果、展示变更、如果批准则更新表格。
 
 ---
 
-## The 10 Repos
+## 10 个仓库
 
 | # | Repo | Owner |
 |---|------|-------|
@@ -25,56 +25,56 @@ Update the DEVELOPMENT WORKFLOWS table in `README.md` by researching 10 repos in
 
 ---
 
-## Table Format
+## 表格格式
 
-The README table has these columns:
+README 表格包含以下列：
 
 ```markdown
 | Name | ★ | Uniqueness | Plan | <img src="!/tags/a.svg" height="14"> | <img src="!/tags/c.svg" height="14"> | <img src="!/tags/s.svg" height="14"> |
 ```
 
-- **Name**: `[Short Name](github-url)` — use project name, not owner/repo
-- **★**: Star count rounded to `k` (e.g., 98k, 10k, 4.1k). Under 1000 show exact number
-- **Uniqueness**: 2-3 shields.io badge tags using `![tag](https://img.shields.io/badge/TAG-ddf4ff)`. Underscores for spaces, `--` for hyphens, `%2B` for `+`, `%2F` for `/`
-- **Plan**: Icon + linked name of the Plan implementation. Icon is `<img src="!/tags/c.svg" height="14">` for command, `<img src="!/tags/a.svg" height="14">` for agent, `<img src="!/tags/s.svg" height="14">` for skill. Name links to the actual file in the repo
-- **Agent/Command/Skill counts**: Just the number (e.g., `25`, `0`, `108+`)
+- **Name**：`[简称](github-url)` — 使用项目名称，而非 owner/repo
+- **★**：星标数向 `k` 取整（例如 98k、10k、4.1k）。少于 1000 显示确切数字
+- **Uniqueness**：使用 `![tag](https://img.shields.io/badge/TAG-ddf4ff)` 的 2-3 个 shields.io 徽章标签。空格用下划线，连字符用 `--`，`+` 用 `%2B`，`/` 用 `%2F`
+- **Plan**：图标 + Plan 实现的链接名称。图标为命令使用 `<img src="!/tags/c.svg" height="14">`，代理使用 `<img src="!/tags/a.svg" height="14">`，技能使用 `<img src="!/tags/s.svg" height="14">`。名称链接到仓库中的实际文件
+- **Agent/Command/Skill counts**：仅显示数字（例如 `25`、`0`、`108+`）
 
-**Sort order**: Sorted by stars descending (highest first). Do NOT group by Plan type.
-
----
-
-## Phase 0: Read Current State
-
-Read these files:
-
-1. `README.md` — the `## ⚙️ DEVELOPMENT WORKFLOWS` table (note current stars, tags, Plan links, counts)
-2. `changelog/development-workflows/changelog.md` — previous changelog entries
+**排序规则**：按星标降序排列（最高在前）。不要按 Plan 类型分组。
 
 ---
 
-## Phase 1: Launch 2 Research Agents
+## 阶段 0：读取当前状态
 
-**Immediately** spawn both agents in a **single message** (parallel). Each uses `subagent_type: "development-workflows-research-agent"`.
+读取以下文件：
 
-### Agent 1 (3 repos)
+1. `README.md` — `## ⚙️ DEVELOPMENT WORKFLOWS` 表（注意当前星标、标签、Plan 链接、计数）
+2. `changelog/development-workflows/changelog.md` — 之前的变更日志条目
 
-> Research these 3 Claude Code workflow repositories:
+---
+
+## 阶段 1：启动 2 个研究代理
+
+**立即**在**单条消息**中生成两个代理（并行）。每个使用 `subagent_type: "development-workflows-research-agent"`。
+
+### 代理 1（3 个仓库）
+
+> 研究以下 3 个 Claude Code 工作流仓库：
 >
-> **Repo 1: github/spec-kit** (https://github.com/github/spec-kit)
-> **Repo 2: affaan-m/everything-claude-code** (https://github.com/affaan-m/everything-claude-code)
-> **Repo 3: obra/superpowers** (https://github.com/obra/superpowers)
+> **仓库 1：github/spec-kit**（https://github.com/github/spec-kit）
+> **仓库 2：affaan-m/everything-claude-code**（https://github.com/affaan-m/everything-claude-code）
+> **仓库 3：obra/superpowers**（https://github.com/obra/superpowers）
 >
-> For EACH repo, return:
+> 对于每个仓库，返回：
 >
-> 1. **Stars** — use GitHub API `https://api.github.com/repos/{owner}/{repo}`, read `stargazers_count`. Round to `k`.
-> 2. **Agent count** — count `.md` files in `agents/` or `.claude/agents/`. For obra, also count implicit sub-agents dispatched by skills.
-> 3. **Skill count** — count folders in `skills/` or `.claude/skills/`.
-> 4. **Command count** — count `.md` files in `commands/` or `.claude/commands/`. For spec-kit, count files in `templates/commands/`.
-> 5. **Plan implementation** — find the Plan/planning agent, skill, or command. Return its name, type (agent/skill/command), and file path.
-> 6. **Uniqueness tags** — 2-3 short tags (2-3 words each) capturing what makes this workflow unique.
-> 7. **Notable changes** — any significant recent changes? New agents/skills/commands, major versions?
+> 1. **Stars** — 使用 GitHub API `https://api.github.com/repos/{owner}/{repo}`，读取 `stargazers_count`。向 `k` 取整。
+> 2. **Agent count** — 计算 `agents/` 或 `.claude/agents/` 中的 `.md` 文件。对于 obra，还要计算由技能调度的隐式子代理。
+> 3. **Skill count** — 计算 `skills/` 或 `.claude/skills/` 中的文件夹。
+> 4. **Command count** — 计算 `commands/` 或 `.claude/commands/` 中的 `.md` 文件。对于 spec-kit，计算 `templates/commands/` 中的文件。
+> 5. **Plan implementation** — 查找 Plan/planning 代理、技能或命令。返回其名称、类型（agent/skill/command）和文件路径。
+> 6. **Uniqueness tags** — 2-3 个简短标签（每个 2-3 个单词），捕捉这个工作流的独特之处。
+> 7. **Notable changes** — 有任何重要的最近变更吗？新代理/技能/命令、主要版本？
 >
-> Return structured report per repo:
+> 返回每个仓库的结构化报告：
 > ```
 > REPO: github/spec-kit
 > STARS: <number>k
@@ -86,29 +86,29 @@ Read these files:
 > CHANGES: <changes or "No significant changes">
 > ```
 
-### Agent 2 (7 repos)
+### 代理 2（7 个仓库）
 
-> Research these 7 Claude Code workflow repositories:
+> 研究以下 7 个 Claude Code 工作流仓库：
 >
-> **Repo 1: Fission-AI/OpenSpec** (https://github.com/Fission-AI/OpenSpec)
-> **Repo 2: humanlayer/humanlayer** (https://github.com/humanlayer/humanlayer)
-> **Repo 3: gsd-build/get-shit-done** (https://github.com/gsd-build/get-shit-done)
-> **Repo 4: garrytan/gstack** (https://github.com/garrytan/gstack)
-> **Repo 5: bmad-code-org/BMAD-METHOD** (https://github.com/bmad-code-org/BMAD-METHOD)
-> **Repo 6: EveryInc/compound-engineering-plugin** (https://github.com/EveryInc/compound-engineering-plugin)
-> **Repo 7: Yeachan-Heo/oh-my-claudecode** (https://github.com/Yeachan-Heo/oh-my-claudecode)
+> **仓库 1：Fission-AI/OpenSpec**（https://github.com/Fission-AI/OpenSpec）
+> **仓库 2：humanlayer/humanlayer**（https://github.com/humanlayer/humanlayer）
+> **仓库 3：gsd-build/get-shit-done**（https://github.com/gsd-build/get-shit-done）
+> **仓库 4：garrytan/gstack**（https://github.com/garrytan/gstack）
+> **仓库 5：bmad-code-org/BMAD-METHOD**（https://github.com/bmad-code-org/BMAD-METHOD）
+> **仓库 6：EveryInc/compound-engineering-plugin**（https://github.com/EveryInc/compound-engineering-plugin）
+> **仓库 7：Yeachan-Heo/oh-my-claudecode**（https://github.com/Yeachan-Heo/oh-my-claudecode）
 >
-> For EACH repo, return:
+> 对于每个仓库，返回：
 >
-> 1. **Stars** — use GitHub API `https://api.github.com/repos/{owner}/{repo}`, read `stargazers_count`. Round to `k`.
-> 2. **Agent count** — count `.md` files in `agents/` or `.claude/agents/`. For BMAD, count agent-persona skills in `src/bmm-skills/`. For compound-engineering-plugin, count `.md` files across all subdirectories of `plugins/compound-engineering/agents/`. For oh-my-claudecode, count `.md` files in `agents/` at repo root.
-> 3. **Skill count** — count folders in `skills/` or `.claude/skills/`. For gstack, skills are root-level directories with SKILL.md. For BMAD, count all skills in `src/bmm-skills/` and `src/core-skills/`. For compound-engineering-plugin, count folders in `plugins/compound-engineering/skills/` plus `plugins/coding-tutor/skills/`. For oh-my-claudecode, count folders in `skills/` at repo root.
-> 4. **Command count** — count `.md` files in `commands/` or `.claude/commands/`. For GSD, count in `commands/gsd/`. For OpenSpec, count `/opsx:*` commands. For BMAD, count is 0 (commands generated at install time). For compound-engineering-plugin, count `.md` files in `.claude/commands/` plus `plugins/coding-tutor/commands/`. For oh-my-claudecode, count is 0 (skills serve as slash commands).
-> 5. **Plan implementation** — find the Plan/planning agent, skill, or command. Return its name, type (agent/skill/command), and file path.
-> 6. **Uniqueness tags** — 2-3 short tags (2-3 words each) capturing what makes this workflow unique.
-> 7. **Notable changes** — any significant recent changes? New agents/skills/commands, major versions?
+> 1. **Stars** — 使用 GitHub API `https://api.github.com/repos/{owner}/{repo}`，读取 `stargazers_count`。向 `k` 取整。
+> 2. **Agent count** — 计算 `agents/` 或 `.claude/agents/` 中的 `.md` 文件。对于 BMAD，计算 `src/bmm-skills/` 中的 agent-persona 技能。对于 compound-engineering-plugin，计算 `plugins/compound-engineering/agents/` 所有子目录中的 `.md` 文件。对于 oh-my-claudecode，计算仓库根目录 `agents/` 中的 `.md` 文件。
+> 3. **Skill count** — 计算 `skills/` 或 `.claude/skills/` 中的文件夹。对于 gstack，技能是带有 SKILL.md 的根级目录。对于 BMAD，计算 `src/bmm-skills/` 和 `src/core-skills/` 中的所有技能。对于 compound-engineering-plugin，计算 `plugins/compound-engineering/skills/` 加上 `plugins/coding-tutor/skills/` 中的文件夹。对于 oh-my-claudecode，计算仓库根目录 `skills/` 中的文件夹。
+> 4. **Command count** — 计算 `commands/` 或 `.claude/commands/` 中的 `.md` 文件。对于 GSD，计算 `commands/gsd/` 中的。对于 OpenSpec，计算 `/opsx:*` 命令。对于 BMAD，计数为 0（命令在安装时生成）。对于 compound-engineering-plugin，计算 `.claude/commands/` 加上 `plugins/coding-tutor/commands/` 中的 `.md` 文件。对于 oh-my-claudecode，计数为 0（技能作为斜杠命令）。
+> 5. **Plan implementation** — 查找 Plan/planning 代理、技能或命令。返回其名称、类型（agent/skill/command）和文件路径。
+> 6. **Uniqueness tags** — 2-3 个简短标签（每个 2-3 个单词），捕捉这个工作流的独特之处。
+> 7. **Notable changes** — 有任何重要的最近变更吗？新代理/技能/命令、主要版本？
 >
-> Return structured report per repo:
+> 返回每个仓库的结构化报告：
 > ```
 > REPO: Fission-AI/OpenSpec
 > STARS: <number>k
@@ -122,88 +122,88 @@ Read these files:
 
 ---
 
-## Phase 2: Compare & Report
+## 阶段 2：比较与报告
 
-**Wait for both agents.** Then compare findings against the current table and present:
+**等待两个代理完成。**然后将发现与当前表格进行比较并展示：
 
 ```
-Development Workflows — Update Report
+Development Workflows — 更新报告
 ══════════════════════════════════════
 
-Changes Found:
-  <repo>: ★ <old>k → <new>k | agents <old>→<new> | commands <old>→<new> | skills <old>→<new>
-  <repo>: tags updated: <old tags> → <new tags>
-  <repo>: Plan link changed: <old> → <new>
+发现的变更：
+  <repo>：★ <old>k → <new>k | agents <old>→<new> | commands <old>→<new> | skills <old>→<new>
+  <repo>：标签已更新：<old tags> → <new tags>
+  <repo>：Plan 链接已更改：<old> → <new>
   ...
 
-No Changes:
-  <repo>: ✓ (all values match)
+无变更：
+  <repo>：✓（所有值匹配）
   ...
 
-Action Items:
-#  | Type        | Action                              | Status
-1  | Star        | Update <repo> ★ from Xk to Yk       | NEW/RECURRING
-2  | Count       | Update <repo> agents from X to Y     | NEW/RECURRING
-3  | Tags        | Update <repo> tags                   | NEW/RECURRING
-4  | Plan        | Update <repo> Plan link              | NEW/RECURRING
-5  | Sort        | Move <repo> (Plan type changed)      | NEW/RECURRING
+行动项：
+#  | 类型        | 操作                                | 状态
+1  | Star        | 更新 <repo> ★ 从 Xk 到 Yk           | NEW/RECURRING
+2  | Count       | 更新 <repo> agents 从 X 到 Y        | NEW/RECURRING
+3  | Tags        | 更新 <repo> 标签                    | NEW/RECURRING
+4  | Plan        | 更新 <repo> Plan 链接               | NEW/RECURRING
+5  | Sort        | 移动 <repo>（Plan 类型已更改）       | NEW/RECURRING
 ```
 
-Compare with previous changelog entries and mark items as `NEW`, `RECURRING`, or `RESOLVED`.
+与之前的变更日志条目进行比较，并将项目标记为 `NEW`、`RECURRING` 或 `RESOLVED`。
 
 ---
 
-## Phase 2.5: Append to Changelog
+## 阶段 2.5：追加到变更日志
 
-**MANDATORY** — always execute before presenting to user.
+**强制执行** — 在向用户展示之前始终执行。
 
-Read `changelog/development-workflows/changelog.md`, then **append** a new entry. If the file doesn't exist, create it with a Status Legend then the first entry.
+读取 `changelog/development-workflows/changelog.md`，然后**追加**新条目。如果文件不存在，创建它并添加状态图例，然后添加第一个条目。
 
 ```markdown
 ---
 
-## [<YYYY-MM-DD HH:MM AM/PM PKT>] Development Workflows Update
+## [<YYYY-MM-DD HH:MM AM/PM PKT>] Development Workflows 更新
 
-| # | Priority | Type | Action | Status |
+| # | 优先级 | 类型 | 操作 | 状态 |
 |---|----------|------|--------|--------|
 | 1 | HIGH/MED/LOW | <type> | <action> | <status> |
 ```
 
-Get time via `TZ=Asia/Karachi date "+%Y-%m-%d %I:%M %p PKT"`. Status must be one of:
+通过 `TZ=Asia/Karachi date "+%Y-%m-%d %I:%M %p PKT"` 获取时间。状态必须是以下之一：
 - `COMPLETE (reason)` | `INVALID (reason)` | `ON HOLD (reason)`
 
-Always append, never overwrite.
+始终追加，永不覆盖。
 
 ---
 
-## Phase 2.6: Update Last Updated Badge
+## 阶段 2.6：更新最后更新徽章
 
-**MANDATORY** — execute after Phase 2.5.
+**强制执行** — 在阶段 2.5 之后执行。
 
-Update the badge on line 4 of `README.md`. Get time via `TZ=Asia/Karachi date "+%b %d, %Y %-I:%M %p PKT"`, URL-encode it, replace the date in the badge. Do NOT log this as an action item.
-
----
-
-## Phase 3: Execute
-
-Ask user: **(1) Execute all** | **(2) Execute specific** | **(3) Skip**
-
-When executing, edit the `## ⚙️ DEVELOPMENT WORKFLOWS` table in `README.md`:
-- Update stars, tags, Plan links, counts per row
-- Maintain sort order: stars descending (highest first). Do NOT group by Plan type
-- Match existing format exactly (icons, badge URLs, link style)
+更新 `README.md` 第 4 行的徽章。通过 `TZ=Asia/Karachi date "+%b %d, %Y %-I:%M %p PKT"` 获取时间，进行 URL 编码，替换徽章中的日期。不要将此记录为行动项。
 
 ---
 
-## Rules
+## 阶段 3：执行
 
-1. **Launch BOTH agents in parallel** — single message, never sequential
-2. **Never guess** — use data from agents only
-3. **Don't auto-execute** — present report first, wait for approval
-4. **ALWAYS append changelog** and **ALWAYS update badge** — mandatory
-5. **Sort by stars descending** — highest stars first, do NOT group by Plan type
-6. **Tags use shields.io** — `![tag](https://img.shields.io/badge/TAG-ddf4ff)` with `_` for spaces, `--` for hyphens
-7. **Plan links must point to actual files** — not repo root
-8. **Agents, commands, skills are different** — count from their respective directories, don't conflate
-9. **Round stars consistently** — `k` suffix (98k, 10k, 4.1k). Under 1000 show exact
-10. **Compare with previous changelog** — mark items NEW, RECURRING, or RESOLVED
+询问用户：**(1) 执行全部** | **(2) 执行特定项** | **(3) 跳过**
+
+执行时，编辑 `README.md` 中的 `## ⚙️ DEVELOPMENT WORKFLOWS` 表：
+- 更新每行的星标、标签、Plan 链接、计数
+- 保持排序顺序：星标降序（最高在前）。不要按 Plan 类型分组
+- 完全匹配现有格式（图标、徽章 URL、链接样式）
+
+---
+
+## 规则
+
+1. **并行启动两个代理** — 单条消息，永不串行
+2. **永不猜测** — 仅使用代理数据
+3. **不要自动执行** — 先展示报告，等待批准
+4. **始终追加变更日志**和**始终更新徽章** — 强制执行
+5. **按星标降序排列** — 最高星标在前，不要按 Plan 类型分组
+6. **标签使用 shields.io** — `![tag](https://img.shields.io/badge/TAG-ddf4ff)`，空格用 `_`，连字符用 `--`
+7. **Plan 链接必须指向实际文件** — 而非仓库根目录
+8. **Agents、commands、skills 是不同的** — 从各自的目录计数，不要混淆
+9. **星标向 k 一致取整** — `k` 后缀（98k、10k、4.1k）。少于 1000 显示确切数字
+10. **与之前的变更日志比较** — 将项目标记为 NEW、RECURRING 或 RESOLVED

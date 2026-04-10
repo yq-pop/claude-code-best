@@ -1,6 +1,6 @@
-# LLM Day-to-Day Degradation: Myth vs Reality
+# LLM 日常性能下降:神话 vs 现实
 
-Can a deployed LLM's performance change day-to-day even though the model weights are frozen? A deep-dive into proven causes, infrastructure bugs, and psychological factors.
+即使模型权重被冻结,已部署的 LLM 的性能会日复一日地变化吗?深入探讨已证实的原因、基础设施错误和心理因素。
 
 <table width="100%">
 <tr>
@@ -21,27 +21,27 @@ Can a deployed LLM's performance change day-to-day even though the model weights
 ---
 ---
 
-# 🔥 Claude Code Ops 4.6 Analysis. High Reasoning
+# 🔥 Claude Code Ops 4.6 分析。高度推理
 
-When Anthropic launches a model like Opus 4.6, the **model weights** — billions of learned parameters — are frozen. Training is enormously expensive (millions of dollars, weeks of compute). Nobody is retraining the model overnight.
+当 Anthropic 推出像 Opus 4.6 这样的模型时,**模型权重** — 数十亿个学习参数 — 被冻结。训练费用极其昂贵(数百万美元,数周的计算)。没有人会在一夜之间重新训练模型。
 
-But weights are only one layer of a much larger system. Research reveals at least **7 distinct mechanisms** that can cause real or perceived quality changes, even when model weights are frozen.
+但权重只是一个更大系统的一层。研究揭示了至少**7种不同的机制**,即使模型权重被冻结,也可能导致真实或感知的质量变化。
 
-| Question | Answer |
+| 问题 | 答案 |
 |----------|--------|
-| Do model weights change after launch? | **No** — confirmed by all providers |
-| Can the model behave differently day-to-day? | **Yes** — proven with ±8-14% variance |
-| Is it intentional "nerfing"? | **No** — no evidence of deliberate degradation |
-| Are infrastructure bugs real? | **Yes** — Anthropic confirmed 3 bugs affecting up to 16% of requests |
-| Is some of it psychological? | **Yes** — confirmation bias and honeymoon effects are real |
-| Can system prompts/post-training change? | **Yes** — documented across providers |
-| Should users trust their perception? | **Partially** — real causes exist, but perception amplifies them |
+| 模型权重在发布后会改变吗? | **否** — 所有提供商确认 |
+| 模型可以日复一日地表现不同吗? | **是** — 已证明有±8-14%的变化 |
+| 这是故意的"削弱"吗? | **否** — 没有证据表明故意降级 |
+| 基础设施错误是真实的吗? | **是** — Anthropic 确认了3个影响多达16%请求的错误 |
+| 其中一些是心理作用吗? | **是** — 确认偏差和蜜月效应是真实的 |
+| 系统提示/后训练可以改变吗? | **是** — 各提供商都有记录 |
+| 用户应该相信他们的感知吗? | **部分** — 真实原因存在,但感知放大了它们 |
 
 ---
 
-## The Full Inference Stack
+## 完整的推理堆栈
 
-The model weights are frozen, but **nine layers above them** can independently affect what you experience:
+模型权重被冻结,但**其上的九层**可以独立影响你的体验:
 
 ```
 ┌──────────────────────────────────────────────┐
@@ -243,52 +243,52 @@ LLMs are probabilistic. The same prompt can produce different outputs each time.
 
 ---
 
-## Bottom Line
+## 底线
 
-The phenomenon users describe is **real but misattributed**:
+用户描述的现象是**真实的但归因错误**:
 
-- **Correct**: their experience degraded on certain days
-- **Incorrect**: the model was intentionally "nerfed"
+- **正确**: 他们的体验在某些天退化了
+- **不正确**: 模型被故意"削弱"了
 
-The actual causes are a combination of:
+实际原因是以下因素的组合:
 
-1. **Infrastructure bugs** — proven by Anthropic's postmortem (up to 16% of requests affected)
-2. **MoE routing variance** — ±8-14% quality swing measured by Scale AI, even with zero changes
-3. **System prompt and post-training updates** — documented across providers
-4. **Hardware heterogeneity** — TPU vs GPU vs Trainium, each with different failure modes
-5. **Context pollution** — long sessions degrade within-session quality
-6. **Confirmation bias** — social media amplifies perceived patterns
-7. **Stochastic variance** — same model, same prompt, different output every time
+1. **基础设施错误** — 由 Anthropic 的事后分析证明(多达16%的请求受影响)
+2. **MoE 路由变化** — Scale AI 测量的±8-14%质量波动,即使零变化
+3. **系统提示和后训练更新** — 各提供商都有记录
+4. **硬件异构性** — TPU vs GPU vs Trainium,每个都有不同的失败模式
+5. **上下文污染** — 长会话降低会话内质量
+6. **确认偏差** — 社交媒体放大了感知模式
+7. **随机变化** — 相同模型,相同提示,每次不同输出
 
-The measurement problem is severe: day-to-day variance of ±8-14% means you cannot distinguish a real 5% quality change from noise. This is why both the "it's all in your head" and "they nerfed it" camps feel confident — the signal-to-noise ratio makes it impossible to tell from individual experience alone.
-
----
-
-## Sources
-
-- [Anthropic: A Postmortem of Three Recent Issues](https://www.anthropic.com/engineering/a-postmortem-of-three-recent-issues) — Official postmortem detailing three infrastructure bugs (September 2025)
-- [Anthropic Reveals Three Infrastructure Bugs — InfoQ](https://www.infoq.com/news/2025/10/anthropic-infrastructure-bugs/) — Technical analysis of the postmortem
-- [How is ChatGPT's Behavior Changing Over Time? — Stanford/UC Berkeley](https://arxiv.org/abs/2307.09009) — Landmark study on LLM drift (2023)
-- [The Truth About ChatGPT's Degrading Capabilities — TechTalks](https://bdtechtalks.com/2023/07/24/chatgpt-capabilities-degrading-study/) — Methodological critique of the Stanford study
-- [LLMs Are Getting Dumber and We Have No Idea Why — Ignorance.ai](https://www.ignorance.ai/p/llms-are-getting-dumber-and-we-have) — Five theories for perceived degradation
-- [When Claude Forgets How to Code — Robert Matsuoka](https://hyperdev.matsuoka.com/p/when-claude-forgets-how-to-code) — Analysis of Claude quality fluctuations and infrastructure causes
-- [Smoothing Out LLM Variance — Scale AI](https://scale.com/blog/smoothing-out-llm-variance) — Measured ±8-14% day-to-day variance across providers
-- [What We Can Learn from Anthropic's System Prompt Updates — PromptLayer](https://blog.promptlayer.com/what-we-can-learn-from-anthropics-system-prompt-updates/) — System prompt evolution analysis
-- [Claude's System Prompt Changes Reveal Anthropic's Priorities — Drew Breunig](https://www.dbreunig.com/2025/06/03/comparing-system-prompts-across-claude-versions.html) — Hot-fix patterns in system prompts
-- [Complaints About Secretly Switching Models — OpenAI Forum](https://community.openai.com/t/complaints-about-secretly-switching-models/1360150) — Documented silent model swaps
-- [Speculative Decoding — BentoML LLM Inference Handbook](https://bentoml.com/llm/inference-optimization/speculative-decoding) — How draft models affect serving
-- [A Visual Guide to Mixture of Experts — Maarten Grootendorst](https://newsletter.maartengrootendorst.com/p/a-visual-guide-to-mixture-of-experts) — MoE architecture and routing explained
+测量问题很严重:±8-14%的日常变化意味着你无法从噪音中区分出真实的5%质量变化。这就是为什么"都在你脑中"和"他们削弱了它"两个阵营都感到自信 — 信噪比使得仅从个人经验无法判断。
 
 ---
+
+## 资料来源
+
+- [Anthropic: A Postmortem of Three Recent Issues](https://www.anthropic.com/engineering/a-postmortem-of-three-recent-issues) — 详述三个基础设施错误的官方事后分析(2025年9月)
+- [Anthropic Reveals Three Infrastructure Bugs — InfoQ](https://www.infoq.com/news/2025/10/anthropic-infrastructure-bugs/) — 事后分析的技术分析
+- [How is ChatGPT's Behavior Changing Over Time? — Stanford/UC Berkeley](https://arxiv.org/abs/2307.09009) — LLM 漂移的里程碑研究(2023)
+- [The Truth About ChatGPT's Degrading Capabilities — TechTalks](https://bdtechtalks.com/2023/07/24/chatgpt-capabilities-degrading-study/) — 对斯坦福研究的方法学批评
+- [LLMs Are Getting Dumber and We Have No Idea Why — Ignorance.ai](https://www.ignorance.ai/p/llms-are-getting-dumber-and-we-have) — 感知退化的五种理论
+- [When Claude Forgets How to Code — Robert Matsuoka](https://hyperdev.matsuoka.com/p/when-claude-forgets-how-to-code) — Claude 质量波动和基础设施原因分析
+- [Smoothing Out LLM Variance — Scale AI](https://scale.com/blog/smoothing-out-llm-variance) — 测量各提供商的±8-14%日常变化
+- [What We Can Learn from Anthropic's System Prompt Updates — PromptLayer](https://blog.promptlayer.com/what-we-can-learn-from-anthropics-system-prompt-updates/) — 系统提示演变分析
+- [Claude's System Prompt Changes Reveal Anthropic's Priorities — Drew Breunig](https://www.dbreunig.com/2025/06/03/comparing-system-prompts-across-claude-versions.html) — 系统提示中的热修复模式
+- [Complaints About Secretly Switching Models — OpenAI Forum](https://community.openai.com/t/complaints-about-secretly-switching-models/1360150) — 记录的静默模型切换
+- [Speculative Decoding — BentoML LLM Inference Handbook](https://bentoml.com/llm/inference-optimization/speculative-decoding) — 草稿模型如何影响服务
+- [A Visual Guide to Mixture of Experts — Maarten Grootendorst](https://newsletter.maartengrootendorst.com/p/a-visual-guide-to-mixture-of-experts) — MoE 架构和路由解释
+
+---
 ---
 
-# 🔥 Codex 5.3 High Reason and Finding
+# 🔥 Codex 5.3 高度推理和发现
 
-### Report Scope
+### 报告范围
 
-This section explains why users can experience a short window where Claude output quality drops while Codex 5.3 feels stable or stronger on coding tasks. The focus is not on permanent model quality rankings. The focus is short-horizon production behavior under real serving conditions.
+本节解释为什么用户可能会经历一个短暂的窗口期,在此期间 Claude 输出质量下降,而 Codex 5.3 在编码任务上感觉稳定或更强。重点不是永久的模型质量排名。重点是真实服务条件下的短期生产行为。
 
-Report date: March 5, 2026.
+报告日期:2026年3月5日。
 
 ### Observed Pattern
 
@@ -355,6 +355,6 @@ To reduce day-to-day variance in production:
 5. Keep a fallback provider/model path for incident windows.
 6. Separate "model quality" from "serving reliability" in internal dashboards.
 
-### Final Conclusion
+### 最终结论
 
-Codex 5.3 looking better during a short Claude degradation window is a technically plausible and expected outcome in modern LLM operations. The strongest explanation is not permanent model collapse. The strongest explanation is temporary serving-path degradation at one provider, combined with coding-specific optimization and stable operation at the other provider during the same period.
+在短暂的 Claude 退化窗口期间 Codex 5.3 看起来更好,在现代 LLM 操作中是技术上合理且预期的结果。最有力的解释不是永久性模型崩溃。最有力的解释是一个提供商的临时服务路径退化,加上另一个提供商在同一时期的编码特定优化和稳定运行。
