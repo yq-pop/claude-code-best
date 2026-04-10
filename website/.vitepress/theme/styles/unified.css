@@ -1,0 +1,292 @@
+/**
+ * 统一样式系统 - 解决字体大小、颜色、间距不协调问题
+ */
+
+/* ============================================
+   全局统一规范
+   ============================================ */
+
+/* 字体大小系统 - 统一标准 */
+:root {
+  --text-xs: 0.75rem;    /* 12px */
+  --text-sm: 0.875rem;   /* 14px */
+  --text-base: 1rem;     /* 16px */
+  --text-lg: 1.125rem;   /* 18px */
+  --text-xl: 1.25rem;    /* 20px */
+  --text-2xl: 1.5rem;    /* 24px */
+  --text-3xl: 1.875rem;  /* 30px */
+  --text-4xl: 2.25rem;   /* 36px */
+  
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+}
+
+/* ============================================
+   全局元素统一
+   ============================================ */
+
+body {
+  font-size: var(--text-base) !important;
+}
+
+/* 标题系统 - 严格统一 */
+.vp-doc h1 {
+  font-size: var(--text-4xl) !important;
+  margin: 0 0 var(--space-xl) 0;
+  padding-bottom: var(--space-lg);
+}
+
+.vp-doc h2 {
+  font-size: var(--text-3xl) !important;
+  margin: var(--space-2xl) 0 var(--space-lg) 0;
+}
+
+.vp-doc h3 {
+  font-size: var(--text-2xl) !important;
+  margin: var(--space-xl) 0 var(--space-md) 0;
+}
+
+.vp-doc h4 {
+  font-size: var(--text-xl) !important;
+  margin: var(--space-lg) 0 var(--space-sm) 0;
+}
+
+.vp-doc p {
+  font-size: var(--text-base) !important;
+  line-height: 1.8;
+  margin: var(--space-md) 0;
+}
+
+/* 列表统一 */
+.vp-doc ul,
+.vp-doc ol {
+  font-size: var(--text-base) !important;
+  line-height: 1.8;
+  margin: var(--space-md) 0;
+}
+
+.vp-doc li {
+  font-size: var(--text-base) !important;
+  margin: 0.5rem 0;
+}
+
+/* 表格统一 */
+.vp-doc table {
+  font-size: var(--text-sm) !important;
+  margin: var(--space-xl) 0;
+}
+
+.vp-doc th {
+  font-size: var(--text-sm) !important;
+  font-weight: 600;
+  padding: var(--space-sm) var(--space-md);
+}
+
+.vp-doc td {
+  font-size: var(--text-sm) !important;
+  padding: var(--space-sm) var(--space-md);
+}
+
+/* 代码块统一 */
+.vp-doc code {
+  font-size: var(--text-sm) !important;
+}
+
+.vp-doc pre code {
+  font-size: var(--text-sm) !important;
+  line-height: 1.7;
+}
+
+/* 引用块统一 */
+.vp-doc blockquote {
+  font-size: var(--text-base) !important;
+  padding: var(--space-md) var(--space-lg);
+  margin: var(--space-xl) 0;
+}
+
+/* ============================================
+   导航系统统一
+   ============================================ */
+
+/* 顶部导航 */
+.VPNavBar {
+  height: 64px !important;
+  padding: 0 32px !important;
+}
+
+.VPNavBarTitle .title {
+  font-size: var(--text-lg) !important;
+  font-weight: 700;
+}
+
+.VPNavBarMenuLink {
+  font-size: var(--text-base) !important;
+  font-weight: 500;
+  padding: 0 16px;
+}
+
+/* 侧边栏 */
+.VPSidebar {
+  width: 280px !important;
+  font-size: var(--text-sm);
+}
+
+.VPSidebarGroup .title {
+  font-size: var(--text-xs) !important;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: var(--space-sm) var(--space-md);
+  margin-top: var(--space-lg);
+  color: var(--vp-c-text-3);
+}
+
+.VPSidebarItem .text {
+  font-size: var(--text-sm) !important;
+  line-height: 1.6;
+  padding: var(--space-xs) var(--space-md);
+}
+
+/* ============================================
+   Hero 区域统一
+   ============================================ */
+
+.VPHero {
+  padding: 80px 24px !important;
+}
+
+.VPHero .name {
+  font-size: 3.5rem !important;
+}
+
+.VPHero .text {
+  font-size: 3.5rem !important;
+}
+
+.VPHero .tagline {
+  font-size: var(--text-xl) !important;
+  max-width: 600px;
+  margin: var(--space-lg) auto 0;
+}
+
+.VPHero .actions {
+  margin-top: var(--space-2xl);
+  gap: var(--space-md);
+}
+
+/* ============================================
+   Feature 卡片统一
+   ============================================ */
+
+.VPFeatures {
+  padding: 60px 24px !important;
+}
+
+.VPFeature {
+  padding: 28px 24px !important;
+  height: auto !important;
+  min-height: 220px;
+}
+
+.VPFeature .icon {
+  font-size: 2.5rem !important;
+  margin-bottom: var(--space-md);
+}
+
+.VPFeature .title {
+  font-size: var(--text-lg) !important;
+  margin-bottom: var(--space-sm);
+}
+
+.VPFeature .details {
+  font-size: var(--text-sm) !important;
+  line-height: 1.7;
+}
+
+/* ============================================
+   按钮系统统一
+   ============================================ */
+
+.VPButton {
+  font-size: var(--text-base) !important;
+  padding: 12px 28px !important;
+  border-radius: 10px !important;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+/* ============================================
+   颜色系统优化 - 更协调
+   ============================================ */
+
+/* 链接颜色 */
+.vp-doc a {
+  font-weight: 500;
+}
+
+/* 代码内联 */
+.vp-doc :not(pre) > code {
+  font-size: var(--text-sm) !important;
+  padding: 0.25em 0.5em;
+  background: var(--vp-code-bg);
+  border-radius: 4px;
+}
+
+/* ============================================
+   响应式统一
+   ============================================ */
+
+@media (max-width: 960px) {
+  .VPHero .name,
+  .VPHero .text {
+    font-size: 2.5rem !important;
+  }
+  
+  .VPHero .tagline {
+    font-size: var(--text-lg) !important;
+  }
+  
+  .vp-doc h1 { font-size: var(--text-3xl) !important; }
+  .vp-doc h2 { font-size: var(--text-2xl) !important; }
+  .vp-doc h3 { font-size: var(--text-xl) !important; }
+}
+
+@media (max-width: 768px) {
+  .VPNavBar {
+    padding: 0 20px !important;
+  }
+  
+  .VPHero {
+    padding: 60px 20px !important;
+  }
+  
+  .VPHero .name,
+  .VPHero .text {
+    font-size: 2rem !important;
+  }
+  
+  .VPHero .tagline {
+    font-size: var(--text-base) !important;
+  }
+  
+  .VPFeatures {
+    padding: 40px 20px !important;
+  }
+}
+
+/* ============================================
+   修复覆盖优先级
+   ============================================ */
+
+.VPDoc * {
+  letter-spacing: normal;
+}
+
+/* 确保一致的行高 */
+.vp-doc > * {
+  line-height: 1.7;
+}

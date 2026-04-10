@@ -1,0 +1,203 @@
+/**
+ * 布局修复和优化
+ * 解决字体不统一、间距不协调等问题
+ */
+
+/* 全局重置 - 确保一致性 */
+* {
+  box-sizing: border-box;
+}
+
+/* 内容区域统一 */
+.VPDoc .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.VPDoc .content {
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+/* 列表样式统一 */
+.vp-doc ul,
+.vp-doc ol {
+  font-size: 1rem;
+  line-height: 1.8;
+  padding-left: 1.5rem;
+}
+
+.vp-doc li {
+  margin: 0.5rem 0;
+}
+
+.vp-doc li p {
+  margin: 0.5rem 0;
+}
+
+/* 导航栏统一高度 */
+.VPNav {
+  height: 64px;
+}
+
+.VPNavBar {
+  height: 64px;
+  padding: 0 32px;
+}
+
+/* Logo 区域 */
+.VPNavBarTitle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.VPNavBarTitle .title {
+  font-size: 18px !important;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* 侧边栏宽度固定 */
+.VPSidebar {
+  width: 280px;
+  padding: 24px 0;
+}
+
+.VPSidebar .nav {
+  padding: 0 16px;
+}
+
+/* 文档内容区域 */
+.VPDoc {
+  padding: 32px 32px 96px;
+}
+
+.VPDoc h1 {
+  margin-top: 0;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--vp-c-divider);
+}
+
+.VPDoc h2 {
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
+  padding-top: 1.5rem;
+}
+
+.VPDoc h3 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+/* 按钮统一大小 */
+.VPButton {
+  font-size: 15px !important;
+  padding: 12px 28px !important;
+  border-radius: 10px !important;
+  font-weight: 600;
+}
+
+/* 搜索框 */
+.VPNavBarSearch {
+  font-size: 14px;
+}
+
+/* Footer */
+.VPFooter {
+  padding: 32px;
+  text-align: center;
+  font-size: 14px;
+}
+
+/* 目录导航 */
+.VPDocAside {
+  width: 256px;
+  padding: 24px 0 24px 24px;
+}
+
+.VPDocAside .title {
+  font-size: 13px !important;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 12px;
+}
+
+.VPDocAside .outline-link {
+  font-size: 13px !important;
+  line-height: 2;
+}
+
+/* 表格样式统一 */
+.vp-doc table {
+  font-size: 0.95rem;
+  width: 100%;
+  margin: 2rem 0;
+}
+
+.vp-doc th {
+  font-size: 0.9rem !important;
+  padding: 12px 16px;
+}
+
+.vp-doc td {
+  font-size: 0.9rem !important;
+  padding: 12px 16px;
+}
+
+/* 响应式优化 */
+@media (max-width: 960px) {
+  .VPDoc {
+    padding: 24px 24px 64px;
+  }
+  
+  .VPNavBar {
+    padding: 0 24px;
+  }
+  
+  .VPHero .name,
+  .VPHero .text {
+    font-size: 2.5rem !important;
+  }
+  
+  .VPHero .tagline {
+    font-size: 1.1rem !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .VPDoc {
+    padding: 16px 16px 48px;
+  }
+  
+  .VPHero .name,
+  .VPHero .text {
+    font-size: 2rem !important;
+  }
+  
+  .VPHero .tagline {
+    font-size: 1rem !important;
+  }
+  
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.75rem; }
+  h3 { font-size: 1.35rem; }
+}
+
+/* 滚动条优化 */
+.VPSidebar {
+  scrollbar-width: thin;
+  scrollbar-color: var(--vp-c-brand) transparent;
+}
+
+/* 内容宽度限制 */
+.vp-doc {
+  max-width: 900px;
+}
+
+.vp-doc .container {
+  max-width: 100%;
+}

@@ -1,0 +1,26 @@
+{
+  "name": "claude-code-best-practice-website",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Claude Code Best Practice - Modern Technical Documentation Website",
+  "scripts": {
+    "dev": "vitepress dev",
+    "build": "vitepress build",
+    "preview": "vitepress preview"
+  },
+  "keywords": [
+    "claude-code",
+    "documentation",
+    "best-practices",
+    "ai-development"
+  ],
+  "author": "Claude Code Best Practice Team",
+  "license": "MIT",
+  "devDependencies": {
+    "vitepress": "^1.1.4",
+    "vue": "^3.4.21"
+  },
+  "dependencies": {
+    "@vueuse/core": "^10.9.0"
+  }
+}

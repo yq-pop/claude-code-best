@@ -1,0 +1,391 @@
+/**
+ * 自定义样式 - Claude Code Best Practice
+ * 设计理念: 精致极简主义 + 技术感边缘 + 流畅交互
+ */
+
+/* 全局字体设置 - 统一大小 */
+body {
+  font-family: var(--vp-font-family-base);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+/* 标题字体 - 统一尺寸系统 */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.5rem; }
+h4 { font-size: 1.25rem; }
+h5 { font-size: 1.1rem; }
+h6 { font-size: 1rem; }
+
+/* 段落统一 */
+p {
+  font-size: 1rem;
+  line-height: 1.8;
+  margin: 1rem 0;
+}
+
+/* 代码字体 */
+code, kbd, samp, pre {
+  font-family: var(--vp-font-family-mono) !important;
+}
+
+/* Hero 区域增强 - 统一大小 */
+.VPHero {
+  position: relative;
+  z-index: 1;
+  padding: 80px 24px;
+}
+
+.VPHero .name {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 900;
+  font-size: 4rem !important;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.VPHero .text {
+  font-size: 4rem !important;
+  font-weight: 900;
+}
+
+.VPHero .tagline {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 500;
+  font-size: 1.25rem !important;
+  line-height: 1.6;
+  opacity: 0.85;
+  max-width: 600px;
+  margin: 1.5rem auto 0;
+}
+
+.VPHero .actions {
+  margin-top: 3rem;
+  gap: 1rem;
+}
+
+/* Feature 卡片增强 - 统一样式 */
+.VPFeature {
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 12px;
+  padding: 32px 28px;
+  background: var(--vp-c-bg-soft);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+}
+
+.VPFeature::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--vp-c-brand), var(--vp-c-accent));
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.VPFeature:hover::before {
+  transform: scaleX(1);
+}
+
+.VPFeature:hover {
+  transform: translateY(-6px);
+  border-color: var(--vp-c-brand);
+  box-shadow: 
+    0 20px 40px rgba(124, 58, 237, 0.15),
+    0 0 60px rgba(124, 58, 237, 0.05);
+}
+
+.VPFeature .icon {
+  font-size: 3rem;
+  margin-bottom: 16px;
+  filter: drop-shadow(0 4px 8px rgba(124, 58, 237, 0.3));
+}
+
+.VPFeature .title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.15rem !important;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--vp-c-text-1);
+  line-height: 1.4;
+}
+
+.VPFeature .details {
+  font-size: 0.95rem !important;
+  line-height: 1.7;
+  color: var(--vp-c-text-2);
+}
+
+/* 按钮增强 */
+.VPButton {
+  border-radius: 12px;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  padding: 14px 32px;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.VPButton.brand {
+  background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+  border: none;
+}
+
+.VPButton.brand::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.VPButton.brand:hover::before {
+  left: 100%;
+}
+
+.VPButton.brand:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(124, 58, 237, 0.4);
+}
+
+.VPButton.alt {
+  border: 2px solid var(--vp-c-brand);
+  color: var(--vp-c-brand);
+  background: transparent;
+}
+
+.VPButton.alt:hover {
+  background: var(--vp-c-brand-soft);
+  transform: translateY(-2px);
+}
+
+/* 导航栏样式由 navigation-fix.css 统一管理 */
+
+/* 侧边栏样式由 navigation-fix.css 统一管理 */
+
+/* 代码块增强 */
+.vp-doc div[class*='language-'] {
+  border-radius: 12px;
+  border: 1px solid var(--vp-c-divider);
+  background: var(--vp-code-block-bg);
+  margin: 24px 0;
+  transition: all 0.3s ease;
+}
+
+.vp-doc div[class*='language-']:hover {
+  border-color: var(--vp-c-brand-light);
+  box-shadow: 0 8px 24px rgba(124, 58, 237, 0.1);
+}
+
+.vp-doc div[class*='language-'] code {
+  font-family: var(--vp-font-family-mono);
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+/* 行号样式 */
+.line-numbers-mode .line-numbers {
+  background: rgba(0, 0, 0, 0.2);
+  border-right: 1px solid var(--vp-c-divider);
+}
+
+/* 表格增强 */
+.vp-doc table {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--vp-c-divider);
+}
+
+.vp-doc thead {
+  background: var(--vp-c-bg-soft);
+}
+
+.vp-doc th {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  color: var(--vp-c-text-1);
+}
+
+.vp-doc tr {
+  transition: background 0.2s ease;
+}
+
+.vp-doc tbody tr:hover {
+  background: var(--vp-c-brand-soft);
+}
+
+/* 链接增强 */
+.vp-doc a {
+  color: var(--vp-c-brand);
+  text-decoration: none;
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.vp-doc a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--vp-c-brand);
+  transition: width 0.3s ease;
+}
+
+.vp-doc a:hover {
+  color: var(--vp-c-brand-light);
+}
+
+.vp-doc a:hover::after {
+  width: 100%;
+}
+
+/* 徽章样式 */
+.vp-doc img[alt*="badge"] {
+  display: inline-block;
+  margin: 2px 4px;
+  vertical-align: middle;
+  transition: transform 0.2s ease;
+}
+
+.vp-doc img[alt*="badge"]:hover {
+  transform: scale(1.05);
+}
+
+/* 提示框增强 */
+.vp-doc .tip,
+.vp-doc .warning,
+.vp-doc .danger,
+.vp-doc .info {
+  border-radius: 12px;
+  border-left: 4px solid;
+  padding: 16px 20px;
+  margin: 20px 0;
+  backdrop-filter: blur(10px);
+}
+
+.vp-doc .tip {
+  border-color: var(--vp-c-brand);
+  background: var(--vp-c-brand-soft);
+}
+
+.vp-doc .warning {
+  border-color: #f59e0b;
+  background: rgba(245, 158, 11, 0.1);
+}
+
+.vp-doc .danger {
+  border-color: #ef4444;
+  background: rgba(239, 68, 68, 0.1);
+}
+
+/* 自定义容器 */
+.vp-doc .custom-block {
+  border-radius: 12px;
+  margin: 24px 0;
+}
+
+/* 页脚增强 */
+.VPFooter {
+  background: var(--vp-c-bg-alt);
+  border-top: 1px solid var(--vp-c-divider);
+  padding: 32px 24px;
+}
+
+/* 搜索框增强 */
+.VPNavBarSearch {
+  border-radius: 12px;
+}
+
+/* 返回顶部按钮 */
+.VPBackToTop {
+  background: var(--vp-c-brand) !important;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+  transition: all 0.3s ease;
+}
+
+.VPBackToTop:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(124, 58, 237, 0.5);
+}
+
+/* 目录导航样式由 navigation-fix.css 统一管理 */
+
+/* 响应式优化 */
+@media (max-width: 768px) {
+  :root {
+    --vp-font-size-root: 15px;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* 打印样式 */
+@media print {
+  .VPNav,
+  .VPSidebar,
+  .VPFooter {
+    display: none;
+  }
+}
+
+/* 选择文本样式 */
+::selection {
+  background: var(--vp-c-brand-soft);
+  color: var(--vp-c-text-1);
+}
+
+/* 滚动条样式 */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--vp-c-bg-alt);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--vp-c-brand-dark);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--vp-c-brand);
+}
+
+/* 焦点样式 */
+:focus-visible {
+  outline: 2px solid var(--vp-c-brand);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
