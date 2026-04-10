@@ -15,7 +15,7 @@ Boris Cherny ([@bcherny](https://x.com/bcherny))，Claude Code 的创建者，�
 
 Boris 分享了直接来自 Claude Code 团队的使用技巧。团队使用 Claude 的方式与 Boris 个人使用方式不同。请记住：使用 Claude Code 没有唯一正确的方式 — 每个人的设置都不同。你应该进行实验，看看什么适合你！
 
-<a href="https://x.com/bcherny/status/2017742741636321619"><img src="assets/boris-1-feb-26/0.png" alt="Boris Cherny intro tweet" width="50%" /></a>
+<a href="https://x.com/bcherny/status/2017742741636321619"><img src="./assets/boris-1-feb-26/0.png" alt="Boris Cherny intro tweet" width="50%" /></a>
 
 ---
 
@@ -27,7 +27,7 @@ Boris 分享了直接来自 Claude Code 团队的使用技巧。团队使用 Cla
 
 参见：[Worktrees 文档](https://code.claude.com/docs/en/common...)
 
-<a href="https://x.com/bcherny/status/2017742743125299476"><img src="assets/boris-1-feb-26/1.png" alt="Do more in parallel" width="50%" /></a>
+<a href="https://x.com/bcherny/status/2017742743125299476"><img src="./assets/boris-1-feb-26/1.png" alt="Do more in parallel" width="50%" /></a>
 
 ---
 
@@ -39,7 +39,7 @@ Boris 分享了直接来自 Claude Code 团队的使用技巧。团队使用 Cla
 
 另一个人说，一旦出现问题，他们就会切换回计划模式并重新规划。不要继续推进。他们还明确告诉 Claude 进入计划模式进行验证步骤，而不仅仅是构建。
 
-<a href="https://x.com/bcherny/status/2017742745365057733"><img src="assets/boris-1-feb-26/2.png" alt="Start every complex task in plan mode" width="50%" /></a>
+<a href="https://x.com/bcherny/status/2017742745365057733"><img src="./assets/boris-1-feb-26/2.png" alt="Start every complex task in plan mode" width="50%" /></a>
 
 ---
 
@@ -51,7 +51,7 @@ Boris 分享了直接来自 Claude Code 团队的使用技巧。团队使用 Cla
 
 一位工程师告诉 Claude 为每个任务/项目维护一个笔记目录，在每个 PR 后更新。然后他们将 `CLAUDE.md` 指向它。
 
-<a href="https://x.com/bcherny/status/2017742747067945390"><img src="assets/boris-1-feb-26/3.png" alt="Invest in your CLAUDE.md" width="50%" /></a>
+<a href="https://x.com/bcherny/status/2017742747067945390"><img src="./assets/boris-1-feb-26/3.png" alt="Invest in your CLAUDE.md" width="50%" /></a>
 
 ---
 
@@ -66,7 +66,7 @@ Boris 分享了直接来自 Claude Code 团队的使用技巧。团队使用 Cla
 
 参见：[使用技能扩展 Claude — Claude Code 文档](https://code.claude.com/docs/en/skills)
 
-<a href="https://x.com/bcherny/status/2017742748984742078"><img src="assets/boris-1-feb-26/4.png" alt="Create your own skills" width="50%" /></a>
+<a href="https://x.com/bcherny/status/2017742748984742078"><img src="./assets/boris-1-feb-26/4.png" alt="Create your own skills" width="50%" /></a>
 
 ---
 
@@ -80,7 +80,7 @@ Or, just say "Go fix the failing CI tests." Don't micromanage how.
 
 Point Claude at docker logs to troubleshoot distributed systems — it's surprisingly capable at this.
 
-<a href="https://x.com/bcherny/status/2017742750473720121"><img src="assets/boris-1-feb-26/5.png" alt="Claude fixes most bugs by itself" width="50%" /></a>
+<a href="https://x.com/bcherny/status/2017742750473720121"><img src="./assets/boris-1-feb-26/5.png" alt="Claude fixes most bugs by itself" width="50%" /></a>
 
 ---
 
@@ -92,7 +92,7 @@ b. **After a mediocre fix,** say: "Knowing everything you know now, scrap this a
 
 c. **Write detailed specs** and reduce ambiguity before handing work off. The more specific you are, the better the output.
 
-<a href="https://x.com/bcherny/status/2017742752566632544"><img src="assets/boris-1-feb-26/6.png" alt="Level up your prompting" width="50%" /></a>
+<a href="https://x.com/bcherny/status/2017742752566632544"><img src="./assets/boris-1-feb-26/6.png" alt="Level up your prompting" width="50%" /></a>
 
 ---
 
@@ -106,7 +106,7 @@ Use voice dictation. You speak 3x faster than you type, and your prompts get way
 
 See: [Terminal Setup Docs](https://code.claude.com/docs/en/termin...)
 
-<a href="https://x.com/bcherny/status/2017742753971769626"><img src="assets/boris-1-feb-26/7.png" alt="Terminal and environment setup" width="50%" /></a>
+<a href="https://x.com/bcherny/status/2017742753971769626"><img src="./assets/boris-1-feb-26/7.png" alt="Terminal and environment setup" width="50%" /></a>
 
 ---
 
@@ -118,7 +118,7 @@ b. Offload individual tasks to subagents to keep your main agent's context windo
 
 c. Route permission requests to Opus 4.5 via a hook — let it scan for attacks and auto-approve the safe ones. See: [Hooks Docs](https://code.claude.com/docs/en/hooks#...)
 
-<a href="https://x.com/bcherny/status/2017742755737555434"><img src="assets/boris-1-feb-26/8.png" alt="Use subagents" width="50%" /></a>
+<a href="https://x.com/bcherny/status/2017742755737555434"><img src="./assets/boris-1-feb-26/8.png" alt="Use subagents" width="50%" /></a>
 
 ---
 
@@ -128,7 +128,7 @@ Ask Claude Code to use the "bq" CLI to pull and analyze metrics on the fly. The 
 
 This works for any database that has a CLI, MCP, or API.
 
-<a href="https://x.com/bcherny/status/2017742757666902374"><img src="assets/boris-1-feb-26/9.png" alt="Use Claude for data and analytics" width="50%" /></a>
+<a href="https://x.com/bcherny/status/2017742757666902374"><img src="./assets/boris-1-feb-26/9.png" alt="Use Claude for data and analytics" width="50%" /></a>
 
 ---
 
@@ -144,7 +144,7 @@ c. Ask Claude to draw ASCII diagrams of new protocols and codebases to help you 
 
 d. Build a spaced-repetition learning skill: you explain your understanding, Claude asks follow-ups to fill gaps, stores the result.
 
-<a href="https://x.com/bcherny/status/2017742759218794768"><img src="assets/boris-1-feb-26/10.png" alt="Learning with Claude" width="50%" /></a>
+<a href="https://x.com/bcherny/status/2017742759218794768"><img src="./assets/boris-1-feb-26/10.png" alt="Learning with Claude" width="50%" /></a>
 
 ---
 

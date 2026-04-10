@@ -25,7 +25,7 @@ claude
 ## Power-ups (10)
 
 <p align="center">
-  <img src="assets/claude-power-ups/powerup-menu.png" alt="Power-ups menu showing 10 lessons" width="700">
+  <img src="./assets/claude-power-ups/powerup-menu.png" alt="Power-ups menu showing 10 lessons" width="700">
 </p>
 
 | # | Power-up | 主题 |
@@ -48,15 +48,15 @@ claude
 最后一个 power-up 通过动画演示教授模型切换和努力控制。
 
 <p align="center">
-  <img src="assets/claude-power-ups/dial-the-model-1.png" alt="Dial the model — demo thinking deeply" width="700">
+  <img src="./assets/claude-power-ups/dial-the-model-1.png" alt="Dial the model — demo thinking deeply" width="700">
 </p>
 
 <p align="center">
-  <img src="assets/claude-power-ups/dial-the-model-2.png" alt="Dial the model — demo showing hypotheses" width="700">
+  <img src="./assets/claude-power-ups/dial-the-model-2.png" alt="Dial the model — demo showing hypotheses" width="700">
 </p>
 
 <p align="center">
-  <img src="assets/claude-power-ups/dial-the-model-3.png" alt="Dial the model — demo setting effort to high" width="700">
+  <img src="./assets/claude-power-ups/dial-the-model-3.png" alt="Dial the model — demo setting effort to high" width="700">
 </p>
 
 ---

@@ -4,6 +4,7 @@ export default defineConfig({
   title: 'Claude Code 最佳实践',
   description: '从氛围编程到智能体工程 - 熟能生巧，让 Claude 完美运作',
   lang: 'zh-CN',
+  appearance: false,
   
   head: [
     ['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }],
@@ -35,8 +36,7 @@ export default defineConfig({
           { text: '💻 实现示例', link: '/implementation/' },
           { text: '🔧 工作流', link: '/workflows/' }
         ]
-      },
-      { text: 'GitHub', link: 'https://github.com/yq-pop/claude-code-best' }
+      }
     ],
     
     sidebar: {
@@ -138,9 +138,7 @@ export default defineConfig({
       ]
     },
     
-    socialLinks: [
-      { icon: 'github', link: 'https://github.com/yq-pop/claude-code-best' }
-    ],
+    socialLinks: [],
     
     search: {
       provider: 'local',

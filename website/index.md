@@ -29,7 +29,7 @@ features:
   - icon: 🎯
     title: 10大工作流对比
     details: 深入分析 Everything Claude Code、Superpowers、gstack 等业界主流工作流，找到最适合你的方案
-    link: /workflows/comparison
+    link: /workflows/
     linkText: 对比分析
   
   - icon: 🎬
@@ -180,7 +180,7 @@ features:
     <div class="cta-arrow">→</div>
   </a>
   
-  <a href="/workflows/orchestration" class="cta-card cta-tertiary">
+  <a href="/workflows/" class="cta-card cta-tertiary">
     <div class="cta-icon">🔧</div>
     <div class="cta-content">
       <h3>工作流示例</h3>

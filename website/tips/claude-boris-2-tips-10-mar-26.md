@@ -19,7 +19,7 @@ Claude Code 的新功能：**代码审查**。一个智能体团队对每个 PR 
 - Boris 使用了几周，发现它捕获了许多他本来不会注意到的真正错误
 - 当 PR 打开时，Claude 会派遣一个智能体团队来寻找错误
 
-<a href="https://x.com/bcherny/status/2031089411820228645"><img src="assets/boris-10-mar-26/0.png" alt="Boris Cherny announcing Code Review" width="50%" /></a>
+<a href="https://x.com/bcherny/status/2031089411820228645"><img src="./assets/boris-10-mar-26/0.png" alt="Boris Cherny announcing Code Review" width="50%" /></a>
 
 ---
 
@@ -31,7 +31,7 @@ Claude Code 的新功能：**代码审查**。一个智能体团队对每个 PR 
 - 类似于工程团队：如果 Boris 导致了一个错误，他的同事审查代码可能比他更可靠地找到它
 - 在极限情况下，智能体可能会编写完美的无错误代码 — 在那之前，**多个不相关的上下文窗口**往往是一个好方法
 
-<a href="https://x.com/bcherny/status/2031151689219321886"><img src="assets/boris-10-mar-26/1.png" alt="Boris Cherny on test time compute" width="50%" /></a>
+<a href="https://x.com/bcherny/status/2031151689219321886"><img src="./assets/boris-10-mar-26/1.png" alt="Boris Cherny on test time compute" width="50%" /></a>
 
 ---
 

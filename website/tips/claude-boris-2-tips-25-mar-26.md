@@ -19,7 +19,7 @@ Boris 分享了他的 GitHub 贡献图，显示**3 月 24 日有 266 次贡献**
 - 每个 PR = 一个提交，这使得回退整个功能变得容易，并简化了 `git bisect`
 - 在高速 AI 辅助工作流中（141 个 PR/天），压缩合并是务实的选择 — 分支内的单个"修复 lint"、"试试这个"等提交都是噪音
 
-<a href="https://x.com/bcherny/status/2038552880018538749"><img src="assets/boris-25-mar-26/1.png" alt="Boris Cherny — 266 次贡献，始终使用压缩合并" width="50%" /></a>
+<a href="https://x.com/bcherny/status/2038552880018538749"><img src="./assets/boris-25-mar-26/1.png" alt="Boris Cherny — 266 次贡献，始终使用压缩合并" width="50%" /></a>
 
 ---
 
@@ -39,7 +39,7 @@ Boris 分享了这 141 个 PR 的规模分布，总计 **45,032 行变更**（�
 - 分布严重右偏 — 偶尔的大型 PR 是不可避免的（批量重命名、迁移），但常态是紧凑的
 - 小型 PR 降低合并冲突风险，更易于审查，并与压缩合并完美配合，实现干净的回退
 
-<a href="https://x.com/bcherny/status/2038552880018538749"><img src="assets/boris-25-mar-26/2.png" alt="Boris Cherny — PR 规模分布表" width="50%" /></a>
+<a href="https://x.com/bcherny/status/2038552880018538749"><img src="./assets/boris-25-mar-26/2.png" alt="Boris Cherny — PR 规模分布表" width="50%" /></a>
 
 ---
 

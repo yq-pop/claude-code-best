@@ -1,172 +1,143 @@
 /**
- * 导航完全重写 - 解决显示不完整和不协调问题
- * 核心原则：足够宽度 + 允许换行 + 左右统一
+ * 导航完全重写 - 简洁统一设计
+ * 左右两侧使用相同的简洁风格
  */
 
 /* ============================================
-   左侧边栏 - 修复显示不完整
+   左侧边栏 - 简洁设计
    ============================================ */
 
-/* 侧边栏容器 - 增加宽度 */
+/* 侧边栏容器 */
 .VPSidebar {
-  width: 300px !important;
-  max-width: 300px !important;
-  min-width: 300px !important;
-  background: var(--vp-c-bg);
-  border-right: 1px solid var(--vp-c-divider);
-  padding: 24px 0 !important;
+  width: 240px !important;
+  background: transparent !important;
+  border-right: none !important;
+  padding: 24px 16px 24px 24px !important;
   overflow-y: auto;
   overflow-x: hidden;
+  top: 64px !important;
+  height: calc(100vh - 64px) !important;
+  padding-top: 24px !important;
 }
 
 /* 确保内容区域有正确的左边距 */
 .VPContent.has-sidebar {
-  margin-left: 300px !important;
+  margin-left: 240px !important;
   padding-left: 32px !important;
 }
 
-/* 侧边栏内部容器 */
-.VPSidebar .nav {
-  padding: 0 !important;
-  width: 100%;
-}
-
-/* 侧边栏分组 */
-.VPSidebarItem.level-0 {
-  padding: 0;
-}
-
+/* 侧边栏分组标题 */
 .VPSidebarItem.level-0 > .item > .text {
   font-size: 12px !important;
   font-weight: 700 !important;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--vp-c-text-2);
-  padding: 16px 20px 8px 20px !important;
-  white-space: nowrap;
+  padding: 16px 0 8px 0 !important;
 }
 
-/* 侧边栏链接 - 允许换行，不截断 */
+/* 侧边栏链接 - 简洁样式 */
 .VPSidebarItem.level-1 .item .link,
 .VPSidebarItem .item > .link {
   display: block;
   font-size: 14px !important;
   font-weight: 500;
-  color: var(--vp-c-text-1);
-  padding: 8px 20px !important;
+  color: var(--vp-c-text-2);
+  padding: 6px 0 !important;
   line-height: 1.5;
-  transition: all 0.2s ease;
-  border-left: 3px solid transparent;
-  white-space: normal !important;
-  word-wrap: break-word !important;
-  overflow-wrap: break-word !important;
-  text-overflow: clip !important;
-  overflow: visible !important;
+  transition: color 0.2s ease;
+  background: transparent !important;
+  border: none !important;
 }
 
 .VPSidebarItem.level-1 .item .link:hover,
 .VPSidebarItem .item > .link:hover {
   color: var(--vp-c-brand-1);
-  background-color: var(--vp-c-bg-soft);
-  border-left-color: var(--vp-c-brand-1);
 }
 
 .VPSidebarItem.is-active > .item > .link,
 .VPSidebarItem.level-1.is-active .item .link {
   color: var(--vp-c-brand-1) !important;
-  background-color: var(--vp-c-brand-soft);
   font-weight: 600 !important;
-  border-left-color: var(--vp-c-brand-1);
 }
 
 /* 子级链接缩进 */
 .VPSidebarItem.level-2 .item .link {
-  padding-left: 36px !important;
+  padding-left: 12px !important;
   font-size: 13px !important;
 }
 
 .VPSidebarItem.level-3 .item .link {
-  padding-left: 52px !important;
+  padding-left: 24px !important;
   font-size: 13px !important;
 }
 
 /* ============================================
-   右侧目录导航 - 与左侧完全统一
+   右侧目录导航 - 简洁无边框设计
    ============================================ */
 
 /* 右侧容器 */
 .VPDocAside {
-  width: 256px !important;
-  max-width: 256px !important;
-  min-width: 256px !important;
+  width: 240px !important;
   padding-left: 24px !important;
   padding-top: 24px !important;
   padding-right: 16px !important;
 }
 
-/* 目录外框 */
+/* 目录外框 - 无边框，用背景区分 */
 .VPDocAsideOutline {
-  background: var(--vp-c-bg);
-  border: 1px solid var(--vp-c-divider);
-  border-radius: 8px;
-  padding: 16px 0 !important;
-  overflow: visible !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  border-left: 2px solid var(--vp-c-divider) !important;
+  padding-left: 16px !important;
 }
 
-/* 目录标题 - 与左侧分组标题统一 */
+/* 目录标题 */
 .VPDocAsideOutline .outline-title {
   font-size: 12px !important;
   font-weight: 700 !important;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--vp-c-text-2);
-  padding: 0 16px 12px 16px !important;
-  margin: 0 !important;
-  border-bottom: 1px solid var(--vp-c-divider-light);
+  padding: 0 0 12px 0 !important;
+  margin: 0 0 8px 0 !important;
+  border-bottom: none !important;
 }
 
 /* 目录内容区 */
 .VPDocAsideOutline .content {
-  padding: 8px 0 0 0 !important;
+  padding: 0 !important;
 }
 
-/* 目录链接 - 与左侧链接完全统一 */
+/* 目录链接 */
 .VPDocAsideOutline .outline-link {
   display: block;
   font-size: 13px !important;
   font-weight: 500;
-  color: var(--vp-c-text-1);
-  padding: 6px 16px !important;
+  color: var(--vp-c-text-2);
+  padding: 4px 0 !important;
   line-height: 1.5;
-  transition: all 0.2s ease;
-  border-left: 3px solid transparent;
-  white-space: normal !important;
-  word-wrap: break-word !important;
-  overflow-wrap: break-word !important;
-  text-overflow: clip !important;
-  overflow: visible !important;
+  transition: color 0.2s ease;
 }
 
 .VPDocAsideOutline .outline-link:hover {
   color: var(--vp-c-brand-1);
-  background-color: var(--vp-c-bg-soft);
-  border-left-color: var(--vp-c-brand-1);
 }
 
 .VPDocAsideOutline .outline-link.active {
   color: var(--vp-c-brand-1) !important;
-  background-color: var(--vp-c-brand-soft);
   font-weight: 600 !important;
-  border-left-color: var(--vp-c-brand-1);
 }
 
 /* 嵌套层级 */
 .VPDocAsideOutline .outline-link.nested-1 {
-  padding-left: 28px !important;
+  padding-left: 12px !important;
 }
 
 .VPDocAsideOutline .outline-link.nested-2 {
-  padding-left: 40px !important;
+  padding-left: 24px !important;
 }
 
 /* ============================================
@@ -237,7 +208,7 @@
 
 /* 确保文档内容居中 */
 .VPContent.has-sidebar.has-aside {
-  padding-right: 280px !important;
+  padding-right: 260px !important;
 }
 
 /* ============================================
@@ -246,19 +217,19 @@
 
 @media (max-width: 1280px) {
   .VPSidebar {
-    width: 280px !important;
-    max-width: 280px !important;
-    min-width: 280px !important;
+    width: 220px !important;
   }
   
   .VPContent.has-sidebar {
-    margin-left: 280px !important;
+    margin-left: 220px !important;
   }
   
   .VPDocAside {
-    width: 220px !important;
-    max-width: 220px !important;
-    min-width: 220px !important;
+    width: 200px !important;
+  }
+  
+  .VPContent.has-sidebar.has-aside {
+    padding-right: 220px !important;
   }
 }
 

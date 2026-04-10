@@ -29,7 +29,7 @@ claude --version  # 应显示已安装的 Claude Code 版本
 
 ## 步骤 3: 登录
 
-<img src="assets/login.png" alt="Claude Code 登录界面" width="50%">
+<img src="./assets/login.png" alt="Claude Code 登录界面" width="50%">
 
 在终端中运行 `claude`。首次启动时,它会要求您选择登录方法。
 

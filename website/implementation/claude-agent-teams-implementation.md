@@ -14,7 +14,7 @@
 <a href="#time-orchestration"><img src="../!/tags/implemented-hd.svg" alt="已实现"></a>
 
 <p align="center">
-  <img src="assets/impl-agent-teams.png" alt="Agent Teams 实战 — 使用 tmux 的分屏模式" width="100%">
+  <img src="./assets/impl-agent-teams.png" alt="Agent Teams 实战 — 使用 tmux 的分屏模式" width="100%">
 </p>
 
 Agent Teams 生成**多个独立的 Claude Code 会话**，通过共享任务列表进行协调。与 subagents（单个会话内的隔离上下文分支）不同，每个团队成员都有自己完整的上下文窗口，自动加载 CLAUDE.md、MCP 服务器和 skills。

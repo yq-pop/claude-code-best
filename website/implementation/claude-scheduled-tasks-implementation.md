@@ -22,7 +22,7 @@
 ### 1. 调度任务
 
 <p align="center">
-  <img src="assets/impl-loop-1.png" alt="/loop 1m tell current time — 调度和 cron 设置" width="100%">
+  <img src="./assets/impl-loop-1.png" alt="/loop 1m tell current time — 调度和 cron 设置" width="100%">
 </p>
 
 `/loop 1m "tell current time"` 解析间隔（`1m` → 每 1 分钟），创建 cron 作业，并确认调度。关键要点：
@@ -37,7 +37,7 @@
 ### 2. Loop 实战
 
 <p align="center">
-  <img src="assets/impl-loop-2.png" alt="每分钟触发的循环任务" width="100%">
+  <img src="./assets/impl-loop-2.png" alt="每分钟触发的循环任务" width="100%">
 </p>
 
 任务每分钟触发一次，运行 `date` 并报告当前时间。每次迭代都会触发异步 **UserPromptSubmit** 和 **Stop** hooks——与本仓库中用于声音通知的 hook 系统相同。

@@ -41,7 +41,7 @@ API 级别的功能(现已正式发布)可减少令牌消耗、延迟并提高�
 
 ## 编程式工具调用(PTC)
 
-<img src="assets/programmatic-tool-calling-diagram.svg" alt="PTC 图表 — 传统工具调用 vs 编程式工具调用" width="100%" />
+<img src="./assets/programmatic-tool-calling-diagram.svg" alt="PTC 图表 — 传统工具调用 vs 编程式工具调用" width="100%" />
 
 ### 范式转变
 
