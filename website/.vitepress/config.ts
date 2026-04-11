@@ -26,6 +26,7 @@ export default defineConfig({
     
     nav: [
       { text: '首页', link: '/' },
+      { text: '演示文稿', link: '/presentation/' },
       { text: '指南', link: '/guide/' },
       { text: '最佳实践', link: '/best-practice/' },
       { text: '技巧', link: '/tips/' },
