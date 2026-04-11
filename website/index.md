@@ -12,6 +12,9 @@ hero:
     - theme: alt
       text: 浏览文档
       link: /best-practice/
+    - theme: alt
+      text: 幻灯片演示
+      link: /presentation/
 
 features:
   - icon: 🧠
