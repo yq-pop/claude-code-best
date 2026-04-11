@@ -8,7 +8,7 @@ MCP(模型上下文协议)服务器通过连接外部工具、数据库和 API �
 <table width="100%">
 <tr>
 <td><a href="../">← 返回 Claude Code 最佳实践</a></td>
-<td align="right"><img src="../!/claude-jumping.svg" alt="Claude" width="60" /></td>
+<td align="right"><img src="/claude-jumping.svg" alt="Claude" width="60" /></td>
 </tr>
 </table>
 

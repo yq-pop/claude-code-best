@@ -5,13 +5,13 @@
 <table width="100%">
 <tr>
 <td><a href="../">← 返回 Claude Code Best Practice</a></td>
-<td align="right"><img src="../!/claude-jumping.svg" alt="Claude" width="60" /></td>
+<td align="right"><img src="/claude-jumping.svg" alt="Claude" width="60" /></td>
 </tr>
 </table>
 
 ---
 
-<a href="#weather-agent"><img src="../!/tags/implemented-hd.svg" alt="已实现"></a>
+<a href="#weather-agent"><img src="/tags/implemented-hd.svg" alt="已实现"></a>
 
 weather agent 在本仓库中作为 **Command → Agent → Skill** 架构模式的示例实现，展示了两种不同的 skill 模式。
 
@@ -60,7 +60,7 @@ skill:
 
 ---
 
-## ![如何使用](../!/tags/how-to-use.svg)
+## ![如何使用](/tags/how-to-use.svg)
 
 ```bash
 $ claude
@@ -69,7 +69,7 @@ $ claude
 
 ---
 
-## ![如何实现](../!/tags/how-to-implement.svg)
+## ![如何实现](/tags/how-to-implement.svg)
 
 你可以使用 `/agents` 命令创建一个 agent，
 ```bash
@@ -81,12 +81,12 @@ $ claude
 
 ---
 
-<a href="https://github.com/shanraisshan/claude-code-best-practice#orchestration-workflow"><img src="../!/tags/orchestration-workflow-hd.svg" alt="编排工作流"></a>
+<a href="https://github.com/shanraisshan/claude-code-best-practice#orchestration-workflow"><img src="/tags/orchestration-workflow-hd.svg" alt="编排工作流"></a>
 
 weather agent 是 Command → Agent → Skill 编排模式中的 **Agent**。它从 `/weather-orchestrator` 命令接收工作流，并使用其预加载的 skill（`weather-fetcher`）获取温度。然后命令调用独立的 `weather-svg-creator` skill 来创建可视化输出。
 
 <p align="center">
-  <img src="../orchestration-workflow/orchestration-workflow.svg" alt="Command Skill Agent 架构流程" width="100%">
+  <img src="/orchestration-workflow.svg" alt="Command Skill Agent 架构流程" width="100%">
 </p>
 
 | 组件 | 角色 | 本仓库 |

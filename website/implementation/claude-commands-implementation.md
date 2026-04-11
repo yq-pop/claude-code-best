@@ -5,13 +5,13 @@
 <table width="100%">
 <tr>
 <td><a href="../">← 返回 Claude Code Best Practice</a></td>
-<td align="right"><img src="../!/claude-jumping.svg" alt="Claude" width="60" /></td>
+<td align="right"><img src="/claude-jumping.svg" alt="Claude" width="60" /></td>
 </tr>
 </table>
 
 ---
 
-<a href="#weather-orchestrator"><img src="../!/tags/implemented-hd.svg" alt="已实现"></a>
+<a href="#weather-orchestrator"><img src="/tags/implemented-hd.svg" alt="已实现"></a>
 
 weather orchestrator 命令在本仓库中作为 **Command → Agent → Skill** 架构模式的入口点实现，展示了命令如何编排多步骤工作流。
 
@@ -53,7 +53,7 @@ Use the Skill tool to invoke the weather-svg-creator skill:
 
 ---
 
-## ![如何使用](../!/tags/how-to-use.svg)
+## ![如何使用](/tags/how-to-use.svg)
 
 ```bash
 $ claude
@@ -62,18 +62,18 @@ $ claude
 
 ---
 
-## ![如何实现](../!/tags/how-to-implement.svg)
+## ![如何实现](/tags/how-to-implement.svg)
 
 让 Claude 为你创建一个——它会在 `.claude/commands/<name>.md` 中生成带有 YAML frontmatter 和正文的 markdown 文件
 
 ---
 
-<a href="https://github.com/shanraisshan/claude-code-best-practice#orchestration-workflow"><img src="../!/tags/orchestration-workflow-hd.svg" alt="编排工作流"></a>
+<a href="https://github.com/shanraisshan/claude-code-best-practice#orchestration-workflow"><img src="/tags/orchestration-workflow-hd.svg" alt="编排工作流"></a>
 
 weather orchestrator 是 Command → Agent → Skill 编排模式中的 **Command**。它作为入口点——处理用户交互（温度单位偏好），将数据获取委托给 `weather-agent`，并调用 `weather-svg-creator` skill 生成可视化输出。
 
 <p align="center">
-  <img src="../orchestration-workflow/orchestration-workflow.svg" alt="Command Skill Agent 架构流程" width="100%">
+  <img src="/orchestration-workflow.svg" alt="Command Skill Agent 架构流程" width="100%">
 </p>
 
 | 组件 | 角色 | 本仓库 |

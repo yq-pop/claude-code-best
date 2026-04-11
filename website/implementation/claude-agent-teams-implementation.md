@@ -5,13 +5,13 @@
 <table width="100%">
 <tr>
 <td><a href="../">← 返回 Claude Code Best Practice</a></td>
-<td align="right"><img src="../!/claude-jumping.svg" alt="Claude" width="60" /></td>
+<td align="right"><img src="/claude-jumping.svg" alt="Claude" width="60" /></td>
 </tr>
 </table>
 
 ---
 
-<a href="#time-orchestration"><img src="../!/tags/implemented-hd.svg" alt="已实现"></a>
+<a href="#time-orchestration"><img src="/tags/implemented-hd.svg" alt="已实现"></a>
 
 <p align="center">
   <img src="./assets/impl-agent-teams.png" alt="Agent Teams 实战 — 使用 tmux 的分屏模式" width="100%">
@@ -21,7 +21,7 @@ Agent Teams 生成**多个独立的 Claude Code 会话**，通过共享任务列
 
 ---
 
-## ![如何使用](../!/tags/how-to-use.svg)
+## ![如何使用](/tags/how-to-use.svg)
 
 时间编排工作流完全由 agent team 构建。要运行最终产品：
 
@@ -35,7 +35,7 @@ claude
 
 ---
 
-## ![如何实现](../!/tags/how-to-implement.svg)
+## ![如何实现](/tags/how-to-implement.svg)
 
 你可以使用 agent teams 创建天气编排工作流的副本——在这个例子中，时间编排工作流完全由 agent team 构建。
 

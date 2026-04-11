@@ -8,7 +8,7 @@ Claude Code 技能 — 前置元数据字段和官方捆绑技能。
 <table width="100%">
 <tr>
 <td><a href="../">← 返回 Claude Code 最佳实践</a></td>
-<td align="right"><img src="../!/claude-jumping.svg" alt="Claude" width="60" /></td>
+<td align="right"><img src="/claude-jumping.svg" alt="Claude" width="60" /></td>
 </tr>
 </table>
 
@@ -34,7 +34,7 @@ Claude Code 技能 — 前置元数据字段和官方捆绑技能。
 
 ---
 
-## ![Official](../!/tags/official.svg) **(5)**
+## ![Official](/tags/official.svg) **(5)**
 
 | # | 技能 | 描述 |
 |---|-------|-------------|

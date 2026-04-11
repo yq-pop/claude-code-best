@@ -5,13 +5,13 @@
 <table width="100%">
 <tr>
 <td><a href="../">← 返回 Claude Code Best Practice</a></td>
-<td align="right"><img src="../!/claude-jumping.svg" alt="Claude" width="60" /></td>
+<td align="right"><img src="/claude-jumping.svg" alt="Claude" width="60" /></td>
 </tr>
 </table>
 
 ---
 
-<a href="#loop-demo"><img src="../!/tags/implemented-hd.svg" alt="已实现"></a>
+<a href="#loop-demo"><img src="/tags/implemented-hd.svg" alt="已实现"></a>
 
 `/loop` skill 用于按 cron 间隔调度循环任务。以下是 `/loop 1m "tell current time"` 的演示——一个每分钟触发的简单循环任务。
 
@@ -44,7 +44,7 @@
 
 ---
 
-## ![如何使用](../!/tags/how-to-use.svg)
+## ![如何使用](/tags/how-to-use.svg)
 
 ```bash
 $ claude
@@ -55,6 +55,6 @@ $ claude
 
 ---
 
-## ![如何实现](../!/tags/how-to-implement.svg)
+## ![如何实现](/tags/how-to-implement.svg)
 
 `/loop` 是内置的 Claude Code skill——无需设置。它在底层使用 cron 工具（`CronCreate`、`CronList`、`CronDelete`）来管理循环调度。

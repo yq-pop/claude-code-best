@@ -5,7 +5,7 @@ Thariq ([@trq212](https://x.com/trq212)) 于 2026 年 3 月 17 日分享的关�
 <table width="100%">
 <tr>
 <td><a href="../">← 返回 Claude Code 最佳实践</a></td>
-<td align="right"><img src="../!/claude-jumping.svg" alt="Claude" width="60" /></td>
+<td align="right"><img src="/claude-jumping.svg" alt="Claude" width="60" /></td>
 </tr>
 </table>
 
@@ -249,7 +249,7 @@ Claude 通常会尝试遵守你的说明，由于技能可重用性很高，你�
 
 技能是智能体非常强大、灵活的工具，但现在还处于早期阶段，我们都在摸索如何最好地使用它们。将此视为我们看到有效的有用技巧的大杂烩，而不是权威指南。理解技能的最佳方式是开始、实验并查看对你有效的方法。我们的大多数技能最初只是几行和一个陷阱，并且因为人们在 Claude 遇到新的边缘情况时不断添加到它们而变得更好。
 
-<a href="https://x.com/trq212/status/2033949937936085378"><img src="./assets/thariq-17-mar-26/28.png" alt="结论" width="50%" /></a>
+<a href="https://x.com/trq212/status/2033949937936085378"><img src="./assets/thariq-17-mar-26/27.png" alt="结论" width="50%" /></a>
 
 ---
 

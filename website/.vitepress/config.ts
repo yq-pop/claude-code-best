@@ -5,6 +5,7 @@ export default defineConfig({
   description: '从氛围编程到智能体工程 - 熟能生巧，让 Claude 完美运作',
   lang: 'zh-CN',
   appearance: false,
+  ignoreDeadLinks: true,
   
   head: [
     ['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }],

@@ -5,13 +5,13 @@
 <table width="100%">
 <tr>
 <td><a href="../">← 返回 Claude Code Best Practice</a></td>
-<td align="right"><img src="../!/claude-jumping.svg" alt="Claude" width="60" /></td>
+<td align="right"><img src="/claude-jumping.svg" alt="Claude" width="60" /></td>
 </tr>
 </table>
 
 ---
 
-<a href="#weather-svg-creator"><img src="../!/tags/implemented-hd.svg" alt="已实现"></a>
+<a href="#weather-svg-creator"><img src="/tags/implemented-hd.svg" alt="已实现"></a>
 
 本仓库实现了两个 skills，作为 **Command → Agent → Skill** 架构模式的一部分，展示了两种不同的 skill 调用模式：**agent skills**（预加载）和 **skills**（直接调用）。
 
@@ -100,7 +100,7 @@ Fetch the current temperature for Dubai, UAE in the requested unit
 
 ---
 
-## ![如何使用](../!/tags/how-to-use.svg)
+## ![如何使用](/tags/how-to-use.svg)
 
 **Skill** ——通过斜杠命令直接调用：
 ```bash
@@ -110,7 +110,7 @@ $ claude
 
 ---
 
-## ![如何实现](../!/tags/how-to-implement.svg)
+## ![如何实现](/tags/how-to-implement.svg)
 
 让 Claude 为你创建一个——它会在 `.claude/skills/my-skill/SKILL.md` 中生成带有 YAML frontmatter 和正文的 markdown 文件
 
